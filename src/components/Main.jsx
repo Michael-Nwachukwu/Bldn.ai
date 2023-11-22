@@ -7,6 +7,7 @@ import {
   TabPanel,
   Input
 } from "@chakra-ui/react";
+import Chatinput from "./Chatinput";
 
 const Main = () => {
   return (
@@ -35,13 +36,23 @@ const Main = () => {
 
         <TabPanels>
           <TabPanel>
-            <Input border={'1px'} bg={'transparent'} py={7} placeholder="Basic usage" />
+            <Chatinput />
           </TabPanel>
           <TabPanel>
-            <Input border={'1px'} bg={'transparent'} py={7} placeholder="Basic usage" />
+            <Input
+              border={"1px"}
+              bg={"transparent"}
+              py={7}
+              placeholder="Basic usage"
+            />
           </TabPanel>
           <TabPanel>
-            <Input border={'1px'} bg={'transparent'} py={7} placeholder="Basic usage" />
+            <Input
+              border={"1px"}
+              bg={"transparent"}
+              py={7}
+              placeholder="Basic usage"
+            />
           </TabPanel>
         </TabPanels>
       </Tabs>
