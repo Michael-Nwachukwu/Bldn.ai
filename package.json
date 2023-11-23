@@ -16,6 +16,7 @@
     "@fontsource-variable/space-grotesk": "^5.0.15",
     "@fontsource/open-sans": "^5.0.17",
     "@fontsource/syncopate": "^5.0.17",
+    "@supabase/supabase-js": "^2.38.5",
     "framer-motion": "^10.16.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

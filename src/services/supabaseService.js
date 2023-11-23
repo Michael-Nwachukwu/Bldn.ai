@@ -10,7 +10,7 @@ export const sendMessageToSupabase = async (userId, message) => {
     .upsert([{ user_id: userId, message }]);
     
     if (error) {
-    console.error('Error sending message to Supabase:', error);
+        console.error('Error sending message to Supabase:', error);
     }
 
     return data;

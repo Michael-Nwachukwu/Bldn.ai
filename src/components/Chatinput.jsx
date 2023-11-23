@@ -10,7 +10,8 @@ const Chatinput = ({ onSendMessage }) => {
     const handleMessageChange = (e) => {setMessage(e.target.value)};
 
     // handle sending message
-    const handleSendMessage = async () => {
+    const handleSendMessage = async (e) => {
+        e.preventDefault();
         if(message.trim() !== ''){
 
             // Get the current user's ID
@@ -24,6 +25,8 @@ const Chatinput = ({ onSendMessage }) => {
 
             // commence sending message to chatgpt
             onSendMessage(message);
+        }else{
+            alert('empty');
         }
     }
     return (

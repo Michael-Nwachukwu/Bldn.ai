@@ -8,6 +8,7 @@ import {
   Input
 } from "@chakra-ui/react";
 import Chatinput from "./Chatinput";
+import { onSendMessage } from "../services/supabaseService";
 
 const Main = () => {
   return (
@@ -36,7 +37,7 @@ const Main = () => {
 
         <TabPanels>
           <TabPanel>
-            <Chatinput />
+            <Chatinput onSendMessage={onSendMessage} />
           </TabPanel>
           <TabPanel>
             <Input
