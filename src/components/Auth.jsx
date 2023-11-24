@@ -10,56 +10,57 @@ const Auth = () => {
     const [show, setShow] = useState(false);    
     const handleClick = () => setShow(!show);
 
-    // const handleLogin = async () => {
-    //     const email = emailRef.current?.value;
-    //     const password = passwordRef.current?.value;
-      
-    //     try {
-    //         // attempt this
-    //         const { user, error } = await supabase.auth.signIn({ email, password });
-            
-    //         // if we have this error
-    //         if (error && error.code === 'USER_NOT_FOUND') {
-    //             // If user is not found, sign up
-    //             await supabase.auth.signUp({ email, password });
-    //             setHelperText({
-    //                 error: false,
-    //                 text: "An email has been sent to you for verification!",
-    //             });
-    //         } else if (error) {
-    //             // Handle other errors
-    //             setHelperText({ error: true, text: error.message });
-    //         } else {
-    //             // Successfully signed in
-    //             setHelperText({
-    //                 error: false,
-    //                 text: "You are now logged in!",
-    //             });
-    //         }
-    //     } catch (error) {
-    //       console.error('Error:', error.message);
-    //     }
-    // };
-      
-
-    const handleLogin = async (type) => {
+    const handleLogin = async () => {
         const email = emailRef.current?.value;
         const password = passwordRef.current?.value;
-
-        const { user, error } =
-            type === "LOGIN"
-                ? await supabase.auth.signIn({ email, password })
-                : await supabase.auth.signUp({ email, password });
-
-        if (error) {
-            setHelperText({ error: true, text: error.message });
-        } else if (!user && !error) {
-            setHelperText({
-                error: false,
-                text: "An email has been sent to you for verification!",
-            });
+      
+        try {
+            // attempt this
+            const { user, error } = await supabase.auth.signUp({ email, password });
+            
+            // if we have this error
+            if (error && error.code === 'USER_NOT_FOUND') {
+                console.error('Sign-in Error:', error.message);
+                // If user is not found, sign up
+                await supabase.auth.signUp({ email, password });
+                setHelperText({
+                    error: false,
+                    text: "An email has been sent to you for verification!",
+                });
+            } else if (error) {
+                // Handle other errors
+                setHelperText({ error: true, text: error.message });
+            } else {
+                // Successfully signed in
+                setHelperText({
+                    error: false,
+                    text: "You are now logged in!",
+                });
+            }
+        } catch (error) {
+          console.error('Error:', error.message);
         }
     };
+      
+
+    // const handleLogin = async (type) => {
+    //     const email = emailRef.current?.value;
+    //     const password = passwordRef.current?.value;
+
+    //     const { user, error } =
+    //         type === "LOGIN"
+    //             ? await supabase.auth.signIn({ email, password })
+    //             : await supabase.auth.signUp({ email, password });
+
+    //     if (error) {
+    //         setHelperText({ error: true, text: error.message });
+    //     } else if (!user && !error) {
+    //         setHelperText({
+    //             error: false,
+    //             text: "An email has been sent to you for verification!",
+    //         });
+    //     }
+    // };
 
     const handleOAuthLogin = async (provider) => {
         // You need to enable the third party auth you want in Authentication > Settings
@@ -153,7 +154,7 @@ const Auth = () => {
                     <Button
                         type="submit"
                         onClick={() =>
-                            handleLogin().catch(console.error)
+                            handleLogin()
                         }
                         width={'100%'}
                         bg={"#905f43"}
