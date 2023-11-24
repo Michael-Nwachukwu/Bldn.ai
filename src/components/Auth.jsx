@@ -22,7 +22,7 @@ const Auth = () => {
         try {
             const { user, error } =
                 type === "LOGIN"
-                    ? await supabase.auth.signIn({ email, password })
+                    ? await supabase.auth.signInWithPassword({ email, password })
                     : await supabase.auth.signUp({ email, password });
     
             if (error) {
