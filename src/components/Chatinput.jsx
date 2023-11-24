@@ -20,7 +20,7 @@ const Chatinput = ({ onSendMessage }) => {
             // Use the userId in sendMessageToSupabase
             await sendMessageToSupabase(userId, message);
 
-            // reset input
+            // reset inputs
             setMessage('');
 
             // commence sending message to chatgpt

@@ -1,48 +1,39 @@
-// rafce for gen
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Box, Center, VStack } from "@chakra-ui/react";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Auth from "./components/Auth";
 import { supabase } from "./services/supabase";
 
-
 const App = () => {
   // State variable to manage the user session
-  const [session, setSession] = useState(null);
+  const [user, setUser] = useState(null);
 
-  // useEffect hook to fetch and update the user session
   useEffect(() => {
-    // Fetch the current user session using Supabase authentication
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      // Set the user session in the component state
-      setSession(session);
+    supabase.auth.getSession().then(({ data: session }) => {
+      setUser(session?.user ?? null);
     });
 
-    // Subscribe to changes in the authentication state (user login/logout)
-    supabase.auth.onAuthStateChange((_event, session) => {
-      // Update the user session in the component state on state changes
-      setSession(session);
-    });
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        const currentUser = session?.user;
+        setUser(currentUser ?? null);
+      }
+    );
 
-    // // Cleanup function for unsubscribing from the auth state changes
-    // // included the if session check because was throwing erros. so were checking if a session exists before executing
-    // return () => {
-    //   if(session){
-    //     supabase.auth.removeAuthListener();
-    //   }
-    // };
-  }, []); // Run the effect only once on component mount
+    return () => {
+      if(user){
+        authListener?.unsubscribe();
+      }
+    };
+  }, [user]);
+
   return (
     <Box bg="#F7F1ED" minW="100vw" minH="100vh">
       <VStack>
         <Container minW='6xl'>
           <Box py={"3"}>
-            {/* <Header />
-            <Main /> */}
-            {!session ? <Auth /> : <Main />}
-            {/* <Auth /> */}
+            {!user ? <Auth /> : <Main />}
           </Box>
         </Container>
       </VStack>

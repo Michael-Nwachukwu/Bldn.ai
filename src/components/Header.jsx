@@ -10,8 +10,14 @@ import {
   Divider
 } from "@chakra-ui/react";
 import logo from "../assets/bldn xb.png";
+import { supabase } from "../services/supabase";
 
 const Header = () => {
+
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut()
+  }
+  
   return (
     <Box>
       <Box borderBottom={'1px'} borderColor="gray.300" pb={3}>
@@ -39,6 +45,7 @@ const Header = () => {
                 border="1px"
                 borderColor="#E3CCBF"
                 boxShadow='md'
+                onClick={()=>signOut()}
                 rounded='lg'
               >
                 Sign Out

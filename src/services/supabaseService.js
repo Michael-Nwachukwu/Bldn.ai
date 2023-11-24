@@ -22,6 +22,7 @@ export const sendMessageToSupabase = async (userId, message) => {
 
 // Function to get the current logged-in user's ID
 export const getCurrentUserId = () => {
+    
     const user = supabase.auth.user();
 
     // Check if a user is logged in
