@@ -32,6 +32,7 @@ const Auth = () => {
                     error: false,
                     text: "An email has been sent to you for verification!",
                 });
+                // Navigate to the main component after successful signup
             }
         } catch (error) {
             console.error('Login/Sign-up Error:', error.message);

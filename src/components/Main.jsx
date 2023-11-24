@@ -9,10 +9,12 @@ import {
 } from "@chakra-ui/react";
 import Chatinput from "./Chatinput";
 import { onSendMessage } from "../services/supabaseService";
+import Header from "./Header";
 
 const Main = () => {
   return (
     <>
+      <Header />
       <Tabs isFitted variant="enclosed" colorScheme="green" mx={24} mt={12}>
         <TabList mb="1em">
           <Tab
