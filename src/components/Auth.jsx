@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { supabase } from "../services/supabase";
-import { Box, Center, Flex, VStack, Image, Input, InputGroup, InputRightElement, Button, Divider } from "@chakra-ui/react";
+import { Box, Center, Flex, VStack, Image, Input, InputGroup, InputRightElement, Button, Divider, Link, Spacer, AlertIcon, Alert, AlertDescription, Text } from "@chakra-ui/react";
 import logo from "../assets/bldn xb.png";
 
 const Auth = () => {
@@ -8,40 +8,39 @@ const Auth = () => {
     const emailRef = useRef();
     const passwordRef = useRef();
     const [show, setShow] = useState(false);    
+    const [mode, setMode] = useState('Sign In');
     const handleClick = () => setShow(!show);
 
-    const handleLogin = async () => {
+    const switchMode = () => {
+        if(mode == "Sign In"){setMode('Sign Up')}else{setMode('Sign In')}
+    }
+
+    const handleLogin = async (type) => {
         const email = emailRef.current?.value;
         const password = passwordRef.current?.value;
-      
+    
         try {
-            // attempt this
-            const { user, error } = await supabase.auth.signUp({ email, password });
-            
-            // if we have this error
-            if (error && error.code === 'USER_NOT_FOUND') {
-                console.error('Sign-in Error:', error.message);
-                // If user is not found, sign up
-                await supabase.auth.signUp({ email, password });
+            const { user, error } =
+                type === "LOGIN"
+                    ? await supabase.auth.signIn({ email, password })
+                    : await supabase.auth.signUp({ email, password });
+    
+            if (error) {
+                setHelperText({ error: true, text: error.message });
+            } else if (!user && !error) {
                 setHelperText({
                     error: false,
                     text: "An email has been sent to you for verification!",
                 });
-            } else if (error) {
-                // Handle other errors
-                setHelperText({ error: true, text: error.message });
-            } else {
-                // Successfully signed in
-                setHelperText({
-                    error: false,
-                    text: "You are now logged in!",
-                });
             }
         } catch (error) {
-          console.error('Error:', error.message);
+            console.error('Login/Sign-up Error:', error.message);
+            // Handle unexpected errors
+            setHelperText({ error: true, text: "An unexpected error occurred. Check that you have an active internet connection and are signing into an existing account" });
         }
     };
-      
+    
+
 
     // const handleLogin = async (type) => {
     //     const email = emailRef.current?.value;
@@ -51,7 +50,6 @@ const Auth = () => {
     //         type === "LOGIN"
     //             ? await supabase.auth.signIn({ email, password })
     //             : await supabase.auth.signUp({ email, password });
-
     //     if (error) {
     //         setHelperText({ error: true, text: error.message });
     //     } else if (!user && !error) {
@@ -96,6 +94,11 @@ const Auth = () => {
             <Box width="40%">
                 <VStack direction='column'>
                     <Image src={logo} alt="logo" width={90} marginBottom="1rem" />
+                    <Text
+                        fontWeight={'bold'}
+                        fontSize={'20px'}
+                        color={'gray'}
+                    >{mode} to your BldN account</Text>
                     <Input
                         focusBorderColor='brand.700'
                         border={"1px"}
@@ -134,37 +137,64 @@ const Auth = () => {
                         </InputRightElement>
                     </InputGroup>
 
-                    <span
-                        onClick={forgotPassword}
-                        style={{ cursor: "pointer", width: "100%", color:'gray', }}
-                    >
-                        Forgot Password?
-                    </span>
-                    {!!helperText.text && (
-                        <div
-                            className={`border px-1 py-2 my-2 text-center text-sm ${
-                                helperText.errorre
-                                    ? "bg-red-100 border-red-300 text-red-400"
-                                    : "bg-green-100 border-green-300 text-green-500"
-                            }`}
+                    <Flex w={'100%'}>
+                        <Link
+                            onClick={forgotPassword}
+                            color={'gray'}
                         >
-                            {helperText.text}
-                        </div>
-                    )}
-                    <Button
-                        type="submit"
-                        onClick={() =>
-                            handleLogin()
-                        }
-                        width={'100%'}
-                        bg={"#905f43"}
-                        color={"white"}
-                        _hover={{ bg:'' }}
+                            Forgot Password?
+                        </Link>
 
-                    >
-                        Continue
-                    </Button>
-                       
+                        <Spacer />
+
+                        <Link
+                            onClick={switchMode}
+                            color={'gray'}
+                            fontWeight={'bold'}
+                        >
+                            {mode}?
+                        </Link>
+
+                    </Flex>
+                    {!!helperText.text && (
+                        <Alert 
+                            status={`${helperText.error ? "error" : "success"}`}
+                        >
+                            <AlertIcon />
+                            {/* <AlertTitle>UNSUCCESSFUL</AlertTitle> */}
+                            <AlertDescription>{helperText.text}</AlertDescription>
+                        </Alert>
+                    )}
+                    {mode=='Sign In' && 
+                        <Button
+                            type="submit"
+                            onClick={() =>
+                                handleLogin("LOGIN")
+                            }
+                            width={'100%'}
+                            bg={"#905f43"}
+                            color={"white"}
+                            _hover={{ bg:'' }}
+                        >
+                            SIGN IN
+                        </Button>
+                    }
+
+                    {mode=='Sign Up' && 
+                        <Button
+                            type="submit"
+                            onClick={() =>
+                                handleLogin("REGISTER").catch(console.error)
+                            }
+                            width={'100%'}
+                            bg={"#905f43"}
+                            color={"white"}
+                            _hover={{ bg:'' }}
+                        >
+                            SIGN UP
+                        </Button>
+                    }
+
                     <small style={{ marginTop: '10px', color:'gray' }}>Or continue with</small>
                     <Divider borderColor="black" borderWidth="0.6px" mb={4} />
 
