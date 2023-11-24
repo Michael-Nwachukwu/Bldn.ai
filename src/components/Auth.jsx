@@ -153,7 +153,7 @@ const Auth = () => {
                             color={'gray'}
                             fontWeight={'bold'}
                         >
-                            {mode}?
+                            {mode == 'Sign In' ? 'Sign Up' : 'Sign In'}?
                         </Link>
 
                     </Flex>
