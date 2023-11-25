@@ -10,6 +10,7 @@ import {
 import Chatinput from "./Chatinput";
 import { onSendMessage } from "../services/supabaseService";
 import Header from "./Header";
+import Chatwidget from "./Chatwidget";
 
 const Main = () => {
 
@@ -40,6 +41,7 @@ const Main = () => {
 
         <TabPanels>
           <TabPanel>
+            <Chatwidget />
             <Chatinput onSendMessage={onSendMessage} />
           </TabPanel>
           <TabPanel>
