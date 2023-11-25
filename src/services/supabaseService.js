@@ -3,39 +3,46 @@ import { supabase } from './supabase';
 
 // Function to send a message to Supabase
 export const sendMessageToSupabase = async (userId, message) => {
-  try {
-    // Insert the message into the 'chat_messages' table
-    const { data, error } = await supabase
-    .from('chat_messages')
-    .upsert([{ user_id: userId, message }]);
-    
-    if (error) {
-        console.error('Error sending message to Supabase:', error);
-    }
+    console.log('userId:', userId);
+    console.log('message:', message);
 
-    return data;
-  } catch (error) {
-    console.error('Error sending message to Supabase:', error);
-    throw error;
-  }
+    try {
+        // Insert the message into the 'chat_messages' table
+        // const { data, error } = await supabase
+        // .from('chat_messages')
+        // .upsert([{ user_id: userId, message }]);
+
+        const { data, error } = await supabase
+            .from('chat_messages')
+            .insert([{ user_id: userId, message: message }]);
+
+        if (error) {
+            console.error('Error sending message to Supabase:', error);
+        }
+
+        return data;
+
+    } catch (error) {
+        console.error('Error sending message to Supabase:', error);
+        throw error;
+    }
 };
 
 // Function to get the current logged-in user's ID
-export const getCurrentUserId = () => {
-    
-    const user = supabase.auth.user();
+export const getCurrentUserId = async () => {
 
-    // Check if a user is logged in
-    if (user) {
-      return user.id; // Return the user's ID
-    } else {
-      return null; // Return null if no user is logged in
-    }
+    const { data: profile } = await supabase
+        .from('profiles')
+        .select('id, username, email');
 
+    const userId = profile[0].id;
+
+    return userId; // Return the user's ID
+ 
 };
 
 export const onSendMessage = async (message) => {
-    setLoading(true);
+    // setLoading(true);
 
     const options = {
         method: 'POST',
@@ -60,10 +67,13 @@ export const onSendMessage = async (message) => {
     try {
         const response = await fetch(import.meta.env.VITE_OPENAI_API_URL, options);
         const json = await response.json();
-        let message = json.choices[0].text.trim();
-        sendMessageToSupabase = async ('001', message);
-        // setKeywords(json.choices[0].text.trim());
-        setLoading(false);
+        if (json.choices && json.choices.length > 0) {
+            let message = json.choices[0].text.trim();
+            await sendMessageToSupabase('001', message);
+        } else {
+            console.error('Invalid response from OpenAI API:', json);
+        }
+        // setLoading(false);
     } catch (error) {
         console.error(error);
         alert(error);

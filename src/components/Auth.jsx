@@ -16,6 +16,7 @@ const Auth = () => {
     }
 
     const handleLogin = async (type) => {
+        console.log('check');
         const email = emailRef.current?.value;
         const password = passwordRef.current?.value;
     
@@ -24,7 +25,7 @@ const Auth = () => {
                 type === "LOGIN"
                     ? await supabase.auth.signInWithPassword({ email, password })
                     : await supabase.auth.signUp({ email, password });
-    
+
             if (error) {
                 setHelperText({ error: true, text: error.message });
             } else if (!user && !error) {
@@ -32,6 +33,7 @@ const Auth = () => {
                     error: false,
                     text: "An email has been sent to you for verification!",
                 });
+
                 // Navigate to the main component after successful signup
             }
         } catch (error) {
@@ -40,6 +42,63 @@ const Auth = () => {
             setHelperText({ error: true, text: "An unexpected error occurred. Check that you have an active internet connection and are signing into an existing account" });
         }
     };
+
+    const getCurrentUserId = () => {
+
+        const user = supabase.auth.user();
+    
+        // Check if a user is logged in
+        if (user) {
+            return user.id; // Return the user's ID
+        } else {
+            return null; // Return null if no user is logged in
+        }
+    
+    };    
+
+    // let idm = getCurrentUserId();
+    // console.log(idm);
+
+    // const handleSignUp = async () => {
+
+    //     const email = emailRef.current?.value;
+    //     const password = passwordRef.current?.value;
+    
+    //     const { user, error } = await supabase.auth.signUp({ email, password });
+    
+    //     if (error) {
+    //         setHelperText({ error: true, text: error.message });
+    //         console.log('Error signing up:', error.message)
+    //     } else {
+    //         console.log('Signed up as:', user.email)
+    //     }
+    // }
+
+    // const handleLogin = async () => {
+    //     const email = emailRef.current?.value;
+    //     const password = passwordRef.current?.value;
+    
+    //     const { user, error } = await supabase.auth.signInWithPassword({ email, password });
+            
+    //     if (error) {
+    //         setHelperText({ error: true, text: error.message });
+    //         console.log('Error signing in:', error.message)
+    //     } else {
+    //         // console.log("Logged-in user ID:", user.email);
+    //         // const { data: profile } = await supabase
+    //         //     .from('profiles')
+    //         //     .select('id, username, email');
+
+    //         // const userId = profile[0].id;
+
+    //         // console.log('User profile:', userId);
+    //     }
+    // };
+
+
+
+
+
     
 
 

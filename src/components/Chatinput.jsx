@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Input } from '@chakra-ui/react';
 import { sendMessageToSupabase, getCurrentUserId } from '../services/supabaseService';
+import { supabase } from '../services/supabase';
 
 const Chatinput = ({ onSendMessage }) => {
     // state to track user input
@@ -15,7 +16,13 @@ const Chatinput = ({ onSendMessage }) => {
         if(message.trim() !== ''){
 
             // Get the current user's ID
-            const userId = getCurrentUserId();
+            // const userId = getCurrentUserId();
+
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('id, username, email');
+
+            const userId = profile[0].id;
 
             // Use the userId in sendMessageToSupabase
             await sendMessageToSupabase(userId, message);
@@ -24,7 +31,7 @@ const Chatinput = ({ onSendMessage }) => {
             setMessage('');
 
             // commence sending message to chatgpt
-            onSendMessage(message);
+            // onSendMessage(message);
         }else{
             alert('empty');
         }

@@ -26,13 +26,7 @@ const App = () => {
       setSession(session);
     });
 
-    // // Cleanup function for unsubscribing from the auth state changes
-    // // included the if session check because was throwing erros. so were checking if a session exists before executing
-    // return () => {
-    //   if(session){
-    //     supabase.auth.removeAuthListener();
-    //   }
-    // };
+    
   }, []); // Run the effect only once on component mount
   return (
     <Box bg="#F7F1ED" minW="100vw" minH="100vh">

@@ -12,6 +12,7 @@ import { onSendMessage } from "../services/supabaseService";
 import Header from "./Header";
 
 const Main = () => {
+
   return (
     <>
       <Header />
