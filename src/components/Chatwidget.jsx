@@ -5,8 +5,7 @@ import { supabase } from '../services/supabase';
 
 const Chatwidget = () => {
     const [messages, setMessages] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const conversations = conversations.channel('conversations') // set your topic here
+    // const [loading, setLoading] = useState(true);
 
     const fetchRecentMessages = async () => {
         try {
@@ -29,6 +28,8 @@ const Chatwidget = () => {
     };
 
     useEffect(() => {
+        const conversations = supabase.channel('conversations') // set your topic here
+
         // Fetch initial set of messages
         // fetchRecentMessages();
 
@@ -55,12 +56,13 @@ const Chatwidget = () => {
             console.log(payload)
         }
 
-
         conversations
             .on(
-                'broadcast',
+                'postgres_changes',
                 {
-                    event: 'test',
+                    event: 'INSERT',
+                    schema: 'public', 
+                    table: 'chat_messages'
                 },
                 (payload) => messageReceived(payload)
             )
@@ -88,7 +90,7 @@ const Chatwidget = () => {
 
     return (
         <Flex direction="column" p={4}>
-        {loading && <Spinner color="green.500" />}
+        {/* {loading && <Spinner color="green.500" />} */}
         {messages.map((message) => (
             <Flex key={message.id} justify={message.user_id === '001' ? 'flex-start' : 'flex-end'} mb={2}>
             {/* Blob */}
