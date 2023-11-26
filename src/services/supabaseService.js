@@ -3,15 +3,11 @@ import { supabase } from './supabase';
 
 // Function to send a message to Supabase
 export const sendMessageToSupabase = async (userId, message) => {
-    console.log('userId:', userId);
-    console.log('message:', message);
+    // console.log('userId:', userId);
+    // console.log('message:', message);
 
     try {
         // Insert the message into the 'chat_messages' table
-        // const { data, error } = await supabase
-        // .from('chat_messages')
-        // .upsert([{ user_id: userId, message }]);
-
         const { data, error } = await supabase
             .from('chat_messages')
             .insert([{ user_id: userId, message: message }]);
