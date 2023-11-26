@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input } from '@chakra-ui/react';
+import { Input, InputGroup, InputRightElement, Button, Textarea } from '@chakra-ui/react';
 import { sendMessageToSupabase, getCurrentUserId } from '../services/supabaseService';
 import { supabase } from '../services/supabase';
 
@@ -18,11 +18,15 @@ const Chatinput = ({ onSendMessage }) => {
             // Get the current user's ID
             // const userId = getCurrentUserId();
 
-            const { data: profile } = await supabase
-                .from('profiles')
-                .select('id, username, email');
+            // const { data: profile } = await supabase
+            //     .from('profiles')
+            //     .select('id, username, email')
+            //     .eq('id', auth.uid());
 
-            const userId = profile[0].id;
+            // const userId = profile[0].id;
+
+            const { data: { user } } = await supabase.auth.getUser()
+            const userId = user.id;
 
             // Use the userId in sendMessageToSupabase
             await sendMessageToSupabase(userId, message);
@@ -38,22 +42,33 @@ const Chatinput = ({ onSendMessage }) => {
     }
     return (
         <>
-            <form action="" onSubmit={handleSendMessage}>
-                <Input
+            <InputGroup size='md'>
+                <Textarea
                     border={"1px"}
                     bg={"transparent"}
-                    py={7}
-                    placeholder="Type a Message"
+                    // py={7}
+                    pr={24}
+                    placeholder="Enter your prompt"
                     value={message}
                     onChange={handleMessageChange}
-                    style={{ position: 'relative' }}
+                    _hover={{ border:'' }}
+                    focusBorderColor='brand.700'
                 />
-                <button onClick={handleSendMessage} style={{ position: 'absolute',right:30, top:80, background:'black', padding:'0.7em 1.5em 0.7em 1.5em', color:'#F7F1ED', borderRadius:'10px',  }}>
-                    <span>
+                <InputRightElement width='6rem'>
+                    <Button 
+                        h='2.8rem' 
+                        size='lg' 
+                        mt={10}
+                        mr={4} 
+                        bg={"black"} 
+                        color={"white"} 
+                        onClick={handleSendMessage}
+                        _hover={{ bg:'' }}
+                    >
                         Send
-                    </span>
-                </button>
-            </form>
+                    </Button>
+                </InputRightElement>
+            </InputGroup>
         </>
     )
 }
