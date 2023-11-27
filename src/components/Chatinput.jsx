@@ -15,16 +15,6 @@ const Chatinput = ({ onSendMessage }) => {
         e.preventDefault();
         if(message.trim() !== ''){
 
-            // Get the current user's ID
-            // const userId = getCurrentUserId();
-
-            // const { data: profile } = await supabase
-            //     .from('profiles')
-            //     .select('id, username, email')
-            //     .eq('id', auth.uid());
-
-            // const userId = profile[0].id;
-
             const { data: { user } } = await supabase.auth.getUser()
             const userId = user.id;
 
@@ -46,7 +36,6 @@ const Chatinput = ({ onSendMessage }) => {
                 <Textarea
                     border={"1px"}
                     bg={"transparent"}
-                    // py={7}
                     pr={24}
                     placeholder="Enter your prompt"
                     value={message}

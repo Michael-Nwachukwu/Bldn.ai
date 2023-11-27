@@ -27,14 +27,7 @@ export const sendMessageToSupabase = async (userId, message) => {
 // Function to get the current logged-in user's ID
 export const getCurrentUserId = async () => {
 
-    const { data: profile } = await supabase
-        .from('profiles')
-        .select('id, username, email');
-
-    const userId = profile[0].id;
-
-    return userId; // Return the user's ID
- 
+   
 };
 
 export const onSendMessage = async (message) => {

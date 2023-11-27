@@ -50,8 +50,6 @@ const Chatwidget = () => {
         // Fetch initial set of messages
         fetchRecentMessages();
 
-        // console.log(userId);
-
         // // Function to handle real-time updates
         // const handleRealtimeUpdate = (payload) => {
 
