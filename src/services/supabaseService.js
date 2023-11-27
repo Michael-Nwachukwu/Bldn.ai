@@ -3,9 +3,6 @@ import { supabase } from './supabase';
 
 // Function to send a message to Supabase
 export const sendMessageToSupabase = async (userId, message) => {
-    // console.log('userId:', userId);
-    // console.log('message:', message);
-
     try {
         // Insert the message into the 'chat_messages' table
         const { data, error } = await supabase
@@ -15,9 +12,7 @@ export const sendMessageToSupabase = async (userId, message) => {
         if (error) {
             console.error('Error sending message to Supabase:', error);
         }
-
         return data;
-
     } catch (error) {
         console.error('Error sending message to Supabase:', error);
         throw error;
@@ -58,7 +53,7 @@ export const onSendMessage = async (message) => {
         const json = await response.json();
         if (json.choices && json.choices.length > 0) {
             let message = json.choices[0].text.trim();
-            await sendMessageToSupabase('001', message);
+            await sendMessageToSupabase('49fce734-a6ec-431f-9afe-651edee8f9f7', message);
         } else {
             console.error('Invalid response from OpenAI API:', json);
         }

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Flex, Image, Spinner } from '@chakra-ui/react';
 import { supabase } from '../services/supabase';
-import logo from "../assets/bldn xb.png";
 
 const Chatwidget = () => {
     const [messages, setMessages] = useState([]);
@@ -25,24 +24,13 @@ const Chatwidget = () => {
 
                 setUserId(user.id);
 
-                // console.log(chat_messages);
                 setMessages(chat_messages.reverse()); // Reverse the order to display the most recent message at the bottom
             }
 
-            // console.log(messages);
             // setLoading(false);
         } catch (error) {
             console.error('Error fetching recent messages:', error);
         }
-    };
-
-    const fetchRecentMessagest = async () => {
-        let { data: todos, error } = await supabase
-            .from("chat_messages")
-            .select("id, message")
-            // .order("id", { ascending: false });
-        if (error) {console.log("error", error); return null}
-        else {console.log(todos);return todos;}
     };
     
     useEffect(() => {
@@ -56,8 +44,6 @@ const Chatwidget = () => {
 
             // Extract the new message from the payload
             const newMessage = payload.new;
-
-            console.log(newMessage.id);
 
             // Update the state with the new message
             setMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -80,14 +66,12 @@ const Chatwidget = () => {
     }, []);
 
     return (
-        <Flex direction="column" p={4} maxH={"23rem"}
-        overflow={'scroll'}>
+        <Flex direction="column" p={4} maxH={"23rem"} overflow={'scroll'}>
             {/* {loading && <Spinner color="green.500" />} */}
             {messages.map((message) => (
                 <Flex key={message.id} justify={message.user_id === `${userId}` ? 'flex-end' : 'flex-start'} mb={2}>
                     {/* Blob */}
                     <Box
-                        // borderRadius={20}
                         className={message.user_id === `${userId}` ? 'right' : 'left'}
                         p={3}
                         bg={message.user_id === `${userId}` ? '#e3ccbf' : '#a86b48'}
