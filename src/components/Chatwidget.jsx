@@ -2,11 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Flex, Image, Spinner } from '@chakra-ui/react';
 import { supabase } from '../services/supabase';
+import logo from "../assets/bldn xb.png";
 
 const Chatwidget = () => {
     const [messages, setMessages] = useState([]);
-    // const [loading, setLoading] = useState(true);
     const [userId, setUserId] = useState(null);
+    // const [loading, setLoading] = useState(true);
 
     const fetchRecentMessages = async () => {
         
@@ -45,36 +46,36 @@ const Chatwidget = () => {
     };
     
     useEffect(() => {
-        // const conversations = supabase.channel('conversations') // set your topic here
+        const conversations = supabase.channel('conversations') // set your topic here
 
         // Fetch initial set of messages
         fetchRecentMessages();
 
-        // // Function to handle real-time updates
-        // const handleRealtimeUpdate = (payload) => {
+        // Function to handle real-time updates
+        const handleRealtimeUpdate = (payload) => {
 
-        //     // Extract the new message from the payload
-        //     const newMessage = payload.new;
+            // Extract the new message from the payload
+            const newMessage = payload.new;
 
-        //     console.log(newMessage.id);
+            console.log(newMessage.id);
 
-        //     // Update the state with the new message
-        //     setMessages((prevMessages) => [...prevMessages, newMessage]);
+            // Update the state with the new message
+            setMessages((prevMessages) => [...prevMessages, newMessage]);
             
-        // };
+        };
 
-        // // Subscribe to real-time updates for the 'chat_messages' table
-        // conversations
-        //     .on(
-        //         'postgres_changes',
-        //         {
-        //             event: 'INSERT',
-        //             schema: 'public', 
-        //             table: 'chat_messages'
-        //         },
-        //         (payload) => handleRealtimeUpdate(payload)
-        //     )
-        // .subscribe()
+        // Subscribe to real-time updates for the 'chat_messages' table
+        conversations
+            .on(
+                'postgres_changes',
+                {
+                    event: 'INSERT',
+                    schema: 'public', 
+                    table: 'chat_messages'
+                },
+                (payload) => handleRealtimeUpdate(payload)
+            )
+        .subscribe()
 
     }, []);
 
@@ -86,19 +87,13 @@ const Chatwidget = () => {
                 <Flex key={message.id} justify={message.user_id === `${userId}` ? 'flex-end' : 'flex-start'} mb={2}>
                     {/* Blob */}
                     <Box
-                        borderRadius={10}
+                        // borderRadius={20}
+                        className={message.user_id === `${userId}` ? 'right' : 'left'}
                         p={3}
-                        bg={message.user_id === `${userId}` ? 'green.200' : 'blue.200'}
-                        color={message.user_id === `${userId}` ? 'black' : 'white'}
+                        bg={message.user_id === `${userId}` ? '#e3ccbf' : '#a86b48'}
+                        color={message.user_id === `${userId}` ? 'brand.900' : 'white'}
                         maxW="60%"
-                        
                     >
-                        {/* Logo or profile icon */}
-                        {message.user_id === `${!userId}` ? (
-                            <Image src="/ai-logo.png" alt="AI Logo" boxSize="30px" mr={2} />
-                            ) : (
-                            <Image src="/user-icon.png" alt="User Icon" boxSize="30px" ml={2} />
-                        )}
                         <p>{message.message}</p>
                     </Box>
                 </Flex>
