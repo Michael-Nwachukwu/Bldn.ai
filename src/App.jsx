@@ -2,7 +2,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Container, Box, Center, VStack } from "@chakra-ui/react";
-import Header from "./components/Header";
 import Main from "./components/Main";
 import Auth from "./components/Auth";
 import { supabase } from "./services/supabase";
@@ -33,10 +32,7 @@ const App = () => {
       <VStack>
         <Container minW='6xl'>
           <Box py={"3"}>
-            {/* <Header />
-            <Main /> */}
             {!session ? <Auth /> : <Main />}
-            {/* <Auth /> */}
           </Box>
         </Container>
       </VStack>
