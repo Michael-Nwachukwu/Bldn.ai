@@ -17,8 +17,8 @@ const Main = () => {
   return (
     <>
       <Header />
-      <Tabs isFitted variant="enclosed" colorScheme="green" mx={24} mt={12}>
-        <TabList mb="1em">
+      <Tabs isFitted variant="enclosed" colorScheme="green" mx={24} mt={7}>
+        <TabList mb="0.5em">
           <Tab
             borderBottom={"1px"}
             _selected={{ border: "1px", borderBottom: "none" }}

@@ -21,7 +21,7 @@ const Chatwidget = () => {
     // make css rules≠≠
     let rule = css({
         color: 'red',
-        height:'23rem',
+        height:'27rem',
         
     })
 

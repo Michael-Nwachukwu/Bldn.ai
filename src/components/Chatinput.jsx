@@ -25,7 +25,7 @@ const Chatinput = ({ onSendMessage }) => {
             setMessage('');
 
             // commence sending message to chatgpt
-            // onSendMessage(message);
+            onSendMessage(message);
         }else{
             alert('empty');
         }
@@ -41,7 +41,9 @@ const Chatinput = ({ onSendMessage }) => {
                     value={message}
                     onChange={handleMessageChange}
                     _hover={{ border:'' }}
+                    shadow={'2xl'}
                     focusBorderColor='brand.700'
+                    borderRadius={20}
                 />
                 <InputRightElement width='6rem'>
                     <Button 
