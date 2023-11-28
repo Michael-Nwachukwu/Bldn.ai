@@ -2,19 +2,28 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Box, Flex, Image, Spinner } from '@chakra-ui/react';
 import { supabase } from '../services/supabase';
+import ScrollToBottom from 'react-scroll-to-bottom';
+import { css } from 'glamor'
 
 const Chatwidget = () => {
     const [messages, setMessages] = useState([]);
     const [userId, setUserId] = useState(null);
     // const [loading, setLoading] = useState(true);
-    const ref = useRef(<HTMLDivElement />);
+    // const ref = useRef(<HTMLDivElement />);
 
-    function scrollToBottom() {
-        ref.current?.scrollIntoView({
-            behavior: "smooth",
-            block: "end",
-        });
-    }
+    // function scrollToBottom() {
+    //     ref.current?.scrollIntoView({
+    //         behavior: "smooth",
+    //         block: "end",
+    //     });
+    // }
+
+    // make css rules≠≠
+    let rule = css({
+        color: 'red',
+        height:'23rem',
+        
+    })
 
     const fetchRecentMessages = async () => {
         
@@ -36,8 +45,6 @@ const Chatwidget = () => {
 
             }
 
-            scrollToBottom();
-
             // setLoading(false);
         } catch (error) {
             console.error('Error fetching recent messages:', error);
@@ -45,6 +52,8 @@ const Chatwidget = () => {
     };
     
     useEffect(() => {
+        const conversations = supabase.channel('conversations') // set your topic here
+
         // Fetch initial set of messages
         fetchRecentMessages();
 
@@ -57,11 +66,10 @@ const Chatwidget = () => {
             // Update the state with the new message
             setMessages((prevMessages) => [...prevMessages, newMessage]);
             
-            scrollToBottom();
+            // scrollToBottom();
             
         };
 
-        const conversations = supabase.channel('conversations') // set your topic here
 
         // Subscribe to real-time updates for the 'chat_messages' table
         conversations
@@ -80,24 +88,26 @@ const Chatwidget = () => {
     }, []);
 
     return (
-        <Flex direction="column" p={4} maxH={"23rem"} overflow="auto" className='widget'>
-            {/* {loading && <Spinner color="green.500" />} */}
-            {messages.map((message) => (
-                <Flex key={message.id} justify={message.user_id === `${userId}` ? 'flex-end' : 'flex-start'} mb={2}>
-                    {/* Blob */}
-                    <Box
-                        className={message.user_id === `${userId}` ? 'right' : 'left'}
-                        p={3}
-                        bg={message.user_id === `${userId}` ? '#e3ccbf' : '#a86b48'}
-                        color={message.user_id === `${userId}` ? 'brand.900' : 'white'}
-                        maxW="60%"
-                    >
-                        <p>{message.message}</p>
-                    </Box>
-                </Flex>
-            ))}
-            <div ref={ref} />
-        </Flex>
+        <ScrollToBottom className={`${rule}`}>
+            <Flex direction={"column"} p={4} >
+                {/* {loading && <Spinner color="green.500" />} */}
+                {messages.map((message) => (
+                    <Flex key={message.id} justify={message.user_id === `${userId}` ? 'flex-end' : 'flex-start'} mb={2}>
+                        {/* Blob */}
+                        <Box
+                            className={message.user_id === `${userId}` ? 'right' : 'left'}
+                            p={3}
+                            bg={message.user_id === `${userId}` ? '#e3ccbf' : '#a86b48'}
+                            color={message.user_id === `${userId}` ? 'brand.900' : 'white'}
+                            maxW="60%"
+                        >
+                            <p>{message.message}</p>
+                        </Box>
+                    </Flex>
+                ))}
+                {/* <div ref={ref} /> */}
+            </Flex>
+        </ScrollToBottom>
     );
 };
 
