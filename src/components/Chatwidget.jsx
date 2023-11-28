@@ -3,11 +3,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Box, Flex, Image, Spinner } from '@chakra-ui/react';
 import { supabase } from '../services/supabase';
 import ScrollToBottom from 'react-scroll-to-bottom';
-import { css } from 'glamor'
+import { css } from 'glamor';
+import dateFormat from 'dateformat';
 
 const Chatwidget = () => {
     const [messages, setMessages] = useState([]);
     const [userId, setUserId] = useState(null);
+    const [date, setDate] = useState();
     // const [loading, setLoading] = useState(true);
     // const ref = useRef(<HTMLDivElement />);
 
@@ -102,6 +104,9 @@ const Chatwidget = () => {
                             maxW="60%"
                         >
                             <p>{message.message}</p>
+                            <Flex justify={'end'}>
+                                <p>{message.created_at}</p>
+                            </Flex>
                         </Box>
                     </Flex>
                 ))}
