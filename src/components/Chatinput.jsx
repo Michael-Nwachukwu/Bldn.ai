@@ -25,7 +25,7 @@ const Chatinput = ({ onSendMessage }) => {
             setMessage('');
 
             // commence sending message to chatgpt
-            onSendMessage(message);
+            // onSendMessage(message);
         }else{
             alert('empty');
         }

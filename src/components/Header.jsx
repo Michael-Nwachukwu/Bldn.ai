@@ -58,7 +58,7 @@ const Header = () => {
 
       {/* <Divider /> */}
       
-      <Heading fontWeight='bold' textAlign="center" pt={14} >
+      <Heading fontWeight='bold' textAlign="center" pt={10} >
         Paste in your text below and we'll extract the keywords for you.
       </Heading>
       

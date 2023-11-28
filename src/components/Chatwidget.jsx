@@ -1,5 +1,5 @@
 // Chatwidget.js
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Box, Flex, Image, Spinner } from '@chakra-ui/react';
 import { supabase } from '../services/supabase';
 
@@ -7,6 +7,14 @@ const Chatwidget = () => {
     const [messages, setMessages] = useState([]);
     const [userId, setUserId] = useState(null);
     // const [loading, setLoading] = useState(true);
+    const ref = useRef(<HTMLDivElement />);
+
+    function scrollToBottom() {
+        ref.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+        });
+    }
 
     const fetchRecentMessages = async () => {
         
@@ -25,7 +33,10 @@ const Chatwidget = () => {
                 setUserId(user.id);
 
                 setMessages(chat_messages.reverse()); // Reverse the order to display the most recent message at the bottom
+
             }
+
+            scrollToBottom();
 
             // setLoading(false);
         } catch (error) {
@@ -34,8 +45,6 @@ const Chatwidget = () => {
     };
     
     useEffect(() => {
-        const conversations = supabase.channel('conversations') // set your topic here
-
         // Fetch initial set of messages
         fetchRecentMessages();
 
@@ -48,7 +57,11 @@ const Chatwidget = () => {
             // Update the state with the new message
             setMessages((prevMessages) => [...prevMessages, newMessage]);
             
+            scrollToBottom();
+            
         };
+
+        const conversations = supabase.channel('conversations') // set your topic here
 
         // Subscribe to real-time updates for the 'chat_messages' table
         conversations
@@ -63,10 +76,11 @@ const Chatwidget = () => {
             )
         .subscribe()
 
+
     }, []);
 
     return (
-        <Flex direction="column" p={4} maxH={"23rem"} overflow={'scroll'}>
+        <Flex direction="column" p={4} maxH={"23rem"} overflow="auto" className='widget'>
             {/* {loading && <Spinner color="green.500" />} */}
             {messages.map((message) => (
                 <Flex key={message.id} justify={message.user_id === `${userId}` ? 'flex-end' : 'flex-start'} mb={2}>
@@ -82,6 +96,7 @@ const Chatwidget = () => {
                     </Box>
                 </Flex>
             ))}
+            <div ref={ref} />
         </Flex>
     );
 };
