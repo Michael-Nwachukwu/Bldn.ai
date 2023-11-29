@@ -44,6 +44,7 @@ const Chatinput = ({ onSendMessage }) => {
                     shadow={'2xl'}
                     focusBorderColor='brand.700'
                     borderRadius={20}
+                    
                 />
                 <InputRightElement width='6rem'>
                     <Button 
