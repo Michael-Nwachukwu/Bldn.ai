@@ -1,6 +1,6 @@
 // Chatwidget.js
-import React, { useEffect, useState, useRef } from 'react';
-import { Box, Flex, Image, Spinner } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { Box, Flex, Spinner, Skeleton } from '@chakra-ui/react';
 import { supabase } from '../services/supabase';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { css } from 'glamor';
@@ -10,49 +10,93 @@ const Chatwidget = () => {
     const [messages, setMessages] = useState([]);
     const [userId, setUserId] = useState(null);
     const [date, setDate] = useState();
+    const [messageId, setMessageid] = useState();
     // const [loading, setLoading] = useState(true);
-    // const ref = useRef(<HTMLDivElement />);
 
-    // function scrollToBottom() {
-    //     ref.current?.scrollIntoView({
-    //         behavior: "smooth",
-    //         block: "end",
-    //     });
-    // }
-
-    // make css rules≠≠
+    // make css rules for react-scrollToBottom component
     let rule = css({
-        color: 'red',
-        height:'27rem',
-        
+        height:'27rem'
     })
 
-    const fetchRecentMessages = async () => {
+    // const fetchRecentMessages = async () => {
+
+    //     const { data: { user } } = await supabase.auth.getUser()
         
+    //     try {
+    //         const { data: chat_messages, error } = await supabase
+    //             .from('chat_messages')
+    //             .select('*')
+    //             .order('created_at', { ascending: false }) // Order by timestamp in descending order
+    //             .eq('user_id', user.id)
+    //             .eq('reply_to', messageId)
+    //             setMessageid(chat_messages.id)
+    //             // .range(0, 9); // Fetch the most recent 5 messages
+    //         if (error) {
+    //             console.error('Error fetching recent messages:', error);
+    //             return;
+    //         }else{
+
+    //             setUserId(user.id);
+                
+    //             setMessages(chat_messages.reverse()); // Reverse the order to display the most recent message at the bottom
+
+    //         }
+
+    //         // setLoading(false);
+    //     } catch (error) {
+    //         console.error('Error fetching recent messages:', error);
+    //     }
+    // };
+    
+
+    const fetchRecentMessages = async () => {
         try {
+            const { data: { user } } = await supabase.auth.getUser();
+    
             const { data: chat_messages, error } = await supabase
                 .from('chat_messages')
                 .select('*')
                 .order('created_at', { ascending: false }) // Order by timestamp in descending order
-                // .range(0, 9); // Fetch the most recent 5 messages
+                .eq('user_id', user.id)
+                .range(0, 9);
+    
             if (error) {
                 console.error('Error fetching recent messages:', error);
                 return;
-            }else{
-                const { data: { user } } = await supabase.auth.getUser()
-
-                setUserId(user.id);
-
-                setMessages(chat_messages.reverse()); // Reverse the order to display the most recent message at the bottom
-
             }
-
-            // setLoading(false);
+    
+            setUserId(user.id);
+    
+            // Fetch related messages for each message in chat_messages
+            const allMessages = await Promise.all(chat_messages.map(async (message) => {
+                const { data: relatedMessages, error: relatedMessagesError } = await supabase
+                    .from('chat_messages')
+                    .select('*')
+                    .eq('reply_to', message.id)
+                    .range(0, 9);
+    
+                if (relatedMessagesError) {
+                    console.error('Error fetching related messages:', relatedMessagesError);
+                    return [];
+                }
+    
+                return [...relatedMessages, message]; // Include the original message in the array
+            }));
+    
+            // Flatten the array of arrays into a single array
+            const flattenedMessages = allMessages.flat();
+    
+            // Reverse the order to display the most recent message at the bottom
+            setMessages(flattenedMessages.reverse());
         } catch (error) {
             console.error('Error fetching recent messages:', error);
         }
     };
     
+
+
+
+
     useEffect(() => {
         const conversations = supabase.channel('conversations') // set your topic here
 
@@ -67,8 +111,6 @@ const Chatwidget = () => {
 
             // Update the state with the new message
             setMessages((prevMessages) => [...prevMessages, newMessage]);
-            
-            // scrollToBottom();
             
         };
 
@@ -93,24 +135,43 @@ const Chatwidget = () => {
         <ScrollToBottom className={`${rule}`}>
             <Flex direction={"column"} p={4} >
                 {/* {loading && <Spinner color="green.500" />} */}
-                {messages.map((message) => (
-                    <Flex key={message.id} justify={message.user_id === `${userId}` ? 'flex-end' : 'flex-start'} mb={2}>
-                        {/* Blob */}
-                        <Box
-                            className={message.user_id === `${userId}` ? 'right' : 'left'}
-                            p={3}
-                            bg={message.user_id === `${userId}` ? '#e3ccbf' : '#a86b48'}
-                            color={message.user_id === `${userId}` ? 'brand.900' : 'white'}
-                            maxW="60%"
-                        >
-                            <p>{message.message}</p>
-                            <Flex justify={'end'}>
-                                <p>{message.created_at}</p>
-                            </Flex>
-                        </Box>
-                    </Flex>
-                ))}
-                {/* <div ref={ref} /> */}
+                {messages.length === 0 ? (
+                    // Render skeletons when messages are being fetched
+                    Array.from({ length: 5 }).map((_, index) => (
+                        <Flex key={index} justify={index % 2 === 0 ? 'flex-end' : 'flex-start'} mb={2}>
+                            <Box
+                                className={index % 2 === 0 ? 'right' : 'left'}
+                                // p={3}
+                                // bg={index % 2 === 0 ? '#e3ccbf' : '#a86b48'}
+                                maxW="60%"
+                            >
+                                <Skeleton height="10rem" borderRadius={20} width={'20rem'} mb={2} />
+                                <Skeleton height="10rem" borderRadius={20} width={'20rem'} mb={2} />
+                            </Box>
+                        </Flex>
+                    ))
+                ) : (
+                    // Render actual messages when available
+                    messages.map((message) => (
+                        <Flex key={message.id} justify={message.user_id === `${userId}` ? 'flex-end' : 'flex-start'} mb={2}>
+                            {/* Blob */}
+                            <Box
+                                className={message.user_id === `${userId}` ? 'right' : 'left'}
+                                p={3}
+                                bg={message.user_id === `${userId}` ? '#e3ccbf' : '#a86b48'}
+                                color={message.user_id === `${userId}` ? 'brand.900' : 'white'}
+                                maxW="60%"
+                            >
+                                <p>{message.message}</p>
+                                <Flex mt={2} justify={'end'}>
+                                    <small style={{  opacity: 0.6 }}>
+                                        {dateFormat(message.created_at, "h:MM TT, mmmm dS, yyyy")}
+                                    </small>
+                                </Flex>
+                            </Box>
+                        </Flex>
+                    ))
+                )}
             </Flex>
         </ScrollToBottom>
     );

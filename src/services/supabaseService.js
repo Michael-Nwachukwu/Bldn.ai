@@ -2,17 +2,19 @@
 import { supabase } from './supabase';
 
 // Function to send a message to Supabase
-export const sendMessageToSupabase = async (userId, message) => {
+export const sendMessageToSupabase = async (userId, message, messageId) => {
     try {
         // Insert the message into the 'chat_messages' table
         const { data, error } = await supabase
             .from('chat_messages')
-            .insert([{ user_id: userId, message: message }]);
+            .insert({ user_id: userId, message: message, reply_to: messageId })
+            .select()
 
         if (error) {
             console.error('Error sending message to Supabase:', error);
+        }else{
+            return data[0].id;
         }
-        return data;
     } catch (error) {
         console.error('Error sending message to Supabase:', error);
         throw error;
@@ -25,7 +27,7 @@ export const getCurrentUserId = async () => {
    
 };
 
-export const onSendMessage = async (message) => {
+export const onSendMessage = async (message, messageId) => {
     // setLoading(true);
 
     const options = {
@@ -53,7 +55,7 @@ export const onSendMessage = async (message) => {
         const json = await response.json();
         if (json.choices && json.choices.length > 0) {
             let message = json.choices[0].text.trim();
-            await sendMessageToSupabase('49fce734-a6ec-431f-9afe-651edee8f9f7', message);
+            await sendMessageToSupabase('49fce734-a6ec-431f-9afe-651edee8f9f7', message, messageId);
         } else {
             console.error('Invalid response from OpenAI API:', json);
         }
