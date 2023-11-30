@@ -56,8 +56,6 @@ const Header = () => {
         </Flex>
       </Box>
 
-      {/* <Divider /> */}
-      
       <Heading fontWeight='bold' textAlign="center" pt={8} >
         Paste in your text below and we'll extract the keywords for you.
       </Heading>
