@@ -9,8 +9,6 @@ import dateFormat from 'dateformat';
 const Chatwidget = () => {
     const [messages, setMessages] = useState([]);
     const [userId, setUserId] = useState(null);
-    const [date, setDate] = useState();
-    const [messageId, setMessageid] = useState();
     // const [loading, setLoading] = useState(true);
 
     // make css rules for react-scrollToBottom component
