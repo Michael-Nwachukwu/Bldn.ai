@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { supabase } from "../services/supabase";
-import { Box, Center, Flex, VStack, Image, Input, InputGroup, InputRightElement, Button, Divider, Link, Spacer, AlertIcon, Alert, AlertDescription, Text } from "@chakra-ui/react";
+import { Box, Center, Flex, VStack, Image, Input, InputGroup, InputRightElement, Button, Divider, Link, Spacer, AlertIcon, Alert, AlertDescription, Text  } from "@chakra-ui/react";
 import logo from "../assets/bldn xb.png";
 
 const Auth = () => {
@@ -10,6 +10,11 @@ const Auth = () => {
     const [show, setShow] = useState(false);    
     const [mode, setMode] = useState('Sign In');
     const handleClick = () => setShow(!show);
+    const [signInOption, setSignInOptions] = useState('password');
+
+    const changeSignInOption = () => {
+        signInOption == 'password' ? setSignInOptions('otp') : setSignInOptions('password');
+    }
 
     const switchMode = () => {
         if(mode == "Sign In"){setMode('Sign Up')}else{setMode('Sign In')}
@@ -22,9 +27,16 @@ const Auth = () => {
     
         try {
             const { user, error } =
-                type === "LOGIN"
+
+                type === "LOGIN" 
                     ? await supabase.auth.signInWithPassword({ email, password })
+                    : type === "OTP"
+                    ? await supabase.auth.signInWithOtp({ email })
                     : await supabase.auth.signUp({ email, password });
+
+                // type === "LOGIN"
+                //     ? await supabase.auth.signInWithPassword({ email, password })
+                //     : await supabase.auth.signUp({ email, password });
 
             if (error) {
                 setHelperText({ error: true, text: error.message });
@@ -42,83 +54,6 @@ const Auth = () => {
             setHelperText({ error: true, text: "An unexpected error occurred. Check that you have an active internet connection and are signing into an existing account" });
         }
     };
-
-    const getCurrentUserId = () => {
-
-        const user = supabase.auth.user();
-    
-        // Check if a user is logged in
-        if (user) {
-            return user.id; // Return the user's ID
-        } else {
-            return null; // Return null if no user is logged in
-        }
-    
-    };    
-
-    // let idm = getCurrentUserId();
-    // console.log(idm);
-
-    // const handleSignUp = async () => {
-
-    //     const email = emailRef.current?.value;
-    //     const password = passwordRef.current?.value;
-    
-    //     const { user, error } = await supabase.auth.signUp({ email, password });
-    
-    //     if (error) {
-    //         setHelperText({ error: true, text: error.message });
-    //         console.log('Error signing up:', error.message)
-    //     } else {
-    //         console.log('Signed up as:', user.email)
-    //     }
-    // }
-
-    // const handleLogin = async () => {
-    //     const email = emailRef.current?.value;
-    //     const password = passwordRef.current?.value;
-    
-    //     const { user, error } = await supabase.auth.signInWithPassword({ email, password });
-            
-    //     if (error) {
-    //         setHelperText({ error: true, text: error.message });
-    //         console.log('Error signing in:', error.message)
-    //     } else {
-    //         // console.log("Logged-in user ID:", user.email);
-    //         // const { data: profile } = await supabase
-    //         //     .from('profiles')
-    //         //     .select('id, username, email');
-
-    //         // const userId = profile[0].id;
-
-    //         // console.log('User profile:', userId);
-    //     }
-    // };
-
-
-
-
-
-    
-
-
-    // const handleLogin = async (type) => {
-    //     const email = emailRef.current?.value;
-    //     const password = passwordRef.current?.value;
-
-    //     const { user, error } =
-    //         type === "LOGIN"
-    //             ? await supabase.auth.signIn({ email, password })
-    //             : await supabase.auth.signUp({ email, password });
-    //     if (error) {
-    //         setHelperText({ error: true, text: error.message });
-    //     } else if (!user && !error) {
-    //         setHelperText({
-    //             error: false,
-    //             text: "An email has been sent to you for verification!",
-    //         });
-    //     }
-    // };
 
     const handleOAuthLogin = async (provider) => {
         // You need to enable the third party auth you want in Authentication > Settings
@@ -152,84 +87,172 @@ const Auth = () => {
     return (
         <Center mt={24}>
             <Box width="40%">
-                <VStack direction='column'>
-                    <Image src={logo} alt="logo" width={90} marginBottom="1rem" />
-                    <Text
-                        fontWeight={'bold'}
-                        fontSize={'20px'}
-                        color={'gray'}
-                    >{mode} to your BldN account</Text>
-                    <Input
-                        focusBorderColor='brand.700'
-                        border={"1px"}
-                        bg={"transparent"}
-                        py={6}
-                        variant='outline' 
-                        placeholder='Enter Email'
-                        type={"email"}
-                        name={"email"}
-                        ref={emailRef}
-                        _hover={{ border:'' }}
-                        required
-                    />
-                    
-                    <InputGroup size='md'>
+                {signInOption == 'password' && 
+                    <VStack direction='column'>
+                        <Image src={logo} alt="logo" width={90} marginBottom="1rem" />
+                        <Text
+                            fontWeight={'bold'}
+                            fontSize={'20px'}
+                            color={'gray'}
+                        >{mode} to your BldN account</Text>
+                        
                         <Input
                             focusBorderColor='brand.700'
                             border={"1px"}
                             bg={"transparent"}
                             py={6}
-                            pr='4.5rem'
                             variant='outline' 
-                            type={show ? 'text' : 'password'}
-                            placeholder='Enter password'
-                            name={"password"}
-                            ref={passwordRef}
+                            placeholder='Enter Email'
+                            type={"email"}
+                            name={"email"}
+                            ref={emailRef}
                             _hover={{ border:'' }}
                             required
                         />
-                        <InputRightElement width='4.5rem'>
-                            <Button h='1.75rem' size='sm' mt={3} bg={"#e3ccbf"} color={"brand.600"} onClick={handleClick}
+                        
+                        <InputGroup size='md'>
+                            <Input
+                                focusBorderColor='brand.700'
+                                border={"1px"}
+                                bg={"transparent"}
+                                py={6}
+                                pr='4.5rem'
+                                variant='outline' 
+                                type={show ? 'text' : 'password'}
+                                placeholder='Enter password'
+                                name={"password"}
+                                ref={passwordRef}
+                                _hover={{ border:'' }}
+                                required
+                            />
+                            <InputRightElement width='4.5rem'>
+                                <Button h='1.75rem' size='sm' mt={3} bg={"#e3ccbf"} color={"brand.600"} onClick={handleClick}
+                                    _hover={{ bg:'' }}
+                                >
+                                    {show ? 'Hide' : 'Show'}
+                                </Button>
+                            </InputRightElement>
+                        </InputGroup>
+
+                        <Flex w={'100%'}>
+                            <Link
+                                onClick={forgotPassword}
+                                color={'gray'}
+                            >
+                                Forgot Password?
+                            </Link>
+
+                            <Spacer />
+
+                            <Link
+                                onClick={switchMode}
+                                color={'gray'}
+                                fontWeight={'bold'}
+                            >
+                                {mode == 'Sign In' ? 'Sign Up' : 'Sign In'}?
+                            </Link>
+
+                        </Flex>
+                        {!!helperText.text && (
+                            <Alert 
+                                status={`${helperText.error ? "error" : "success"}`}
+                            >
+                                <AlertIcon />
+                                <AlertDescription>{helperText.text}</AlertDescription>
+                            </Alert>
+                        )}
+                        {mode=='Sign In' && 
+                            <Button
+                                type="submit"
+                                onClick={() =>
+                                    handleLogin("LOGIN")
+                                }
+                                width={'100%'}
+                                bg={"#905f43"}
+                                color={"white"}
                                 _hover={{ bg:'' }}
                             >
-                                {show ? 'Hide' : 'Show'}
+                                SIGN IN
                             </Button>
-                        </InputRightElement>
-                    </InputGroup>
+                        }
 
-                    <Flex w={'100%'}>
-                        <Link
-                            onClick={forgotPassword}
-                            color={'gray'}
+                        {mode=='Sign Up' && 
+                            <Button
+                                type="submit"
+                                onClick={() =>
+                                    handleLogin("REGISTER").catch(console.error)
+                                }
+                                width={'100%'}
+                                bg={"#905f43"}
+                                color={"white"}
+                                _hover={{ bg:'' }}
+                            >
+                                SIGN UP
+                            </Button>
+                        }
+
+                        <small style={{ marginTop: '10px', color:'gray' }}>Or continue with</small>
+                        <Divider borderColor="black" borderWidth="0.6px" mb={4} />
+
+                        <Button
+                            w={'100%'}
+                            onClick={() => handleOAuthLogin("google")}
+                            type="button"
+                            bg={'#e3ccbf'}
+                            color={'brand.600'}
+                            _hover={{ bg:'transparent', border:'1px', borderColor:"#905f43" }}
                         >
-                            Forgot Password?
-                        </Link>
+                            Google
+                        </Button>
+                        <Button
+                            w={'100%'}
+                            onClick={() => changeSignInOption()}
+                            type="button"
+                            bg={'#e3ccbf'}
+                            color={'brand.600'}
+                            _hover={{ bg:'transparent', border:'1px', borderColor:"#905f43" }}
+                        >
+                            Magic Link
+                        </Button>
+                    </VStack>
+                }
 
-                        <Spacer />
-
-                        <Link
-                            onClick={switchMode}
-                            color={'gray'}
+                {signInOption == 'otp' && 
+                    <VStack direction='column'>
+                        <Image src={logo} alt="logo" width={90} marginBottom="1rem" />
+                        <Text
                             fontWeight={'bold'}
-                        >
-                            {mode == 'Sign In' ? 'Sign Up' : 'Sign In'}?
-                        </Link>
+                            fontSize={'20px'}
+                            color={'gray'}
+                        >Sign to your BldN account</Text>
+                        
+                        <Input
+                            focusBorderColor='brand.700'
+                            border={"1px"}
+                            bg={"transparent"}
+                            py={6}
+                            variant='outline' 
+                            placeholder='Enter Email'
+                            type={"email"}
+                            name={"email"}
+                            ref={emailRef}
+                            _hover={{ border:'' }}
+                            required
+                        />
+                        
+                        {!!helperText.text && (
+                            <Alert 
+                                status={`${helperText.error ? "error" : "success"}`}
+                            >
+                                <AlertIcon />
+                                <AlertDescription>{helperText.text}</AlertDescription>
+                            </Alert>
+                        )}
 
-                    </Flex>
-                    {!!helperText.text && (
-                        <Alert 
-                            status={`${helperText.error ? "error" : "success"}`}
-                        >
-                            <AlertIcon />
-                            {/* <AlertTitle>UNSUCCESSFUL</AlertTitle> */}
-                            <AlertDescription>{helperText.text}</AlertDescription>
-                        </Alert>
-                    )}
-                    {mode=='Sign In' && 
                         <Button
                             type="submit"
                             onClick={() =>
-                                handleLogin("LOGIN")
+                                handleLogin("OTP")
                             }
                             width={'100%'}
                             bg={"#905f43"}
@@ -238,47 +261,32 @@ const Auth = () => {
                         >
                             SIGN IN
                         </Button>
-                    }
 
-                    {mode=='Sign Up' && 
-                        <Button
-                            type="submit"
-                            onClick={() =>
-                                handleLogin("REGISTER").catch(console.error)
-                            }
-                            width={'100%'}
-                            bg={"#905f43"}
-                            color={"white"}
-                            _hover={{ bg:'' }}
-                        >
-                            SIGN UP
-                        </Button>
-                    }
+                        <small style={{ marginTop: '10px', color:'gray' }}>Or continue with</small>
+                        <Divider borderColor="black" borderWidth="0.6px" mb={4} />
 
-                    <small style={{ marginTop: '10px', color:'gray' }}>Or continue with</small>
-                    <Divider borderColor="black" borderWidth="0.6px" mb={4} />
-
-                    <Button
-                        w={'100%'}
-                        onClick={() => handleOAuthLogin("google")}
-                        type="button"
-                        bg={'#e3ccbf'}
-                        color={'brand.600'}
-                        _hover={{ bg:'transparent', border:'1px', borderColor:"#905f43" }}
-                    >
-                        Google
-                    </Button>
                         <Button
                             w={'100%'}
-                            onClick={() => handleOAuthLogin("github")}
+                            onClick={() => handleOAuthLogin("google")}
                             type="button"
                             bg={'#e3ccbf'}
                             color={'brand.600'}
                             _hover={{ bg:'transparent', border:'1px', borderColor:"#905f43" }}
                         >
-                            Magic Link
+                            Google
                         </Button>
-                </VStack>
+                        <Button
+                            w={'100%'}
+                            onClick={() => changeSignInOption()}
+                            type="button"
+                            bg={'#e3ccbf'}
+                            color={'brand.600'}
+                            _hover={{ bg:'transparent', border:'1px', borderColor:"#905f43" }}
+                        >
+                            Password
+                        </Button>
+                    </VStack>
+                }
             </Box>
         </Center>
     );
