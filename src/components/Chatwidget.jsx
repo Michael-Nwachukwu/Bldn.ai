@@ -58,7 +58,7 @@ const Chatwidget = () => {
                 .select('*')
                 .order('created_at', { ascending: false }) // Order by timestamp in descending order
                 .eq('user_id', user.id)
-                .range(0, 9);
+                // .range(0, 9);
     
             if (error) {
                 console.error('Error fetching recent messages:', error);
@@ -141,8 +141,6 @@ const Chatwidget = () => {
                         <Flex key={index} justify={index % 2 === 0 ? 'flex-end' : 'flex-start'} mb={2}>
                             <Box
                                 className={index % 2 === 0 ? 'right' : 'left'}
-                                // p={3}
-                                // bg={index % 2 === 0 ? '#e3ccbf' : '#a86b48'}
                                 maxW="60%"
                             >
                                 <Skeleton height="10rem" borderRadius={20} width={'20rem'} mb={2} />
