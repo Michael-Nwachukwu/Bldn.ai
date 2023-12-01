@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Heading,
   Image,
@@ -60,7 +60,7 @@ const Form = ({ firstFieldRef, onCancel, session, setUsername, updateProfile }) 
           Cancel
         </Button>
                   
-        <Button onClick={() => updateProfile(event)} colorScheme='teal' fontSize={"11px"}>
+        <Button onClick={() => updateProfile()} colorScheme='teal' fontSize={"11px"}>
           Save
         </Button>
       </ButtonGroup>
@@ -68,11 +68,47 @@ const Form = ({ firstFieldRef, onCancel, session, setUsername, updateProfile }) 
   )
 }
 
-const Header = ({ session }) => {
+const Header = ({ session, setSession }) => {
   const { onOpen, onClose, isOpen } = useDisclosure()
   const firstFieldRef = React.useRef(null)
   const { user } = session;
   const [username, setUsername] = useState();
+
+  // useEffect hook to fetch and update user profile information
+  useEffect(() => {
+    // Variable to track whether the component is still mounted
+    let ignore = false;
+
+    // Function to get user profile information
+    async function getProfile() {
+
+      // Fetch user profile data from the 'profiles' table in Supabase
+      const { data, error } = await supabase
+        .from('profiles')
+        .select(`username`)
+        .eq('id', user.id)
+        .single();
+
+      // Check if the component is still mounted
+      if (!ignore) {
+        // Handle errors or update profile state based on fetched data
+        if (error) {
+          console.warn(error);
+        } else if (data) {
+          setUsername(data.username);
+        }
+      }
+
+    }
+
+    // Call the getProfile function
+    getProfile();
+
+    // Cleanup function to handle component unmounting
+    return () => {
+      ignore = true;
+    };
+  }, [session]); // Run the effect whenever the session changes
 
 
   const signOut = async () => {
@@ -81,23 +117,18 @@ const Header = ({ session }) => {
 
   // Function to update the user profile
   async function updateProfile(event) {
-    // Prevent the default form submission behavior
-    event.preventDefault();
 
     // Set loading state to true before sending the update request
     // setLoading(true);
 
     // Extract user information from the session
-    const { user } = session;
+    // const { user } = session;
 
     const { data, error } = await supabase
       .from('profiles')
       .update({ username: username })
       .eq('id', user.id)
       .select()
-
-    // Update the user profile data in the 'profiles' table in Supabase
-    // const { error } = await supabase.from('profiles').upsert(updates);
 
     // Handle errors or update the avatar_url state
     if (error) {
@@ -107,6 +138,7 @@ const Header = ({ session }) => {
       console.log(data);
       setUsername(data.username)
       console.log(username);
+      setSession({ username: data.username });
     }
 
     // Set loading state to false after the update request is complete
@@ -157,7 +189,7 @@ const Header = ({ session }) => {
                     ml={-1}
                     mr={2}
                   />
-                  <TagLabel fontWeight={"bold"}>{username}</TagLabel>
+                  <TagLabel fontWeight={"bold"}>{user.username}</TagLabel>
                 </Tag>
 
                 <Popover
