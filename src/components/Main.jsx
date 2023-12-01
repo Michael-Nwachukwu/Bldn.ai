@@ -18,22 +18,25 @@ const Main = ({ session }) => {
     <>
       <Header session={session} />
       <Tabs isFitted variant="enclosed" colorScheme="green" mx={24} mt={7}>
-        <TabList mb="0.5em">
+        <TabList mb="0.5em" fontFamily="syncopate">
           <Tab
             borderBottom={"1px"}
             _selected={{ border: "1px", borderBottom: "none" }}
+            fontSize={'13px'}
           >
             Key word Extractor
           </Tab>
           <Tab
             borderBottom={"1px"}
             _selected={{ border: "1px", borderBottom: "none" }}
+            fontSize={'13px'}
           >
             Crypty
           </Tab>
           <Tab
             borderBottom={"1px"}
             _selected={{ border: "1px", borderBottom: "none" }}
+            fontSize={'13px'}
           >
             Toll
           </Tab>
