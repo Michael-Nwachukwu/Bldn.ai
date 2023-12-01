@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Heading,
   Image,
@@ -32,16 +32,19 @@ import { supabase } from "../services/supabase";
 
 // 1. Create a text input component
 const TextInput = React.forwardRef((props, ref) => {
+
+  const { id, label, setUsername, ...rest } = props;
+
   return (
     <FormControl>
-      <FormLabel fontSize={"11px"} htmlFor={props.id}>{props.label}</FormLabel>
-      <Input fontSize={"11px"} ref={ref} id={props.id} {...props} />
+      <FormLabel fontSize={"11px"} htmlFor={id}>{label}</FormLabel>
+      <Input onChange={(e) => setUsername(e.target.value)} fontSize={"11px"} ref={ref} id={id} {...rest} />
     </FormControl>
   )
 })
 
 // 2. Create the form
-const Form = ({ firstFieldRef, onCancel, session }) => {
+const Form = ({ firstFieldRef, onCancel, session, setUsername, updateProfile }) => {
   return (
     <Stack spacing={4} >
       <TextInput
@@ -49,6 +52,7 @@ const Form = ({ firstFieldRef, onCancel, session }) => {
         id='username'
         ref={firstFieldRef}
         defaultValue= {session.username}
+        setUsername={setUsername}
       />
       <ButtonGroup display='flex' justifyContent='flex-end'>
                   
@@ -56,7 +60,7 @@ const Form = ({ firstFieldRef, onCancel, session }) => {
           Cancel
         </Button>
                   
-        <Button isDisabled colorScheme='teal' fontSize={"11px"}>
+        <Button onClick={() => updateProfile(event)} colorScheme='teal' fontSize={"11px"}>
           Save
         </Button>
       </ButtonGroup>
@@ -68,11 +72,46 @@ const Header = ({ session }) => {
   const { onOpen, onClose, isOpen } = useDisclosure()
   const firstFieldRef = React.useRef(null)
   const { user } = session;
+  const [username, setUsername] = useState();
 
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
   };
+
+  // Function to update the user profile
+  async function updateProfile(event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
+    // Set loading state to true before sending the update request
+    // setLoading(true);
+
+    // Extract user information from the session
+    const { user } = session;
+
+    const { data, error } = await supabase
+      .from('profiles')
+      .update({ username: username })
+      .eq('id', user.id)
+      .select()
+
+    // Update the user profile data in the 'profiles' table in Supabase
+    // const { error } = await supabase.from('profiles').upsert(updates);
+
+    // Handle errors or update the avatar_url state
+    if (error) {
+      alert(error.message);
+    }else{
+      // console.log(user.username);
+      console.log(data);
+      setUsername(data.username)
+      console.log(username);
+    }
+
+    // Set loading state to false after the update request is complete
+    // setLoading(false);
+  }
 
   return (
     <Box>
@@ -118,7 +157,7 @@ const Header = ({ session }) => {
                     ml={-1}
                     mr={2}
                   />
-                  <TagLabel fontWeight={"bold"}>{user.username ? user.username : 'User'}</TagLabel>
+                  <TagLabel fontWeight={"bold"}>{username}</TagLabel>
                 </Tag>
 
                 <Popover
@@ -136,7 +175,7 @@ const Header = ({ session }) => {
                     <FocusLock returnFocus persistentFocus={false}>
                       <PopoverArrow />
                       <PopoverCloseButton />
-                      <Form firstFieldRef={firstFieldRef} onCancel={onClose} session={session} />
+                      <Form firstFieldRef={firstFieldRef} onCancel={onClose} session={session} setUsername={setUsername} updateProfile={updateProfile} />
                     </FocusLock>
                   </PopoverContent>
                 </Popover>
