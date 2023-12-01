@@ -16,36 +16,6 @@ const Chatwidget = () => {
     let rule = css({
         height:'27rem'
     })
-
-    // const fetchRecentMessages = async () => {
-
-    //     const { data: { user } } = await supabase.auth.getUser()
-        
-    //     try {
-    //         const { data: chat_messages, error } = await supabase
-    //             .from('chat_messages')
-    //             .select('*')
-    //             .order('created_at', { ascending: false }) // Order by timestamp in descending order
-    //             .eq('user_id', user.id)
-    //             .eq('reply_to', messageId)
-    //             setMessageid(chat_messages.id)
-    //             // .range(0, 9); // Fetch the most recent 5 messages
-    //         if (error) {
-    //             console.error('Error fetching recent messages:', error);
-    //             return;
-    //         }else{
-
-    //             setUserId(user.id);
-                
-    //             setMessages(chat_messages.reverse()); // Reverse the order to display the most recent message at the bottom
-
-    //         }
-
-    //         // setLoading(false);
-    //     } catch (error) {
-    //         console.error('Error fetching recent messages:', error);
-    //     }
-    // };
     
 
     const fetchRecentMessages = async () => {
