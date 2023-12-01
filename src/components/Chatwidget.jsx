@@ -1,6 +1,6 @@
 // Chatwidget.js
 import React, { useEffect, useState } from 'react';
-import { Box, Flex, Spinner, Skeleton } from '@chakra-ui/react';
+import { Box, Flex, Spinner, Skeleton, useBoolean, Text } from '@chakra-ui/react';
 import { supabase } from '../services/supabase';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { css } from 'glamor';
@@ -9,6 +9,7 @@ import dateFormat from 'dateformat';
 const Chatwidget = () => {
     const [messages, setMessages] = useState([]);
     const [userId, setUserId] = useState(null);
+    const [loading, setLoading] = useBoolean(true);
     // const [loading, setLoading] = useState(true);
 
     // make css rules for react-scrollToBottom component
@@ -48,6 +49,9 @@ const Chatwidget = () => {
     
 
     const fetchRecentMessages = async () => {
+
+        setLoading.on();
+
         try {
             const { data: { user } } = await supabase.auth.getUser();
     
@@ -56,13 +60,14 @@ const Chatwidget = () => {
                 .select('*')
                 .order('created_at', { ascending: false }) // Order by timestamp in descending order
                 .eq('user_id', user.id)
-                // .range(0, 9);
     
             if (error) {
                 console.error('Error fetching recent messages:', error);
                 return;
+            }else{
+                // chat_messages.length === 0 ? setFlag.off() : setFlag.on();
             }
-    
+
             setUserId(user.id);
     
             // Fetch related messages for each message in chat_messages
@@ -71,10 +76,11 @@ const Chatwidget = () => {
                     .from('chat_messages')
                     .select('*')
                     .eq('reply_to', message.id)
-                    .range(0, 9);
+                    // .range(0, 9);
     
                 if (relatedMessagesError) {
                     console.error('Error fetching related messages:', relatedMessagesError);
+                    alert('Error fetching related messages:', relatedMessagesError);
                     return [];
                 }
     
@@ -83,17 +89,19 @@ const Chatwidget = () => {
     
             // Flatten the array of arrays into a single array
             const flattenedMessages = allMessages.flat();
-    
+
+            
             // Reverse the order to display the most recent message at the bottom
             setMessages(flattenedMessages.reverse());
+            
+            setLoading.off();
+
         } catch (error) {
             console.error('Error fetching recent messages:', error);
+            setLoading.off();
         }
+
     };
-    
-
-
-
 
     useEffect(() => {
         const conversations = supabase.channel('conversations') // set your topic here
@@ -133,7 +141,7 @@ const Chatwidget = () => {
         <ScrollToBottom className={`${rule}`}>
             <Flex direction={"column"} p={4} >
                 {/* {loading && <Spinner color="green.500" />} */}
-                {messages.length === 0 ? (
+                {loading ? (
                     // Render skeletons when messages are being fetched
                     Array.from({ length: 5 }).map((_, index) => (
                         <Flex key={index} justify={index % 2 === 0 ? 'flex-end' : 'flex-start'} mb={2}>
@@ -147,27 +155,34 @@ const Chatwidget = () => {
                         </Flex>
                     ))
                 ) : (
-                    // Render actual messages when available
-                    messages.map((message) => (
-                        <Flex key={message.id} justify={message.user_id === `${userId}` ? 'flex-end' : 'flex-start'} mb={2}>
-                            {/* Blob */}
-                            <Box
-                                className={message.user_id === `${userId}` ? 'right' : 'left'}
-                                p={3}
-                                bg={message.user_id === `${userId}` ? '#e3ccbf' : '#a86b48'}
-                                color={message.user_id === `${userId}` ? 'brand.900' : 'white'}
-                                maxW="60%"
-                            >
-                                <p>{message.message}</p>
-                                <Flex mt={2} justify={'end'}>
-                                    <small style={{  opacity: 0.6 }}>
-                                        {dateFormat(message.created_at, "h:MM TT, mmmm dS, yyyy")}
-                                    </small>
-                                </Flex>
-                            </Box>
-                        </Flex>
-                    ))
+                    messages.length > 0 ? (
+                        // Render actual messages when available
+                        messages.map((message) => (
+                            <Flex key={message.id} justify={message.user_id === `${userId}` ? 'flex-end' : 'flex-start'} mb={2}>
+                                {/* Blob */}
+                                <Box
+                                    className={message.user_id === `${userId}` ? 'right' : 'left'}
+                                    p={3}
+                                    bg={message.user_id === `${userId}` ? '#e3ccbf' : '#a86b48'}
+                                    color={message.user_id === `${userId}` ? 'brand.900' : 'white'}
+                                    maxW="60%"
+                                >
+                                    <p>{message.message}</p>
+                                    <Flex mt={2} justify={'end'}>
+                                        <small style={{  opacity: 0.6 }}>
+                                            {dateFormat(message.created_at, "h:MM TT, mmmm dS, yyyy")}
+                                        </small>
+                                    </Flex>
+                                </Box>
+                            </Flex>
+                        ))
+                    ) :  (
+                        <Text textAlign="center" color="gray.500" mt={4}>
+                        No messages available.
+                    </Text>
+                    )
                 )}
+                
             </Flex>
         </ScrollToBottom>
     );
