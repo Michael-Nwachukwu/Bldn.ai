@@ -60,7 +60,7 @@ const Form = ({ firstFieldRef, onCancel, session, setUsername, updateProfile }) 
           Cancel
         </Button>
                   
-        <Button onClick={() => updateProfile()} colorScheme='teal' fontSize={"11px"}>
+        <Button onClick={(e) => updateProfile(e)} colorScheme='teal' fontSize={"11px"}>
           Save
         </Button>
       </ButtonGroup>
@@ -73,7 +73,6 @@ const Header = ({ session, setSession }) => {
   const firstFieldRef = React.useRef(null)
   const { user } = session;
   const [username, setUsername] = useState();
-  const usernameRef = useRef();
 
   // useEffect hook to fetch and update user profile information
   useEffect(() => {
@@ -116,7 +115,9 @@ const Header = ({ session, setSession }) => {
   };
 
   // Function to update the user profile
-  async function updateProfile() {
+  async function updateProfile(e) {
+
+    e.preventDefault();
 
     let usernamet = firstFieldRef.current?.value;
     // Set loading state to true before sending the update request
@@ -131,10 +132,9 @@ const Header = ({ session, setSession }) => {
     // Handle errors or update the avatar_url state
     if (error) {
       alert(error.message);
-    }else{
-      console.log('Updating username:', username.username);
-      setUsername(username.username);
     }
+      
+    setUsername(usernamet);
 
     // Set loading state to false after the update request is complete
     // setLoading(false);
