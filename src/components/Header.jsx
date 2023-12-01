@@ -45,7 +45,7 @@ const TextInput = React.forwardRef((props, ref) => {
 })
 
 // 2. Create the form
-const Form = ({ firstFieldRef, onCancel, session, setUsername, updateProfile, username }) => {
+const Form = ({ firstFieldRef, onCancel, setUsername, updateProfile, username }) => {
   return (
     <Stack spacing={4} >
       <TextInput
@@ -61,7 +61,7 @@ const Form = ({ firstFieldRef, onCancel, session, setUsername, updateProfile, us
           Cancel
         </Button>
                   
-        <Button onClick={(e) => updateProfile(e)} colorScheme='teal' fontSize={"11px"}>
+        <Button onClick={(e) => updateProfile(e)} colorScheme='brand' fontSize={"11px"}>
           Save
         </Button>
       </ButtonGroup>
