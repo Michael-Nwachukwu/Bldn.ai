@@ -29,6 +29,7 @@ import {
 import { EditIcon } from "./EditIcon";
 import logo from "../assets/bldn xb.png";
 import { supabase } from "../services/supabase";
+import avatar from "../assets/avatar.jpg"
 
 // 1. Create a text input component
 const TextInput = React.forwardRef((props, ref) => {
@@ -44,14 +45,14 @@ const TextInput = React.forwardRef((props, ref) => {
 })
 
 // 2. Create the form
-const Form = ({ firstFieldRef, onCancel, session, setUsername, updateProfile }) => {
+const Form = ({ firstFieldRef, onCancel, session, setUsername, updateProfile, username }) => {
   return (
     <Stack spacing={4} >
       <TextInput
         label='Username'
         id='username'
         ref={firstFieldRef}
-        defaultValue= {session.username}
+        defaultValue= {username}
         setUsername={setUsername}
       />
       <ButtonGroup display='flex' justifyContent='flex-end'>
@@ -136,6 +137,9 @@ const Header = ({ session, setSession }) => {
       
     setUsername(usernamet);
 
+    // Close the popover
+    onClose();
+
     // Set loading state to false after the update request is complete
     // setLoading(false);
   }
@@ -178,13 +182,13 @@ const Header = ({ session, setSession }) => {
                   borderRadius="full"
                 >
                   <Avatar
-                    src="https://bit.ly/sage-adebayo"
+                    src={avatar}
                     size="xs"
                     name="Segun Adebayo"
                     ml={-1}
                     mr={2}
                   />
-                  <TagLabel fontWeight={"bold"}>{username}</TagLabel>
+                  <TagLabel fontWeight={"bold"}>{username ? username : 'user'}</TagLabel>
                 </Tag>
 
                 <Popover
@@ -202,7 +206,7 @@ const Header = ({ session, setSession }) => {
                     <FocusLock returnFocus persistentFocus={false}>
                       <PopoverArrow />
                       <PopoverCloseButton />
-                      <Form firstFieldRef={firstFieldRef} onCancel={onClose} session={session} setUsername={setUsername} updateProfile={updateProfile} />
+                      <Form firstFieldRef={firstFieldRef} onCancel={onClose} session={session} setUsername={setUsername} updateProfile={updateProfile} username={username} />
                     </FocusLock>
                   </PopoverContent>
                 </Popover>
