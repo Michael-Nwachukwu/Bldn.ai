@@ -12,11 +12,11 @@ import { onSendMessage } from "../services/supabaseService";
 import Header from "./Header";
 import Chatwidget from "./Chatwidget";
 
-const Main = () => {
+const Main = ({ session }) => {
 
   return (
     <>
-      <Header />
+      <Header session={session} />
       <Tabs isFitted variant="enclosed" colorScheme="green" mx={24} mt={7}>
         <TabList mb="0.5em">
           <Tab

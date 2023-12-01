@@ -32,7 +32,7 @@ const App = () => {
       <VStack>
         <Container minW='6xl'>
           <Box py={"3"}>
-            {!session ? <Auth /> : <Main />}
+            {!session ? <Auth /> : <Main session={session} />}
           </Box>
         </Container>
       </VStack>
