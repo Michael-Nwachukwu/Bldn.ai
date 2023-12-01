@@ -135,10 +135,7 @@ const Header = ({ session, setSession }) => {
       alert(error.message);
     }else{
       // console.log(user.username);
-      console.log(data);
       setUsername(data.username)
-      console.log(username);
-      setSession({ username: data.username });
     }
 
     // Set loading state to false after the update request is complete
