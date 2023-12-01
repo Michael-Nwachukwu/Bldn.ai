@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Heading,
   Image,
@@ -38,7 +38,7 @@ const TextInput = React.forwardRef((props, ref) => {
   return (
     <FormControl>
       <FormLabel fontSize={"11px"} htmlFor={id}>{label}</FormLabel>
-      <Input onChange={(e) => setUsername(e.target.value)} fontSize={"11px"} ref={ref} id={id} {...rest} />
+      <Input fontSize={"11px"} ref={ref} id={id} {...rest} />
     </FormControl>
   )
 })
@@ -73,6 +73,7 @@ const Header = ({ session, setSession }) => {
   const firstFieldRef = React.useRef(null)
   const { user } = session;
   const [username, setUsername] = useState();
+  const usernameRef = useRef();
 
   // useEffect hook to fetch and update user profile information
   useEffect(() => {
@@ -98,7 +99,6 @@ const Header = ({ session, setSession }) => {
           setUsername(data.username);
         }
       }
-
     }
 
     // Call the getProfile function
@@ -116,26 +116,24 @@ const Header = ({ session, setSession }) => {
   };
 
   // Function to update the user profile
-  async function updateProfile(event) {
+  async function updateProfile() {
 
+    let usernamet = firstFieldRef.current?.value;
     // Set loading state to true before sending the update request
     // setLoading(true);
 
-    // Extract user information from the session
-    // const { user } = session;
-
-    const { data, error } = await supabase
+    const { data: username, error } = await supabase
       .from('profiles')
-      .update({ username: username })
+      .update({ username: usernamet })
       .eq('id', user.id)
-      .select()
+      .select();
 
     // Handle errors or update the avatar_url state
     if (error) {
       alert(error.message);
     }else{
-      // console.log(user.username);
-      setUsername(data.username)
+      console.log('Updating username:', username.username);
+      setUsername(username.username);
     }
 
     // Set loading state to false after the update request is complete
@@ -186,7 +184,7 @@ const Header = ({ session, setSession }) => {
                     ml={-1}
                     mr={2}
                   />
-                  <TagLabel fontWeight={"bold"}>{user.username}</TagLabel>
+                  <TagLabel fontWeight={"bold"}>{username}</TagLabel>
                 </Tag>
 
                 <Popover
