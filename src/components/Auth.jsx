@@ -85,8 +85,8 @@ const Auth = () => {
     };
 
     return (
-        <Center mt={24}>
-            <Box width="40%">
+        <Center mt={{ base:16, lg:24 }}>
+            <Box width={{ base:'100%', lg:"40%" }}>
                 {signInOption == 'password' && 
                     <VStack direction='column'>
                         <Image src={logo} alt="logo" width={90} marginBottom="1rem" />

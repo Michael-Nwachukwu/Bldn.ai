@@ -30,7 +30,7 @@ const App = () => {
   return (
     <Box bg="#F7F1ED" minW="100vw" minH="100vh">
       <VStack>
-        <Container minW='6xl'>
+        <Container minW={{ lg:'6xl' }}>
           <Box py={"3"}>
             {!session ? <Auth /> : <Main session={session} setSession={setSession} />}
           </Box>
