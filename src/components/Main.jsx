@@ -17,33 +17,33 @@ const Main = ({ session }) => {
   return (
     <>
       <Header session={session} />
-      <Tabs isFitted variant="enclosed" colorScheme="green" mx={24} mt={7}>
+      <Tabs isFitted variant="enclosed" colorScheme="green" mx={{ lg:24 }} mt={{ base:5, md:7 }}>
         <TabList mb="0.5em" fontFamily="syncopate">
           <Tab
             borderBottom={"1px"}
             _selected={{ border: "1px", borderBottom: "none" }}
-            fontSize={'13px'}
+            fontSize={{ base:'10px', md:'13px' }}
           >
-            Key word Extractor
+             Extractor
           </Tab>
           <Tab
             borderBottom={"1px"}
             _selected={{ border: "1px", borderBottom: "none" }}
-            fontSize={'13px'}
+            fontSize={{ base:'10px', md:'13px' }}
           >
             Crypty
           </Tab>
           <Tab
             borderBottom={"1px"}
             _selected={{ border: "1px", borderBottom: "none" }}
-            fontSize={'13px'}
+            fontSize={{ base:'10px', md:'13px' }}
           >
             Toll
           </Tab>
         </TabList>
 
         <TabPanels>
-          <TabPanel>
+          <TabPanel >
             <Chatwidget />
             <Chatinput onSendMessage={onSendMessage} />
           </TabPanel>

@@ -109,7 +109,7 @@ const Chatwidget = () => {
 
     return (
         <ScrollToBottom className={`${rule}`}>
-            <Flex direction={"column"} p={4} >
+            <Flex direction={"column"} p={{  lg:4 }} >
                 {/* {loading && <Spinner color="green.500" />} */}
                 {loading ? (
                     // Render skeletons when messages are being fetched
@@ -135,9 +135,9 @@ const Chatwidget = () => {
                                     p={3}
                                     bg={message.user_id === `${userId}` ? '#e3ccbf' : '#a86b48'}
                                     color={message.user_id === `${userId}` ? 'brand.900' : 'white'}
-                                    maxW="60%"
+                                    maxW={{ base:'90%', md:"60%" }}
                                 >
-                                    <p>{message.message}</p>
+                                    <p className='chats'>{message.message}</p>
                                     <Flex mt={2} justify={'end'}>
                                         <small style={{  opacity: 0.6 }}>
                                             {dateFormat(message.created_at, "h:MM TT, mmmm dS, yyyy")}

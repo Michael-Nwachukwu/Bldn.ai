@@ -24,6 +24,8 @@ import {
   Input,
   Stack,
   ButtonGroup,
+  Show,
+  Hide
 
 } from "@chakra-ui/react";
 import { EditIcon } from "./EditIcon";
@@ -146,94 +148,100 @@ const Header = ({ session, setSession }) => {
 
   return (
     <Box>
-      <Box borderBottom={"1px"} borderColor="gray.300" pb={3}>
+      <Box borderBottom={"1px"} borderColor="gray.300" pb={{ md:3 }}>
         <Flex minWidth="max-content" alignItems="center">
           <Image src={logo} alt="logo" width={90} marginBottom="1rem" />
           <Spacer />
-          <Box>
-            <Flex alignItems="center" gap={14} fontFamily="syncopate">
-              <Link
-                fontWeight={600}
-                letterSpacing="0.2px"
-                fontSize="sm"
-                color="#030202"
-                href="https://chakra-ui.com"
-                isExternal
-              >
-                GitHub
-              </Link>
-
-              <Link
-                fontWeight={600}
-                letterSpacing="0.2px"
-                fontSize="sm"
-                color="#030202"
-                href="https://chakra-ui.com"
-                isExternal
-              >
-                Contact
-              </Link>
-
-              <Flex alignItems="center" gap={1}>
-                <Tag
-                  size="lg"
-                  colorScheme="red"
-                  fontSize={"11px"}
-                  borderRadius="full"
+          <Show below='md'>
+            <Box>This text appears at the "sm" value screen width or greater.</Box>
+          </Show>
+          <Hide below='md'>
+            <Box>This text hides at the "md" value screen width and smaller.</Box>
+            {/* <Box>
+              <Flex alignItems="center" gap={14} fontFamily="syncopate">
+                <Link
+                  fontWeight={600}
+                  letterSpacing="0.2px"
+                  fontSize="sm"
+                  color="#030202"
+                  href="https://chakra-ui.com"
+                  isExternal
                 >
-                  <Avatar
-                    src={avatar}
-                    size="xs"
-                    name="Segun Adebayo"
-                    ml={-1}
-                    mr={2}
-                  />
-                  <TagLabel fontWeight={"bold"}>{username ? username : 'user'}</TagLabel>
-                </Tag>
+                  GitHub
+                </Link>
 
-                <Popover
-                  isOpen={isOpen}
-                  initialFocusRef={firstFieldRef}
-                  onOpen={onOpen}
-                  onClose={onClose}
-                  placement="bottom"
-                  closeOnBlur={false}
+                <Link
+                  fontWeight={600}
+                  letterSpacing="0.2px"
+                  fontSize="sm"
+                  color="#030202"
+                  href="https://chakra-ui.com"
+                  isExternal
                 >
-                  <PopoverTrigger>
-                    <IconButton size="sm" bg={''} _hover={{ bg:'' }} icon={<EditIcon />} />
-                  </PopoverTrigger>
-                  <PopoverContent p={5}>
-                    <FocusLock returnFocus persistentFocus={false}>
-                      <PopoverArrow />
-                      <PopoverCloseButton />
-                      <Form firstFieldRef={firstFieldRef} onCancel={onClose} session={session} setUsername={setUsername} updateProfile={updateProfile} username={username} />
-                    </FocusLock>
-                  </PopoverContent>
-                </Popover>
+                  Contact
+                </Link>
+
+                <Flex alignItems="center" gap={1}>
+                  <Tag
+                    size="lg"
+                    colorScheme="red"
+                    fontSize={"11px"}
+                    borderRadius="full"
+                  >
+                    <Avatar
+                      src={avatar}
+                      size="xs"
+                      name="Segun Adebayo"
+                      ml={-1}
+                      mr={2}
+                    />
+                    <TagLabel fontWeight={"bold"}>{username ? username : 'user'}</TagLabel>
+                  </Tag>
+
+                  <Popover
+                    isOpen={isOpen}
+                    initialFocusRef={firstFieldRef}
+                    onOpen={onOpen}
+                    onClose={onClose}
+                    placement="bottom"
+                    closeOnBlur={false}
+                  >
+                    <PopoverTrigger>
+                      <IconButton size="sm" bg={''} _hover={{ bg:'' }} icon={<EditIcon />} />
+                    </PopoverTrigger>
+                    <PopoverContent p={5}>
+                      <FocusLock returnFocus persistentFocus={false}>
+                        <PopoverArrow />
+                        <PopoverCloseButton />
+                        <Form firstFieldRef={firstFieldRef} onCancel={onClose} session={session} setUsername={setUsername} updateProfile={updateProfile} username={username} />
+                      </FocusLock>
+                    </PopoverContent>
+                  </Popover>
+                </Flex>
+
+
+                <Button
+                  fontSize={"xs"}
+                  bg=""
+                  _hover={{ bg: "brand.500", color: "white" }}
+                  size="md"
+                  fontWeight="600"
+                  letterSpacing="0.4px"
+                  border="1px"
+                  borderColor="#E3CCBF"
+                  boxShadow="md"
+                  onClick={() => signOut()}
+                  rounded="lg"
+                >
+                  Sign Out
+                </Button>
               </Flex>
-
-
-              <Button
-                fontSize={"xs"}
-                bg=""
-                _hover={{ bg: "brand.500", color: "white" }}
-                size="md"
-                fontWeight="600"
-                letterSpacing="0.4px"
-                border="1px"
-                borderColor="#E3CCBF"
-                boxShadow="md"
-                onClick={() => signOut()}
-                rounded="lg"
-              >
-                Sign Out
-              </Button>
-            </Flex>
-          </Box>
+            </Box> */}
+          </Hide>
         </Flex>
       </Box>
 
-      <Heading fontWeight="bold" textAlign="center" pt={8}>
+      <Heading fontWeight="bold" textAlign="center" pt={{ base:2, lg:8}} fontSize={'17px'}>
         Paste in your text below and we'll extract the keywords for you.
       </Heading>
     </Box>
