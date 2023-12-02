@@ -79,6 +79,12 @@ const Header = ({ session, setSession }) => {
   const { user } = session;
   const [username, setUsername] = useState();
 
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   // useEffect hook to fetch and update user profile information
   useEffect(() => {
     // Variable to track whether the component is still mounted
@@ -159,7 +165,8 @@ const Header = ({ session, setSession }) => {
 
           <Box display={{ base: 'block', md: 'none' }}>
             <Flex alignItems={'start'} gap={3}>
-              <Flex alignItems="center" gap={1} >
+
+              <Flex alignItems="center" gap={1}>
                 <Tag
                   size="lg"
                   colorScheme="red"
@@ -196,7 +203,9 @@ const Header = ({ session, setSession }) => {
                   </PopoverContent>
                 </Popover>
               </Flex>
+              
               <Menu>
+
                 <MenuButton
                   as={IconButton}
                   aria-label='Options'
@@ -206,10 +215,14 @@ const Header = ({ session, setSession }) => {
                   pb={2}
                   _hover={{ bg: '' }}
                   _active={{ bg: '' }}
+                  onClick={handleCheckboxChange}
                 >
                   {/* Your custom SVG icon goes here */}
-                  <label className="hamburger">
-                    <input type="checkbox" />
+                  <label htmlFor="menuCheckbox" className="hamburger">
+                    <input id="menuCheckbox"
+                      type="checkbox"
+                      checked={isChecked}
+                    />
                     <svg viewBox="0 0 32 32">
                       <path className="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
                       <path className="line" d="M7 16 27 16"></path>
@@ -262,7 +275,9 @@ const Header = ({ session, setSession }) => {
                     </Button>
                   </MenuItem>
                 </MenuList>
+
               </Menu>
+
             </Flex>
           </Box>
         
