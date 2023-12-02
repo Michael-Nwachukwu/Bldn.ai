@@ -18,14 +18,15 @@ import {
   PopoverArrow,
   PopoverCloseButton,
   useDisclosure,
-  Center,
   FormControl,
   FormLabel,
   Input,
   Stack,
   ButtonGroup,
-  Show,
-  Hide
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem
 
 } from "@chakra-ui/react";
 import { EditIcon } from "./EditIcon";
@@ -70,6 +71,7 @@ const Form = ({ firstFieldRef, onCancel, setUsername, updateProfile, username })
     </Stack>
   )
 }
+
 
 const Header = ({ session, setSession }) => {
   const { onOpen, onClose, isOpen } = useDisclosure()
@@ -149,99 +151,206 @@ const Header = ({ session, setSession }) => {
   return (
     <Box>
       <Box borderBottom={"1px"} borderColor="gray.300" pb={{ md:3 }}>
-        <Flex minWidth="max-content" alignItems="center">
-          <Image src={logo} alt="logo" width={90} marginBottom="1rem" />
+        <Flex minWidth="max-content" >
+
+          <Image src={logo} alt="logo" width={{ base:'70px', md:90 }} marginBottom="1rem" />
+
           <Spacer />
-          <Show below='md'>
-            <Box>This text appears at the "sm" value screen width or greater.</Box>
-          </Show>
-          <Hide below='md'>
-            <Box>This text hides at the "md" value screen width and smaller.</Box>
-            {/* <Box>
-              <Flex alignItems="center" gap={14} fontFamily="syncopate">
-                <Link
-                  fontWeight={600}
-                  letterSpacing="0.2px"
-                  fontSize="sm"
-                  color="#030202"
-                  href="https://chakra-ui.com"
-                  isExternal
+
+          <Box display={{ base: 'block', md: 'none' }}>
+            <Flex alignItems={'start'} gap={3}>
+              <Flex alignItems="center" gap={1} >
+                <Tag
+                  size="lg"
+                  colorScheme="red"
+                  fontSize={"11px"}
+                  borderRadius="full"
                 >
-                  GitHub
-                </Link>
+                  <Avatar
+                    src={avatar}
+                    size="xs"
+                    name="Segun Adebayo"
+                    ml={-1}
+                    mr={2}
+                  />
+                  <TagLabel fontWeight={"bold"}>{username ? username : 'user'}</TagLabel>
+                </Tag>
 
-                <Link
-                  fontWeight={600}
-                  letterSpacing="0.2px"
-                  fontSize="sm"
-                  color="#030202"
-                  href="https://chakra-ui.com"
-                  isExternal
+                <Popover
+                  isOpen={isOpen}
+                  initialFocusRef={firstFieldRef}
+                  onOpen={onOpen}
+                  onClose={onClose}
+                  placement="bottom"
+                  closeOnBlur={false}
                 >
-                  Contact
-                </Link>
-
-                <Flex alignItems="center" gap={1}>
-                  <Tag
-                    size="lg"
-                    colorScheme="red"
-                    fontSize={"11px"}
-                    borderRadius="full"
-                  >
-                    <Avatar
-                      src={avatar}
-                      size="xs"
-                      name="Segun Adebayo"
-                      ml={-1}
-                      mr={2}
-                    />
-                    <TagLabel fontWeight={"bold"}>{username ? username : 'user'}</TagLabel>
-                  </Tag>
-
-                  <Popover
-                    isOpen={isOpen}
-                    initialFocusRef={firstFieldRef}
-                    onOpen={onOpen}
-                    onClose={onClose}
-                    placement="bottom"
-                    closeOnBlur={false}
-                  >
-                    <PopoverTrigger>
-                      <IconButton size="sm" bg={''} _hover={{ bg:'' }} icon={<EditIcon />} />
-                    </PopoverTrigger>
-                    <PopoverContent p={5}>
-                      <FocusLock returnFocus persistentFocus={false}>
-                        <PopoverArrow />
-                        <PopoverCloseButton />
-                        <Form firstFieldRef={firstFieldRef} onCancel={onClose} session={session} setUsername={setUsername} updateProfile={updateProfile} username={username} />
-                      </FocusLock>
-                    </PopoverContent>
-                  </Popover>
-                </Flex>
-
-
-                <Button
-                  fontSize={"xs"}
-                  bg=""
-                  _hover={{ bg: "brand.500", color: "white" }}
-                  size="md"
-                  fontWeight="600"
-                  letterSpacing="0.4px"
-                  border="1px"
-                  borderColor="#E3CCBF"
-                  boxShadow="md"
-                  onClick={() => signOut()}
-                  rounded="lg"
-                >
-                  Sign Out
-                </Button>
+                  <PopoverTrigger>
+                    <IconButton size="sm" bg={''} _hover={{ bg:'' }} icon={<EditIcon />} />
+                  </PopoverTrigger>
+                  <PopoverContent p={5}>
+                    <FocusLock returnFocus persistentFocus={false}>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <Form firstFieldRef={firstFieldRef} onCancel={onClose} session={session} setUsername={setUsername} updateProfile={updateProfile} username={username} />
+                    </FocusLock>
+                  </PopoverContent>
+                </Popover>
               </Flex>
-            </Box> */}
-          </Hide>
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  aria-label='Options'
+                  // variant='outline'
+                  bg={''}
+                  border={'none'}
+                  pb={2}
+                  _hover={{ bg: '' }}
+                  _active={{ bg: '' }}
+                >
+                  {/* Your custom SVG icon goes here */}
+                  <label className="hamburger">
+                    <input type="checkbox" />
+                    <svg viewBox="0 0 32 32">
+                      <path className="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+                      <path className="line" d="M7 16 27 16"></path>
+                    </svg>
+                  </label>
+                </MenuButton>
+
+                <MenuList bg={'#f9f6f4'} shadow={'md'} color={'gray.700'}>
+                  <MenuItem bg={'transparent'} _hover={{ bg: '#a86b48', color:'white' }} command='⌘T'>
+                    <Link
+                      fontFamily={'syncopate'}
+                      letterSpacing="0.2px"
+                      fontSize="sm"
+                      href="https://github.com/Michael-Nwachukwu"
+                      isExternal
+                    >
+                      GitHub
+                    </Link>
+
+                  </MenuItem>
+                  <MenuItem bg={'transparent'} _hover={{ bg: '#a86b48', color:'white' }} command='⌘N'>
+                    <Link
+                        fontFamily={'syncopate'}
+                        letterSpacing="0.2px"
+                        fontSize="sm"
+                        href="https://chakra-ui.com"
+                        isExternal
+                      >
+                        Contact
+                      </Link>
+                  </MenuItem>
+                  <MenuItem bg={'transparent'}>
+
+                    <Button
+                      fontSize={"xs"}
+                      bg="#a86b48"
+                      _hover={{ bg: "brand.500", color: "white" }}
+                      size="md"
+                      fontWeight="600"
+                      letterSpacing="0.4px"
+                      border="1px"
+                      borderColor="#E3CCBF"
+                      boxShadow="md"
+                      color={'white'}
+                      onClick={() => signOut()}
+                      rounded="lg"
+                      ml={'auto'}
+                    >
+                      Sign Out
+                    </Button>
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            </Flex>
+          </Box>
+        
+          <Box display={{ base: 'none', md: 'block' }}>
+            <Flex alignItems="center" gap={14} fontFamily="syncopate">
+              <Link
+                fontWeight={600}
+                letterSpacing="0.2px"
+                fontSize="sm"
+                color="#030202"
+                href="https://github.com/Michael-Nwachukwu"
+                isExternal
+              >
+                GitHub
+              </Link>
+
+              <Link
+                fontWeight={600}
+                letterSpacing="0.2px"
+                fontSize="sm"
+                color="#030202"
+                href="https://chakra-ui.com"
+                isExternal
+              >
+                Contact
+              </Link>
+
+              <Flex alignItems="center" gap={1}>
+                <Tag
+                  size="lg"
+                  colorScheme="red"
+                  fontSize={"11px"}
+                  borderRadius="full"
+                >
+                  <Avatar
+                    src={avatar}
+                    size="xs"
+                    name="Segun Adebayo"
+                    ml={-1}
+                    mr={2}
+                  />
+                  <TagLabel fontWeight={"bold"}>{username ? username : 'user'}</TagLabel>
+                </Tag>
+
+                <Popover
+                  isOpen={isOpen}
+                  initialFocusRef={firstFieldRef}
+                  onOpen={onOpen}
+                  onClose={onClose}
+                  placement="bottom"
+                  closeOnBlur={false}
+                >
+                  <PopoverTrigger>
+                    <IconButton size="sm" bg={''} _hover={{ bg:'' }} icon={<EditIcon />} />
+                  </PopoverTrigger>
+                  <PopoverContent p={5}>
+                    <FocusLock returnFocus persistentFocus={false}>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <Form firstFieldRef={firstFieldRef} onCancel={onClose} session={session} setUsername={setUsername} updateProfile={updateProfile} username={username} />
+                    </FocusLock>
+                  </PopoverContent>
+                </Popover>
+              </Flex>
+
+
+              <Button
+                fontSize={"xs"}
+                bg=""
+                _hover={{ bg: "brand.500", color: "white" }}
+                size="md"
+                fontWeight="600"
+                letterSpacing="0.4px"
+                border="1px"
+                borderColor="#E3CCBF"
+                boxShadow="md"
+                onClick={() => signOut()}
+                rounded="lg"
+              >
+                Sign Out
+              </Button>
+            </Flex>
+          </Box>
+            
         </Flex>
       </Box>
 
-      <Heading fontWeight="bold" textAlign="center" pt={{ base:2, lg:8}} fontSize={'17px'}>
+      <Heading fontWeight="bold" textAlign="center" pt={{ base:3, lg:8}} fontSize={'16px'}>
         Paste in your text below and we'll extract the keywords for you.
       </Heading>
     </Box>

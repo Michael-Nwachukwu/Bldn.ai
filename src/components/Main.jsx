@@ -17,7 +17,7 @@ const Main = ({ session }) => {
   return (
     <>
       <Header session={session} />
-      <Tabs isFitted variant="enclosed" colorScheme="green" mx={{ lg:24 }} mt={{ base:5, md:7 }}>
+      <Tabs isFitted variant="enclosed" colorScheme="green" mx={{ lg:24 }} mt={{ base:3, md:7 }}>
         <TabList mb="0.5em" fontFamily="syncopate">
           <Tab
             borderBottom={"1px"}
