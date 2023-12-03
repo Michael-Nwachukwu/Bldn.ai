@@ -18,13 +18,7 @@ const Chatwidget = () => {
         '@media(max-width: 767px)': {
             height:'28rem',
         },
-        '@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)': {
-            height: '22.8rem',
-          },
         
-          '@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)': {
-            height: '28rem',
-          },
     })
     
 
@@ -119,7 +113,7 @@ const Chatwidget = () => {
 
     return (
         <ScrollToBottom className={`${rule}`}>
-            <Flex direction={"column"} p={{  lg:4 }} >
+            <Flex direction={"column"} pb={'15px'} p={{  lg:4 }} >
                 {/* {loading && <Spinner color="green.500" />} */}
                 {loading ? (
                     // Render skeletons when messages are being fetched

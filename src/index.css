@@ -9,6 +9,9 @@
 .headt{
     font-size: 12px;
 }
+/* body, html, *{
+    overflow-y: hidden;
+} */
 
 .chats{
     font-size: 14px;
@@ -72,15 +75,15 @@
 
   .textarea-container {
     position: relative;
-    width: 100%;
+    /* width: 100%; */
   }
   
   .go {
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 40px; /* Adjust the button width */
-    height: 30px; /* Adjust the button height */
+    width: 40px; 
+    height: 30px; 
     background: #a86b48;
     margin-bottom: 15px;
     margin-right: 12px;
@@ -89,4 +92,50 @@
     justify-content: center;
     align-items: center;
   }
+
+
+  .fixed-container {
+    position: fixed;
+    bottom: 0;
+    width: 85%;
+    /* padding-right: 50px; */
+    background: #F7F1ED;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* .textarea-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .go {
+    background: #a86b48;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    height: 30px;
+    margin: 0 12px;
+    cursor: pointer;
+  } */
   

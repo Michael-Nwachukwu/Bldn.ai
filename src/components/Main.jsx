@@ -5,7 +5,9 @@ import {
   Tab,
   TabPanels,
   TabPanel,
-  Input
+  Input,
+  VStack,
+  Flex
 } from "@chakra-ui/react";
 import Chatinput from "./Chatinput";
 import { onSendMessage } from "../services/supabaseService";
@@ -15,7 +17,7 @@ import Chatwidget from "./Chatwidget";
 const Main = ({ session }) => {
 
   return (
-    <>
+    <VStack minH="100vh" spacing={0}>
       <Header session={session} />
       <Tabs isFitted variant="enclosed" colorScheme="green" mx={{ lg:24 }} mt={{ base:3, md:7 }}>
         <TabList mb="0.5em" fontFamily="syncopate">
@@ -44,8 +46,10 @@ const Main = ({ session }) => {
 
         <TabPanels>
           <TabPanel >
-            <Chatwidget />
-            <Chatinput onSendMessage={onSendMessage} />
+            <Flex direction="column">
+              <Chatwidget flex="1" />
+              <Chatinput onSendMessage={onSendMessage} />
+            </Flex>
           </TabPanel>
           <TabPanel>
             <Input
@@ -65,7 +69,7 @@ const Main = ({ session }) => {
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </>
+    </VStack>
   );
 };
 
