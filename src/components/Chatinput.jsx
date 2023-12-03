@@ -32,7 +32,7 @@ const Chatinput = ({ onSendMessage }) => {
     }
     return (
         <>
-            <InputGroup size='md'>
+            <InputGroup size='md' mt={3}>
                 <Textarea
                     border={"1px"}
                     bg={"transparent"}
@@ -41,9 +41,8 @@ const Chatinput = ({ onSendMessage }) => {
                     value={message}
                     onChange={handleMessageChange}
                     _hover={{ border:'' }}
-                    shadow={'2xl'}
                     focusBorderColor='brand.700'
-                    borderRadius={20}
+                    borderRadius={{ base:10, md:20 }}
                     
                 />
                 <InputRightElement width='6rem'>

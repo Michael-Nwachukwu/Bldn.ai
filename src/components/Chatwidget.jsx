@@ -14,7 +14,13 @@ const Chatwidget = () => {
 
     // make css rules for react-scrollToBottom component
     let rule = css({
-        height:'27rem'
+        height:'27rem',
+        '@media(max-width: 767px)': {
+            height:'21.8rem',
+        },
+        '@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)': {
+            height:'20rem',
+        },
     })
     
 
