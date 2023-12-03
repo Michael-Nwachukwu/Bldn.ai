@@ -52,3 +52,41 @@
   stroke-dasharray: 20 300;
   stroke-dashoffset: -32.42;
 }
+
+.input {
+    /* margin: 30px; */
+    background: none;
+    border: none;
+    outline: none;
+    /* max-width: 190px; */
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 15px;
+    box-shadow: inset 2px 2px 10px #a86b48;
+    color: black;
+    height: 50px;
+    /* position: relative; */
+  }
+
+  .textarea-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  .go {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px; /* Adjust the button width */
+    height: 30px; /* Adjust the button height */
+    background: #a86b48;
+    margin-bottom: 15px;
+    margin-right: 12px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

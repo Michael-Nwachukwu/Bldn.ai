@@ -16,11 +16,15 @@ const Chatwidget = () => {
     let rule = css({
         height:'27rem',
         '@media(max-width: 767px)': {
-            height:'21.8rem',
+            height:'28rem',
         },
         '@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)': {
-            height:'20rem',
-        },
+            height: '22.8rem',
+          },
+        
+          '@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)': {
+            height: '28rem',
+          },
     })
     
 
@@ -123,7 +127,7 @@ const Chatwidget = () => {
                         <Flex key={index} justify={index % 2 === 0 ? 'flex-end' : 'flex-start'} mb={2}>
                             <Box
                                 className={index % 2 === 0 ? 'right' : 'left'}
-                                maxW="60%"
+                                maxW={{ base:'90%', md:"60%" }}
                             >
                                 <Skeleton height="10rem" borderRadius={20} width={'20rem'} mb={2} />
                                 <Skeleton height="10rem" borderRadius={20} width={'20rem'} mb={2} />

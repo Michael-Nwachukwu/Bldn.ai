@@ -156,7 +156,7 @@ const Header = ({ session, setSession }) => {
 
   return (
     <Box>
-      <Box borderBottom={"1px"} borderColor="gray.300" pb={{ md:3 }}>
+      <Box borderBottom={"1px"} borderColor="gray.300" pt={3} pb={{ md:3 }}>
         <Flex minWidth="max-content" >
 
           <Image src={logo} alt="logo" width={{ base:'70px', md:90 }} marginBottom="1rem" />
