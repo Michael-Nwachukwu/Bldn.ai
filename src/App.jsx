@@ -26,7 +26,7 @@ const App = () => {
     });
 
     
-  }, [session]); // Run the effect only once on component mount
+  }, []); // Run the effect only once on component mount
   return (
     <Box bg="#F7F1ED" minW="100vw" minH="100vh">
       <VStack>
