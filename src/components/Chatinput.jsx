@@ -61,11 +61,7 @@ const Chatinput = ({ onSendMessage }) => {
                     </Button>
                 </InputRightElement>
             </InputGroup> */}
-            {/* <input 
-                onChange={handleMessageChange}
-                placeholder="Message.." 
-                className="input" 
-                type="text" /> */}
+            
             <div className="fixed-container">
                 <div className="textarea-container">
                     <textarea
