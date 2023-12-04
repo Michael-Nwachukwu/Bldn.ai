@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, InputGroup, InputRightElement, Button, Textarea } from '@chakra-ui/react';
+// import { Input, InputGroup, InputRightElement, Button, Textarea } from '@chakra-ui/react';
 import { sendMessageToSupabase, getCurrentUserId } from '../services/supabaseService';
 import { supabase } from '../services/supabase';
 
