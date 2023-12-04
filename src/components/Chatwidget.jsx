@@ -28,7 +28,7 @@ const Chatwidget = () => {
         },
 
         '@media(min-width: 414px)': {
-            height:'27.6rem',
+            height:'28.5rem',
         },
 
         '@media(min-width: 428px)': {
