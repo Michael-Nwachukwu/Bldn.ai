@@ -57,7 +57,6 @@
 }
 
 .input {
-    /* margin: 30px; */
     background: none;
     border: none;
     outline: none;
@@ -71,7 +70,6 @@
     color: black;
     height: 60px;
     caret-color: #a86b48;
-    /* position: relative; */
   }
 
   .input::placeholder{
@@ -80,7 +78,6 @@
 
   .textarea-container {
     position: relative;
-    /* width: 100%; */
   }
   
   .go {
