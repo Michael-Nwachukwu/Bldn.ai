@@ -14,10 +14,40 @@ const Chatwidget = () => {
 
     // make css rules for react-scrollToBottom component
     let rule = css({
-        height:'27rem',
-        '@media(max-width: 767px)': {
-            height:'28rem',
+
+        '@media(max-width: 360px)': {
+            height:'27.5rem',
         },
+
+        '@media(min-width: 361px)': {
+            height:'23.4rem',
+        },
+
+        '@media(min-width: 390px)': {
+            height:'25rem',
+        },
+
+        '@media(min-width: 414px)': {
+            height:'27.6rem',
+        },
+
+        '@media(min-width: 428px)': {
+            height:'29rem',
+        },
+
+        '@media only screen and (min-width: 768px) and (max-width: 1023px)': {
+            height:'35rem',
+        },
+
+        '@media only screen and (min-width: 800px) and (max-width: 1279px)': {
+            height:'46rem',
+        },
+
+        '@media only screen and (min-width: 884px) and (max-width: 1104px)': {
+            height:'41rem',
+        },
+
+        height:'29rem',
         
     })
     
@@ -121,10 +151,10 @@ const Chatwidget = () => {
                         <Flex key={index} justify={index % 2 === 0 ? 'flex-end' : 'flex-start'} mb={2}>
                             <Box
                                 className={index % 2 === 0 ? 'right' : 'left'}
-                                maxW={{ base:'90%', md:"60%" }}
+                                maxW={{ base:'50%', md:"60%" }}
                             >
-                                <Skeleton height="10rem" borderRadius={20} width={'20rem'} mb={2} />
-                                <Skeleton height="10rem" borderRadius={20} width={'20rem'} mb={2} />
+                                <Skeleton height="10rem" borderRadius={20} width={{ base:'20rem', md:'35rem', lg:'50rem' }} mb={2} />
+                                <Skeleton height="10rem" borderRadius={20} width={{ base:'20rem', md:'35rem', lg:'50rem' }} mb={2} />
                             </Box>
                         </Flex>
                     ))

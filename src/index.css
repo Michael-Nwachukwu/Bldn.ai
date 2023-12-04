@@ -61,16 +61,21 @@
     background: none;
     border: none;
     outline: none;
-    /* max-width: 190px; */
-    margin-top: 10px;
+    /* max-width: 100%; */
+    /* margin-top: 10px; */
     width: 100%;
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 15px;
     box-shadow: inset 2px 2px 10px #a86b48;
     color: black;
-    height: 50px;
+    height: 60px;
+    caret-color: #a86b48;
     /* position: relative; */
+  }
+
+  .input::placeholder{
+    color: #a86b48;
   }
 
   .textarea-container {
@@ -85,7 +90,7 @@
     width: 40px; 
     height: 30px; 
     background: #a86b48;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     margin-right: 12px;
     border-radius: 7px;
     display: flex;
@@ -97,13 +102,34 @@
   .fixed-container {
     position: fixed;
     bottom: 0;
-    width: 85%;
-    /* padding-right: 50px; */
+    width: 77%;
     background: #F7F1ED;
+    padding-bottom: 10px;
   }
 
+  /* Mobile Phones */
+  @media only screen and (max-width: 767px) {
+    
+    .fixed-container {
+      width: 90%;
+      margin-left: -11px;
+    }
+    .input{
+      height: 50px;
+    }
+    .go{
+      margin-bottom: 15px;
+    }
+  }
 
+  /* Tablets */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .fixed-container {
+    padding-bottom: 30px;
+    width: 83%;
 
+  }
+}
 
 
 

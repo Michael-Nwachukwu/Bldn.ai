@@ -156,7 +156,7 @@ const Header = ({ session, setSession }) => {
 
   return (
     <Box>
-      <Box borderBottom={"1px"} borderColor="gray.300" pt={3} pb={{ md:3 }}>
+      <Box borderBottom={"1px"} borderColor="gray.300" pt={3} pb={{ md:2 }}>
         <Flex minWidth="max-content" >
 
           <Image src={logo} alt="logo" width={{ base:'70px', md:90 }} marginBottom="1rem" />
@@ -282,7 +282,7 @@ const Header = ({ session, setSession }) => {
           </Box>
         
           <Box display={{ base: 'none', md: 'block' }}>
-            <Flex alignItems="center" gap={14} fontFamily="syncopate">
+            <Flex alignItems="center" gap={{ md:5, lg:14 }} fontFamily="syncopate">
               <Link
                 fontWeight={600}
                 letterSpacing="0.2px"
@@ -365,7 +365,8 @@ const Header = ({ session, setSession }) => {
         </Flex>
       </Box>
 
-      <Heading fontWeight="bold" textAlign="center" pt={{ base:3, lg:8}} fontSize={'16px'}>
+      <Heading fontWeight="bold" textAlign="center" pt={{ base:3, md:6, lg:5}} 
+      fontSize={{ base:'16px', md:'22px', lg:'30px' }}>
         Paste in your text below and we'll extract the keywords for you.
       </Heading>
     </Box>

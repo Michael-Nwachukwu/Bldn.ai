@@ -17,9 +17,9 @@ import Chatwidget from "./Chatwidget";
 const Main = ({ session }) => {
 
   return (
-    <VStack minH="100vh" spacing={0}>
+    <VStack maxH="100vh" spacing={0}>
       <Header session={session} />
-      <Tabs isFitted variant="enclosed" colorScheme="green" mx={{ lg:24 }} mt={{ base:3, md:7 }}>
+      <Tabs isFitted variant="enclosed" mx={{ lg:20 }} w={'100%'} mt={{ base:3, md:10, lg:5 }}>
         <TabList mb="0.5em" fontFamily="syncopate">
           <Tab
             borderBottom={"1px"}
