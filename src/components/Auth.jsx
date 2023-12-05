@@ -20,19 +20,6 @@ const Auth = () => {
         if(mode == "Sign In"){setMode('Sign Up')}else{setMode('Sign In')}
     }
 
-    const getURL = () => {
-        let url =
-          process?.env?.NEXT_PUBLIC_SITE_URL ?? // Set this to your site URL in production env.
-          process?.env?.NEXT_PUBLIC_VERCEL_URL ?? 
-          'http://localhost:5173/' // Automatically set by Vercel.
-        
-        // Make sure to include `https://` when not localhost.
-        url = url.includes('http') ? url : `https://${url}`
-        // Make sure to include a trailing `/`.
-        url = url.charAt(url.length - 1) === '/' ? url : `${url}/`
-        return url
-    }
-
     const handleLogin = async (type) => {
         console.log('check');
         const email = emailRef.current?.value;
@@ -42,14 +29,10 @@ const Auth = () => {
             const { user, error } =
 
                 type === "LOGIN" 
-                    ? await supabase.auth.signInWithPassword({ email, password, options: { emailRedirectTo: getURL() }})
+                    ? await supabase.auth.signInWithPassword({ email, password})
                     : type === "OTP"
-                    ? await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: getURL() } })
-                    : await supabase.auth.signUp({ email, password, options: { emailRedirectTo: getURL() } });
-
-                // type === "LOGIN"
-                //     ? await supabase.auth.signInWithPassword({ email, password })
-                //     : await supabase.auth.signUp({ email, password });
+                    ? await supabase.auth.signInWithOtp({ email })
+                    : await supabase.auth.signUp({ email, password });
 
             if (error) {
                 setHelperText({ error: true, text: error.message });
@@ -58,8 +41,6 @@ const Auth = () => {
                     error: false,
                     text: "An email has been sent to you for verification!",
                 });
-
-                // Navigate to the main component after successful signup
             }
         } catch (error) {
             console.error('Login/Sign-up Error:', error.message);
