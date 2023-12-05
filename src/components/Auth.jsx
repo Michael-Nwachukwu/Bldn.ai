@@ -43,8 +43,8 @@ const Auth = () => {
                 type === "LOGIN" 
                     ? await supabase.auth.signInWithPassword({ email, password, options: { emailRedirectTo: getURL() }})
                     : type === "OTP"
-                    ? await supabase.auth.signInWithOtp({ email })
-                    : await supabase.auth.signUp({ email, password });
+                    ? await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: getURL() } })
+                    : await supabase.auth.signUp({ email, password, options: { emailRedirectTo: getURL() } });
 
                 // type === "LOGIN"
                 //     ? await supabase.auth.signInWithPassword({ email, password })
