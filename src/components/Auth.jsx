@@ -22,9 +22,10 @@ const Auth = () => {
 
     const getURL = () => {
         let url =
-          process?.env?.NEXT_PUBLIC_SITE_URL ?? 'https://bldn-ai.vercel.app/' // Set this to your site URL in production env.
-          process?.env?.NEXT_PUBLIC_VERCEL_URL ?? 'http://localhost:5173/' // Automatically set by Vercel.
-          
+          process?.env?.NEXT_PUBLIC_SITE_URL ?? // Set this to your site URL in production env.
+          process?.env?.NEXT_PUBLIC_VERCEL_URL ?? 
+          'http://localhost:5173/' // Automatically set by Vercel.
+        
         // Make sure to include `https://` when not localhost.
         url = url.includes('http') ? url : `https://${url}`
         // Make sure to include a trailing `/`.
