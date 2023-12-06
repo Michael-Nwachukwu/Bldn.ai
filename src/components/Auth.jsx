@@ -88,7 +88,7 @@ const Auth = () => {
                             fontWeight={'bold'}
                             fontSize={'20px'}
                             color={'gray'}
-                        >{mode} to your BldN account</Text>
+                        >{mode} to your BldN account. <br /> Password is required</Text>
                         
                         <Input
                             focusBorderColor='brand.700'
@@ -218,7 +218,7 @@ const Auth = () => {
                             fontWeight={'bold'}
                             fontSize={'20px'}
                             color={'gray'}
-                        >Sign to your BldN account</Text>
+                        >Sign in to your BldN account. <br /> Password is not required</Text>
                         
                         <Input
                             focusBorderColor='brand.700'
