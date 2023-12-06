@@ -21,8 +21,6 @@ const Main = ({ session, heading}) => {
     "Ask a question about taxt and we'll fetch the answers for you."
   ];
   
-  const heading = headings.map
-
   return (
     <VStack maxH="100vh" spacing={0}>
       <Header session={session} heading={heading} />

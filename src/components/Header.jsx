@@ -366,7 +366,7 @@ const Header = ({ session, heading }) => {
 
       <Heading fontWeight="bold" textAlign="center" pt={{ base:3, md:6, lg:5}} 
       fontSize={{ base:'16px', md:'22px', lg:'30px' }}>
-        {/* Paste in your text below and we'll extract the keywords for you. */}
+        Paste in your text below and we'll extract the keywords for you.
         {heading}
       </Heading>
     </Box>
