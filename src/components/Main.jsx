@@ -14,11 +14,16 @@ import { onSendMessage } from "../services/supabaseService";
 import Header from "./Header";
 import Chatwidget from "./Chatwidget";
 
-const Main = ({ session }) => {
-
+const Main = ({ session, heading}) => {
+  const headings = [
+    "Paste in your text below and we'll extract the keywords for you.",
+    "Pate in an address and we'll extract the details for you.",
+    "Ask a question about taxt and we'll fetch the answers for you."
+  ];
+  
   return (
     <VStack maxH="100vh" spacing={0}>
-      <Header session={session} />
+      <Header session={session} heading={heading} />
       <Tabs isFitted variant="enclosed" mx={{ lg:20 }} w={'100%'} mt={{ base:3, md:10, lg:5 }}>
         <TabList mb="0.5em" fontFamily="syncopate">
           <Tab
