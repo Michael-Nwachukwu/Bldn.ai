@@ -23,7 +23,7 @@ const Main = ({ session, heading}) => {
   
   return (
     <VStack maxH="100vh" spacing={0}>
-      <Header session={session} heading={heading} />
+      <Header session={session} />
       <Tabs isFitted variant="enclosed" mx={{ lg:20 }} w={'100%'} mt={{ base:3, md:10, lg:5 }}>
         <TabList mb="0.5em" fontFamily="syncopate">
           <Tab
