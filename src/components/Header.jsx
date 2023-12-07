@@ -73,11 +73,12 @@ const Form = ({ firstFieldRef, onCancel, setUsername, updateProfile, username })
 }
 
 
-const Header = ({ session, heading }) => {
+const Header = ({ session, setSession }) => {
   const { onOpen, onClose, isOpen } = useDisclosure()
   const firstFieldRef = React.useRef(null)
   const { user } = session;
   const [username, setUsername] = useState();
+
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -366,8 +367,7 @@ const Header = ({ session, heading }) => {
 
       <Heading fontWeight="bold" textAlign="center" pt={{ base:3, md:6, lg:5}} 
       fontSize={{ base:'16px', md:'22px', lg:'30px' }}>
-        {/* Paste in your text below and we'll extract the keywords for you. */}
-        {heading}
+        Paste in your text below and we'll extract the keywords for you.
       </Heading>
     </Box>
   );
