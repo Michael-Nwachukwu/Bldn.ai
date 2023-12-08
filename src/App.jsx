@@ -12,7 +12,7 @@ const App = () => {
   const [session, setSession] = useState(null);
   const { colorMode, toggleColorMode } = useColorMode()
 
-  const bg = useColorModeValue('F7F1ED', 'black')
+  const bg = useColorModeValue('#F7F1ED', 'black')
 
   // useEffect hook to fetch and update the user session
   useEffect(() => {

@@ -79,7 +79,7 @@ const Form = ({ firstFieldRef, onCancel, setUsername, updateProfile, username, i
 }
 
 
-const Header = ({ session, setSession }) => {
+const Header = ({ session, setSession, fill }) => {
   const { onOpen, onClose, isOpen } = useDisclosure()
   const firstFieldRef = React.useRef(null)
   const { user } = session;
@@ -89,7 +89,8 @@ const Header = ({ session, setSession }) => {
 
 
   const logoUrl = useColorModeValue(logo, logoWhite)
-
+  const color = useColorModeValue('#030202', '#F7F1ED')
+  const svgFill = useColorModeValue('#030202', '#e3ccbf')
 
 
   const handleCheckboxChange = () => {
@@ -298,7 +299,7 @@ const Header = ({ session, setSession }) => {
                 fontWeight={600}
                 letterSpacing="0.2px"
                 fontSize="sm"
-                color="#030202"
+                color={color}
                 href="https://github.com/Michael-Nwachukwu"
                 isExternal
               >
@@ -309,7 +310,7 @@ const Header = ({ session, setSession }) => {
                 fontWeight={600}
                 letterSpacing="0.2px"
                 fontSize="sm"
-                color="#030202"
+                color={color}
                 href="https://chakra-ui.com"
                 isExternal
               >
@@ -342,7 +343,7 @@ const Header = ({ session, setSession }) => {
                   closeOnBlur={false}
                 >
                   <PopoverTrigger>
-                    <IconButton size="sm" bg={''} _hover={{ bg:'' }} icon={<EditIcon />} />
+                    <IconButton size="sm" bg={''} _hover={{ bg:'' }} icon={<EditIcon fill={svgFill} />} />
                   </PopoverTrigger>
                   <PopoverContent p={5}>
                     <FocusLock returnFocus persistentFocus={false}>
