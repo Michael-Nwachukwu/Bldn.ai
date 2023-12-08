@@ -38,22 +38,25 @@ import avatar from "../assets/avatar.jpg"
 const TextInput = React.forwardRef((props, ref) => {
 
   const { id, label, setUsername, ...rest } = props;
+  const handleBlur = (e) => {
+    setUsername(e.target.value);
+  };
 
   return (
     <FormControl>
       <FormLabel fontSize={"11px"} htmlFor={id}>{label}</FormLabel>
-      <Input fontSize={"11px"} ref={ref} id={id} {...rest} />
+      <Input fontSize={"11px"} ref={ref} id={id} onBlur={handleBlur} {...rest} />
     </FormControl>
   )
 })
 
 // 2. Create the form
-const Form = ({ firstFieldRef, onCancel, setUsername, updateProfile, username }) => {
+const Form = ({ firstFieldRef, onCancel, setUsername, updateProfile, username, id }) => {
   return (
     <Stack spacing={4} >
       <TextInput
         label='Username'
-        id='username'
+        id={id}
         ref={firstFieldRef}
         defaultValue= {username}
         setUsername={setUsername}
@@ -130,13 +133,13 @@ const Header = ({ session, setSession }) => {
 
     e.preventDefault();
 
-    let usernamet = firstFieldRef.current?.value;
+    let usernameValue = firstFieldRef.current?.value;
     // Set loading state to true before sending the update request
     // setLoading(true);
 
     const { data: username, error } = await supabase
       .from('profiles')
-      .update({ username: usernamet })
+      .update({ username: usernameValue })
       .eq('id', user.id)
       .select();
 
@@ -145,7 +148,7 @@ const Header = ({ session, setSession }) => {
       alert(error.message);
     }
       
-    setUsername(usernamet);
+    setUsername(usernameValue);
 
     // Close the popover
     onClose();
@@ -176,7 +179,7 @@ const Header = ({ session, setSession }) => {
                   <Avatar
                     src={avatar}
                     size="xs"
-                    name="Segun Adebayo"
+                    name="User"
                     ml={-1}
                     mr={2}
                   />
@@ -198,7 +201,7 @@ const Header = ({ session, setSession }) => {
                     <FocusLock returnFocus persistentFocus={false}>
                       <PopoverArrow />
                       <PopoverCloseButton />
-                      <Form firstFieldRef={firstFieldRef} onCancel={onClose} session={session} setUsername={setUsername} updateProfile={updateProfile} username={username} />
+                      <Form firstFieldRef={firstFieldRef} onCancel={onClose} session={session} setUsername={setUsername} updateProfile={updateProfile} username={username} id={'mobile-form'} />
                     </FocusLock>
                   </PopoverContent>
                 </Popover>
@@ -315,7 +318,7 @@ const Header = ({ session, setSession }) => {
                   <Avatar
                     src={avatar}
                     size="xs"
-                    name="Segun Adebayo"
+                    name="User"
                     ml={-1}
                     mr={2}
                   />
@@ -337,7 +340,7 @@ const Header = ({ session, setSession }) => {
                     <FocusLock returnFocus persistentFocus={false}>
                       <PopoverArrow />
                       <PopoverCloseButton />
-                      <Form firstFieldRef={firstFieldRef} onCancel={onClose} session={session} setUsername={setUsername} updateProfile={updateProfile} username={username} />
+                      <Form firstFieldRef={firstFieldRef} onCancel={onClose} session={session} setUsername={setUsername} updateProfile={updateProfile} username={username} id={'md-form'} />
                     </FocusLock>
                   </PopoverContent>
                 </Popover>
