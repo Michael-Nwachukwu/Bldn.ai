@@ -26,11 +26,14 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem
+  MenuItem,
+  useColorMode,
+  useColorModeValue
 
 } from "@chakra-ui/react";
-import { EditIcon } from "./EditIcon";
+import { EditIcon, Hamburger, Moonlight, Sunshine } from "./Icons";
 import logo from "../assets/bldn xb.png";
+import logoWhite from "../assets/bldn-white.png";
 import { supabase } from "../services/supabase";
 import avatar from "../assets/avatar.jpg"
 
@@ -76,13 +79,19 @@ const Form = ({ firstFieldRef, onCancel, setUsername, updateProfile, username, i
 }
 
 
-const Header = ({ session, setSession }) => {
+const Header = ({ session, setSession, fill, }) => {
   const { onOpen, onClose, isOpen } = useDisclosure()
   const firstFieldRef = React.useRef(null)
   const { user } = session;
   const [username, setUsername] = useState();
-
+  const { colorMode, toggleColorMode } = useColorMode()
   const [isChecked, setIsChecked] = useState(false);
+
+
+  const logoUrl = useColorModeValue(logo, logoWhite)
+  const color = useColorModeValue('#030202', '#F7F1ED')
+  const svgFill = useColorModeValue('#030202', '#e3ccbf')
+
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -162,7 +171,7 @@ const Header = ({ session, setSession }) => {
       <Box borderBottom={"1px"} borderColor="gray.300" pt={3} pb={{ md:2 }}>
         <Flex minWidth="max-content" >
 
-          <Image src={logo} alt="logo" width={{ base:'70px', md:90 }} marginBottom="1rem" />
+          <Image src={logoUrl} alt="logo" width={{ base:'70px', md:90 }} marginBottom="1rem" />
 
           <Spacer />
 
@@ -195,8 +204,8 @@ const Header = ({ session, setSession }) => {
                   closeOnBlur={false}
                 >
                   <PopoverTrigger>
-                    <IconButton size="sm" bg={''} _hover={{ bg:'' }} icon={<EditIcon />} />
-                  </PopoverTrigger>
+                    <IconButton size="sm" bg={''} _hover={{ bg:'' }} icon={<EditIcon fill={svgFill} />} />
+                  </PopoverTrigger> 
                   <PopoverContent p={5}>
                     <FocusLock returnFocus persistentFocus={false}>
                       <PopoverArrow />
@@ -207,6 +216,11 @@ const Header = ({ session, setSession }) => {
                 </Popover>
               </Flex>
               
+              
+              <Button bg={''} pb={2} _hover={{ bg:'' }} onClick={toggleColorMode}>
+                {colorMode == 'light' ? <Moonlight fill={svgFill} /> : <Sunshine fill={svgFill} /> }
+              </Button>
+
               <Menu>
 
                 <MenuButton
@@ -226,10 +240,11 @@ const Header = ({ session, setSession }) => {
                       type="checkbox"
                       checked={isChecked}
                     />
-                    <svg viewBox="0 0 32 32">
+                    {/* <svg viewBox="0 0 32 32">
                       <path className="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
                       <path className="line" d="M7 16 27 16"></path>
-                    </svg>
+                    </svg> */}
+                    <Hamburger fill={fill} colorMode={colorMode} />
                   </label>
                 </MenuButton>
 
@@ -280,7 +295,6 @@ const Header = ({ session, setSession }) => {
                 </MenuList>
 
               </Menu>
-
             </Flex>
           </Box>
         
@@ -290,7 +304,7 @@ const Header = ({ session, setSession }) => {
                 fontWeight={600}
                 letterSpacing="0.2px"
                 fontSize="sm"
-                color="#030202"
+                color={color}
                 href="https://github.com/Michael-Nwachukwu"
                 isExternal
               >
@@ -301,7 +315,7 @@ const Header = ({ session, setSession }) => {
                 fontWeight={600}
                 letterSpacing="0.2px"
                 fontSize="sm"
-                color="#030202"
+                color={color}
                 href="https://chakra-ui.com"
                 isExternal
               >
@@ -334,7 +348,7 @@ const Header = ({ session, setSession }) => {
                   closeOnBlur={false}
                 >
                   <PopoverTrigger>
-                    <IconButton size="sm" bg={''} _hover={{ bg:'' }} icon={<EditIcon />} />
+                    <IconButton size="sm" bg={''} _hover={{ bg:'' }} icon={<EditIcon fill={svgFill} />} />
                   </PopoverTrigger>
                   <PopoverContent p={5}>
                     <FocusLock returnFocus persistentFocus={false}>
@@ -362,6 +376,11 @@ const Header = ({ session, setSession }) => {
               >
                 Sign Out
               </Button>
+
+              <Button onClick={toggleColorMode}>
+                {colorMode == 'light' ? <Moonlight fill={svgFill} /> : <Sunshine fill={svgFill} /> }
+              </Button>
+
             </Flex>
           </Box>
             

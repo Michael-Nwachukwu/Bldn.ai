@@ -19,6 +19,8 @@ const theme = extendTheme({
         heading: `'syncopate', sans-serif`,
         body: `'space-grotesk', sans-serif`,
     },
+    initialColorMode: 'system',
+    useSystemColorMode: true,
   })
 
 export default theme

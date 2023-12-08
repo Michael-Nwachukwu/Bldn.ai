@@ -31,7 +31,7 @@
 
 .line {
   fill: none;
-  stroke: black;
+  /* stroke: black; */
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2;
@@ -96,7 +96,7 @@
     position: fixed;
     bottom: 0;
     width: 77%;
-    background: #F7F1ED;
+    /* background: #F7F1ED; */
     padding-bottom: 10px;
   }
 
@@ -113,6 +113,7 @@
     .go{
       margin-bottom: 15px;
     }
+
   }
 
   /* Tablets */
