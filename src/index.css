@@ -31,7 +31,7 @@
 
 .line {
   fill: none;
-  stroke: black;
+  /* stroke: black; */
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2;
@@ -113,6 +113,7 @@
     .go{
       margin-bottom: 15px;
     }
+
   }
 
   /* Tablets */
