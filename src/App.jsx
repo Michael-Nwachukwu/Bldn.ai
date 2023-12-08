@@ -1,7 +1,7 @@
 // rafce for gen
 import React from "react";
 import { useState, useEffect } from "react";
-import { Container, Box, Center, VStack } from "@chakra-ui/react";
+import { Container, Box, useColorMode, useColorModeValue, VStack } from "@chakra-ui/react";
 import Main from "./components/Main";
 import Auth from "./components/Auth";
 import { supabase } from "./services/supabase";
@@ -10,6 +10,9 @@ import { supabase } from "./services/supabase";
 const App = () => {
   // State variable to manage the user session
   const [session, setSession] = useState(null);
+  const { colorMode, toggleColorMode } = useColorMode()
+
+  const bg = useColorModeValue('F7F1ED', 'black')
 
   // useEffect hook to fetch and update the user session
   useEffect(() => {
@@ -27,8 +30,10 @@ const App = () => {
 
     
   }, []); // Run the effect only once on component mount
+
+
   return (
-    <Box bg="#F7F1ED" minW="100vw" minH="100vh">
+    <Box bg={bg} minW="100vw" minH="100vh">
       <VStack>
         <Container minW={{ md:'90%', lg:'6xl' }}>
           <Box py={{ md:"3" }}>

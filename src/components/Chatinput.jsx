@@ -3,9 +3,14 @@ import React, { useState } from 'react';
 import { sendMessageToSupabase, getCurrentUserId } from '../services/supabaseService';
 import { supabase } from '../services/supabase';
 
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
+
 const Chatinput = ({ onSendMessage }) => {
     // state to track user input
     const [message, setMessage] = useState('');
+
+    const { colorMode, toggleColorMode } = useColorMode();
+
 
     // Handle input change
     const handleMessageChange = (e) => {setMessage(e.target.value)};
@@ -61,8 +66,8 @@ const Chatinput = ({ onSendMessage }) => {
                     </Button>
                 </InputRightElement>
             </InputGroup> */}
-            
-            <div className="fixed-container">
+   
+            <div style={{ background: colorMode == 'light' ? '#F7F1ED' : 'black' }} className="fixed-container">
                 <div className="textarea-container">
                     <textarea
                         onChange={handleMessageChange}
