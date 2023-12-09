@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
 import { supabase } from "../services/supabase";
-import { Box, Center, Flex, VStack, Image, Input, InputGroup, InputRightElement, Button, Divider, Link, Spacer, AlertIcon, Alert, AlertDescription, Text, useColorModeValue  } from "@chakra-ui/react";
+import { Box, Center, Flex, VStack, Image, Input, InputGroup, InputRightElement, Button, Divider, Link, Spacer, AlertIcon, Alert, AlertDescription, Text, useColorModeValue, useColorMode  } from "@chakra-ui/react";
 import logo from "../assets/bldn-black.png";
 import whiteLogo from "../assets/bldn-wheat.png";
+import { Moonlight, Sunshine } from "./Icons";
 
 const Auth = () => {
     const [helperText, setHelperText] = useState({ error: null, text: null });
@@ -12,7 +13,12 @@ const Auth = () => {
     const [mode, setMode] = useState('Sign In');
     const handleClick = () => setShow(!show);
     const [signInOption, setSignInOptions] = useState('password');
+
+    const { colorMode, toggleColorMode } = useColorMode();
+    
     const logoUrl = useColorModeValue(logo, whiteLogo);
+    const svgFill = useColorModeValue('#030202', '#e3ccbf')
+
 
 
     const changeSignInOption = () => {
@@ -284,6 +290,11 @@ const Auth = () => {
                         </Button>
                     </VStack>
                 }
+                <Center mt={10}>
+                    <Button onClick={toggleColorMode}>
+                        {colorMode == 'light' ? <Moonlight fill={svgFill} /> : <Sunshine fill={svgFill} /> }
+                    </Button>
+                </Center>
             </Box>
         </Center>
     );
