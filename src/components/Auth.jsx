@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { supabase } from "../services/supabase";
-import { Box, Center, Flex, VStack, Image, Input, InputGroup, InputRightElement, Button, Divider, Link, Spacer, AlertIcon, Alert, AlertDescription, Text  } from "@chakra-ui/react";
-import logo from "../assets/bldn xb.png";
+import { Box, Center, Flex, VStack, Image, Input, InputGroup, InputRightElement, Button, Divider, Link, Spacer, AlertIcon, Alert, AlertDescription, Text, useColorModeValue  } from "@chakra-ui/react";
+import logo from "../assets/bldn-black.png";
+import whiteLogo from "../assets/bldn-wheat.png";
 
 const Auth = () => {
     const [helperText, setHelperText] = useState({ error: null, text: null });
@@ -11,6 +12,8 @@ const Auth = () => {
     const [mode, setMode] = useState('Sign In');
     const handleClick = () => setShow(!show);
     const [signInOption, setSignInOptions] = useState('password');
+    const logoUrl = useColorModeValue(logo, whiteLogo);
+
 
     const changeSignInOption = () => {
         signInOption == 'password' ? setSignInOptions('otp') : setSignInOptions('password');
@@ -83,7 +86,7 @@ const Auth = () => {
             <Box width={{ base:'100%', lg:"40%" }}>
                 {signInOption == 'password' && 
                     <VStack direction='column'>
-                        <Image src={logo} alt="logo" width={90} marginBottom="1rem" />
+                        <Image src={logoUrl} alt="logo" width={90} marginBottom="1rem" />
                         <Text
                             fontWeight={'bold'}
                             fontSize={'20px'}
