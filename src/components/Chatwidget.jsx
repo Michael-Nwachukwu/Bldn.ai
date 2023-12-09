@@ -1,16 +1,21 @@
 // Chatwidget.js
 import React, { useEffect, useState } from 'react';
-import { Box, Flex, Spinner, Skeleton, useBoolean, Text } from '@chakra-ui/react';
+import { Box, Flex, Spinner, Skeleton, useBoolean, Text, useClipboard, Button } from '@chakra-ui/react';
 import { supabase } from '../services/supabase';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { css } from 'glamor';
 import dateFormat from 'dateformat';
 
 const Chatwidget = () => {
+    // Message: Local instantiation of Messages table on db
     const [messages, setMessages] = useState([]);
+    // State Logged in User Id
     const [userId, setUserId] = useState(null);
     const [loading, setLoading] = useBoolean(true);
+    const [copyable, setCopyable] = useState();
+    const { hasCopied, onCopy } = useClipboard(copyable);
     // const [loading, setLoading] = useState(true);
+
 
     // make css rules for react-scrollToBottom component
     let rule = css({
@@ -50,7 +55,6 @@ const Chatwidget = () => {
         height:'29rem',
         
     })
-    
 
     const fetchRecentMessages = async () => {
 
@@ -106,6 +110,10 @@ const Chatwidget = () => {
         }
 
     };
+    
+    const handleCopy = () => {
+        onCopy()
+    };
 
     useEffect(() => {
         const conversations = supabase.channel('conversations') // set your topic here
@@ -124,7 +132,6 @@ const Chatwidget = () => {
             
         };
 
-
         // Subscribe to real-time updates for the 'chat_messages' table
         conversations
             .on(
@@ -137,7 +144,6 @@ const Chatwidget = () => {
                 (payload) => handleRealtimeUpdate(payload)
             )
         .subscribe()
-
 
     }, []);
 
@@ -162,6 +168,7 @@ const Chatwidget = () => {
                     messages.length > 0 ? (
                         // Render actual messages when available
                         messages.map((message) => (
+                            
                             <Flex key={message.id} justify={message.user_id === `${userId}` ? 'flex-end' : 'flex-start'} mb={2}>
                                 {/* Blob */}
                                 <Box
@@ -171,12 +178,23 @@ const Chatwidget = () => {
                                     color={message.user_id === `${userId}` ? 'brand.900' : 'white'}
                                     maxW={{ base:'90%', md:"60%" }}
                                 >
+                                    {message.user_id !== `${userId}` && (
+                                        <Flex justify={'end'} mb={2}>
+                                            <Button size={'xs'} onClick={() => { setCopyable(message.message); handleCopy(); }}>
+                                                {hasCopied ? 'Copied!' : 'Copy'}
+                                            </Button>
+                                        </Flex>
+                                    )}
                                     <p className='chats'>{message.message}</p>
                                     <Flex mt={2} justify={'end'}>
                                         <small style={{  opacity: 0.6 }}>
                                             {dateFormat(message.created_at, "h:MM TT, mmmm dS, yyyy")}
                                         </small>
                                     </Flex>
+                                    {/* Copy button */}
+         
+                                    
+
                                 </Box>
                             </Flex>
                         ))
