@@ -32,8 +32,8 @@ import {
 
 } from "@chakra-ui/react";
 import { EditIcon, Hamburger, Moonlight, Sunshine } from "./Icons";
-import logo from "../assets/bldn xb.png";
-import logoWhite from "../assets/bldn-white.png";
+import logo from "../assets/bldn-black.png";
+import whiteLogo from "../assets/bldn-wheat.png";
 import { supabase } from "../services/supabase";
 import avatar from "../assets/avatar.jpg"
 
@@ -88,7 +88,7 @@ const Header = ({ session, setSession, fill, }) => {
   const [isChecked, setIsChecked] = useState(false);
 
 
-  const logoUrl = useColorModeValue(logo, logoWhite)
+  const logoUrl = useColorModeValue(logo, whiteLogo)
   const color = useColorModeValue('#030202', '#F7F1ED')
   const svgFill = useColorModeValue('#030202', '#e3ccbf')
 
