@@ -1,4 +1,3 @@
-// Chatwidget.js
 import React, { useEffect, useState } from 'react';
 import { Box, Flex, Spinner, Skeleton, useBoolean, Text, useClipboard, Button } from '@chakra-ui/react';
 import { supabase } from '../services/supabase';
@@ -11,10 +10,10 @@ const Chatwidget = () => {
     const [messages, setMessages] = useState([]);
     // State Logged in User Id
     const [userId, setUserId] = useState(null);
+
     const [loading, setLoading] = useBoolean(true);
     const [copyable, setCopyable] = useState();
     const { hasCopied, onCopy } = useClipboard(copyable);
-    // const [loading, setLoading] = useState(true);
 
 
     // make css rules for react-scrollToBottom component
@@ -56,7 +55,14 @@ const Chatwidget = () => {
         
     })
 
+
     const fetchRecentMessages = async () => {
+
+        // Function to fetch messages from database.(Messages table on supabase db)
+        // Here we are initializing loading with a chakraui Boolean Hook, this is to track when fetch starts and stops to be able to render skeletons, loaders and see how to display "No messages" message if db returns empty.
+        // Then we fetch details of logged in user with the auth.getUser() directive.
+        // Next we fetch the messages that belongs to logged in user with the  .eq('user_id', user.id).
+        // Check for errors and render them if any, else we're setting the global userId variable to logged in user id.
 
         setLoading.on();
 
@@ -73,18 +79,19 @@ const Chatwidget = () => {
                 console.error('Error fetching recent messages:', error);
                 return;
             }else{
-                // chat_messages.length === 0 ? setFlag.off() : setFlag.on();
+                setUserId(user.id);
             }
 
-            setUserId(user.id);
-    
             // Fetch related messages for each message in chat_messages
+            // Here we are fetching another array of replies to logged in users messages. 
+            // We are mapping through chat_messages which is the data we got previously from fetching users messages and we are using each message to get its reply from the db with the '.eq('reply_to', message.id)' 
+            // We are checking for any errors and responding accordingly and if not we are creating an array assigned to allMessage and adding the relatedMessages as well as the originally fetched message. Hence every message and its reply.
+    
             const allMessages = await Promise.all(chat_messages.map(async (message) => {
                 const { data: relatedMessages, error: relatedMessagesError } = await supabase
                     .from('chat_messages')
                     .select('*')
                     .eq('reply_to', message.id)
-                    // .range(0, 9);
     
                 if (relatedMessagesError) {
                     console.error('Error fetching related messages:', relatedMessagesError);
@@ -94,11 +101,11 @@ const Chatwidget = () => {
     
                 return [...relatedMessages, message]; // Include the original message in the array
             }));
-    
+
+
             // Flatten the array of arrays into a single array
             const flattenedMessages = allMessages.flat();
 
-            
             // Reverse the order to display the most recent message at the bottom
             setMessages(flattenedMessages.reverse());
             
@@ -111,8 +118,9 @@ const Chatwidget = () => {
 
     };
     
+    // Handles copying message to clipboard using the useClipboard Hook
     const handleCopy = () => {
-        onCopy()
+        onCopy();
     };
 
     useEffect(() => {
@@ -180,6 +188,7 @@ const Chatwidget = () => {
                                 >
                                     {message.user_id !== `${userId}` && (
                                         <Flex justify={'end'} mb={2}>
+                                            {/* Copy button */}
                                             <Button size={'xs'} onClick={() => { setCopyable(message.message); handleCopy(); }}>
                                                 {hasCopied ? 'Copied!' : 'Copy'}
                                             </Button>
@@ -191,10 +200,6 @@ const Chatwidget = () => {
                                             {dateFormat(message.created_at, "h:MM TT, mmmm dS, yyyy")}
                                         </small>
                                     </Flex>
-                                    {/* Copy button */}
-         
-                                    
-
                                 </Box>
                             </Flex>
                         ))
