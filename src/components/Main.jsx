@@ -13,6 +13,7 @@ import Chatinput from "./Chatinput";
 import { onSendMessage } from "../services/supabaseService";
 import Header from "./Header";
 import Chatwidget from "./Chatwidget";
+import Home from "./crypty/Home";
 
 const Main = ({ session, heading}) => {
   const headings = [
@@ -57,12 +58,13 @@ const Main = ({ session, heading}) => {
             </Flex>
           </TabPanel>
           <TabPanel>
-            <Input
+            {/* <Input
               border={"1px"}
               bg={"transparent"}
               py={7}
               placeholder="Basic usage"
-            />
+            /> */}
+            <Home />
           </TabPanel>
           <TabPanel>
             <Input
