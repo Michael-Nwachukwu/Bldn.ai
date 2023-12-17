@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Spacer, Card, CardBody, VStack } from '@chakra-ui/react'
+import { Box, Flex, Text, Spacer, Card, CardBody, VStack, Grid, GridItem } from '@chakra-ui/react'
 import React from 'react'
 
 const Home = () => {
@@ -45,6 +45,31 @@ const Home = () => {
                 </Flex>
             </Flex>
         </Box>
+
+        <Grid templateColumns='repeat(3, 1fr)' gap={6} mt={8}>
+            <GridItem w='100%'>
+                <Card size={'sm'} h={48} variant={'outline'} bg={'transparent'} borderRadius={10} outline={'brand.300'}>
+                    <CardBody>
+                        
+                    </CardBody>
+                </Card>
+            </GridItem>
+            <GridItem w='100%'>
+                <Card size={'sm'} h={48} variant={'outline'} bg={'transparent'} borderRadius={10} outline={'brand.300'}>
+                    <CardBody>
+                        
+                    </CardBody>
+                </Card>
+            </GridItem>
+            <GridItem w='100%'>
+                <Card size={'sm'} h={48} variant={'outline'} bg={'transparent'} borderRadius={10} outline={'brand.300'}>
+                    <CardBody>
+                        
+                    </CardBody>
+                </Card>
+            </GridItem>
+        </Grid>
+
     </>
   )
 }
