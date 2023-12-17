@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Spacer } from '@chakra-ui/react'
+import { Box, Flex, Text, Spacer, Card, CardBody, VStack, Grid, GridItem } from '@chakra-ui/react'
 import React from 'react'
 
 const Home = () => {
@@ -10,30 +10,66 @@ const Home = () => {
                     <Text>Bitcoin BTC</Text>
                     <Text
                         fontSize={50}
-                        fontWeight={"bold"}
+                        fontWeight={"extrabold"}
+                        fontFamily={'syncopate'}
                     >
                         $42,222.62
                     </Text>
                 </Box>
                 <Spacer />
-                <Flex direction={"column"} alignItems={"center"} gap={3}>
-                    <Box 
-                        bg={"brand.300"}
-                        h={12}
-                        w={60}
-                        borderRadius={10}
-                    >
-                    </Box>
-                    <Box 
-                        bg={"brand.300"}
-                        h={12}
-                        w={60}
-                        borderRadius={10}
-                    >
-                    </Box>
+                <Flex alignItems={"center"} gap={3}>
+                    <Card size={'sm'} variant={'outline'} bg={'transparent'} borderRadius={10} outline={'brand.300'}>
+                        <CardBody>
+                            <VStack align={'start'}>
+                                <Text fontSize={'lg'} fontWeight={'extrabold'} color={'gray-200'}>
+                                    $1,655,669,299,690
+                                </Text>
+                                <Text fontSize={'sm'} >
+                                    Market Capitalization 
+                                </Text>
+                            </VStack>
+                        </CardBody>
+                    </Card>
+                    <Card size={'sm'} variant={'outline'} bg={'transparent'} borderRadius={10} outline={'brand.300'}>
+                        <CardBody >
+                        <VStack align={'start'}>
+                                <Text fontSize={'lg'} fontWeight={'extrabold'} color={'gray-200'}>
+                                   $54,691,566,748
+                                </Text>
+                                <Text fontSize={'sm'} >
+                                    24h Trading Volume
+                                </Text>
+                            </VStack>
+                        </CardBody>
+                    </Card>
                 </Flex>
             </Flex>
         </Box>
+
+        <Grid templateColumns='repeat(3, 1fr)' gap={6} mt={8}>
+            <GridItem w='100%'>
+                <Card size={'sm'} h={48} variant={'outline'} bg={'transparent'} borderRadius={10} outline={'brand.300'}>
+                    <CardBody>
+                        
+                    </CardBody>
+                </Card>
+            </GridItem>
+            <GridItem w='100%'>
+                <Card size={'sm'} h={48} variant={'outline'} bg={'transparent'} borderRadius={10} outline={'brand.300'}>
+                    <CardBody>
+                        
+                    </CardBody>
+                </Card>
+            </GridItem>
+            <GridItem w='100%'>
+                <Card size={'sm'} h={48} variant={'outline'} bg={'transparent'} borderRadius={10} outline={'brand.300'}>
+                    <CardBody>
+                        
+                    </CardBody>
+                </Card>
+            </GridItem>
+        </Grid>
+
     </>
   )
 }
