@@ -65,7 +65,6 @@
     border-radius: 15px;
     box-shadow: inset 2px 2px 10px #a86b48;
     height: 60px;
-    caret-color: #a86b48;
   }
 
   .input::placeholder{
