@@ -1,7 +1,7 @@
-import { Box, Flex, Text, Spacer, Card, CardBody, VStack, Grid, GridItem,  useColorMode, useColorModeValue, List, ListItem , Image, Divider} from '@chakra-ui/react'
+import { Box, Flex, Text, Spacer, Card, CardBody, VStack, Grid, GridItem,  useColorMode, useColorModeValue, List, ListItem , Image, Divider, InputGroup, Input, InputRightElement, Button} from '@chakra-ui/react'
 import React from 'react'
 
-const Home = () => {
+const CryptyHome = () => {
   const { colorMode, toggleColorMode } = useColorMode()
   const borderColor = useColorModeValue('#e3ccbf', '#212d3b')
   const color = useColorModeValue('gray', '#dfe5ed')
@@ -63,6 +63,32 @@ const Home = () => {
                             </Card>
                         </Flex>
                     </Flex>
+                </Flex>
+            </Box>
+
+            <Box mt={5}>
+                <Flex justifyContent={'end'}>
+                    <InputGroup size='md' maxW={'xs'}>
+                        <Input
+                            focusBorderColor='#91a2b8'
+                            bg={"#1b232d"}
+                            opacity={'70%'}
+                            py={5}
+                            // pr='2.5rem'
+                            variant='outline' 
+                            placeholder='Search'
+                            name={"password"}
+                            _hover={{ border:'' }}
+                            required
+                        />
+                        <InputRightElement width='4.5rem'>
+                            <Flex justifyContent={'center'} w={6} bg={"#384a61"} opacity={'70%'} color={"white"} borderRadius={5}
+                                _hover={{ bg:'' }} 
+                            >
+                                /
+                            </Flex>
+                        </InputRightElement>
+                    </InputGroup>
                 </Flex>
             </Box>
 
@@ -155,4 +181,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default CryptyHome

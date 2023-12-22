@@ -13,7 +13,8 @@ import Chatinput from "./Chatinput";
 import { onSendMessage } from "../services/supabaseService";
 import Header from "./Header";
 import Chatwidget from "./Chatwidget";
-import Home from "./crypty/Home";
+import Home from "./crypty/CryptyHome";
+import CryptyHome from "./crypty/CryptyHome";
 
 const Main = ({ session, heading}) => {
   const headings = [
@@ -64,7 +65,7 @@ const Main = ({ session, heading}) => {
               py={7}
               placeholder="Basic usage"
             /> */}
-            <Home />
+            <CryptyHome />
           </TabPanel>
           <TabPanel>
             <Input
