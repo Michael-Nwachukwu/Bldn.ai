@@ -16,15 +16,15 @@ import Chatwidget from "./Chatwidget";
 import Home from "./crypty/CryptyHome";
 import CryptyHome from "./crypty/CryptyHome";
 
-const Main = ({ session, heading}) => {
+const Main = ({ session}) => {
   const headings = [
     "Paste in your text below and we'll extract the keywords for you.",
     "Pate in an address and we'll extract the details for you.",
     "Ask a question about taxt and we'll fetch the answers for you."
   ];
-  
+  // maxH="100vh"
   return (
-    <VStack maxH="100vh" spacing={0}>
+    <VStack  spacing={0}>
       <Header session={session} />
       <Tabs isFitted variant="enclosed" mx={{ lg:20 }} w={'100%'} mt={{ base:3, md:10, lg:5 }}>
         <TabList mb="0.5em" fontFamily="syncopate">

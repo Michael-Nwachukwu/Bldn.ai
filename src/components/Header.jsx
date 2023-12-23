@@ -389,7 +389,7 @@ const Header = ({ session, setSession, fill, }) => {
 
       <Heading fontWeight="bold" textAlign="center" pt={{ base:3, md:6, lg:5}} 
       fontSize={{ base:'16px', md:'22px', lg:'30px' }}>
-        Paste in your text below and we'll extract the keywords for you.
+        Pate in an address and we'll extract the details
       </Heading>
     </Box>
   );

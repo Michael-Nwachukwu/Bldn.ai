@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Spacer, Card, CardBody, VStack, Grid, GridItem,  useColorMode, useColorModeValue, List, ListItem , Image, Divider, InputGroup, Input, InputRightElement, Button, Tag, TagLabel} from '@chakra-ui/react'
+import { Box, Flex, Text, Spacer, Card, CardBody, VStack, Grid, GridItem,  useColorMode, useColorModeValue, List, ListItem , Image, Divider, InputGroup, Input, InputRightElement, Button, Tag, TagLabel, Stat, StatHelpText, StatLabel, StatNumber ,StatArrow} from '@chakra-ui/react'
 import React from 'react'
 
 const CryptyHome = () => {
@@ -11,14 +11,24 @@ const CryptyHome = () => {
             <Box>
                 <Flex>
                     <Box pt={2}>
-                        <Text>Bitcoin BTC</Text>
-                        <Text
-                            fontSize={50}
-                            fontWeight={"extrabold"}
-                            fontFamily={'syncopate'}
-                        >
-                            $42,222.62
-                        </Text>
+                        <Stat>
+                            <StatLabel>
+                                <Flex align={'center'} gap={1.5} fontWeight={'semibold'}>
+                                    <img src="https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1696501400" alt="" />
+                                    Bitcoin BTC
+                                </Flex>
+                            </StatLabel>
+                            <Flex align={'center'} gap={2}>
+                                <StatNumber 
+                                    fontSize={50}
+                                    fontFamily={'syncopate'}
+                                >$42,222.62</StatNumber>
+                                <StatHelpText fontSize={18}>
+                                    <StatArrow color={'red'} type='decrease' />
+                                    23.36%
+                                </StatHelpText>
+                            </Flex>
+                        </Stat>
                     </Box>
                     <Spacer />
                     <Flex direction={'column'} alignItems={'end'} gap={2}>
@@ -51,7 +61,7 @@ const CryptyHome = () => {
                             </Card>
                             <Card size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10} outline={'brand.300'}>
                                 <CardBody >
-                                <VStack align={'start'}>
+                                    <VStack align={'start'}>
                                         <Text fontSize={'lg'} fontWeight={'extrabold'} color={'#dfe5ed'}>
                                         $54,691,566,748
                                         </Text>
@@ -66,8 +76,30 @@ const CryptyHome = () => {
                 </Flex>
             </Box>
 
-            <Box mt={5}>
-                <Flex justifyContent={'end'}>
+            <Box>
+                <Flex justify={'space-between'} align={'center'}>
+                    <List minW={'sm'} spacing={1.5} color={color} fontSize={'sm'}>
+                        <ListItem>
+                            <Flex justify={'space-between'} align={'center'}>
+                                <Text color={'#888b8d'}>Market Cap</Text>
+                                <Text fontWeight={'semibold'}>$854,003,314,585</Text>
+                            </Flex>
+                        </ListItem>
+                        <Divider />
+                        <ListItem>
+                            <Flex justify={'space-between'} align={'center'}>
+                                <Text color={'#888b8d'}>24 Hour Trading Vol</Text>
+                                <Text fontWeight={'semibold'}>$11,616,118,861</Text>
+                            </Flex>
+                        </ListItem>
+                        <Divider />
+                        <ListItem>
+                            <Flex justify={'space-between'} align={'center'}>
+                                <Text color={'#888b8d'}>Fully Diluted Valuation </Text>
+                                <Text fontWeight={'semibold'}>$916,014,813,000</Text>
+                            </Flex>
+                        </ListItem>
+                    </List>
                     <InputGroup size='md' maxW={'xs'}>
                         <Input
                             focusBorderColor='#91a2b8'
@@ -102,7 +134,7 @@ const CryptyHome = () => {
                                     <Spacer />
                                     <Box w={4} h={4} borderRadius={'full'} bg={colorMode === "light" ? 'gray.700' : '#dfe5ed'}></Box>
                                 </Flex>
-                                <List w={'100%'} spacing={3} mt={2} color={color}>
+                                <List w={'100%'} spacing={2.5} mt={2.5} color={color}>
                                     <ListItem>
                                         <Flex alignItems={'center'}>
                                             <Flex alignItems={'center'} gap={4}>
@@ -170,7 +202,7 @@ const CryptyHome = () => {
                                     <Spacer />
                                     <Box w={4} h={4} borderRadius={'full'} bg={colorMode === "light" ? 'gray.700' : '#dfe5ed'}></Box>
                                 </Flex>
-                                <List w={'100%'} spacing={3} mt={2} color={color}>
+                                <List w={'100%'} spacing={2.5} mt={2.5} color={color}>
                                     <ListItem>
                                         <Flex alignItems={'center'}>
                                             <Flex alignItems={'center'} gap={4}>
@@ -238,7 +270,7 @@ const CryptyHome = () => {
                                     <Spacer />
                                     <Box w={4} h={4} borderRadius={'full'} bg={colorMode === "light" ? 'gray.700' : '#dfe5ed'}></Box>
                                 </Flex>
-                                <List w={'100%'} spacing={3} mt={2} color={color}>
+                                <List w={'100%'} spacing={2.5} mt={2.5} color={color}>
                                     <ListItem>
                                         <Flex alignItems={'center'}>
                                             <Flex alignItems={'center'} gap={4}>
@@ -309,6 +341,67 @@ const CryptyHome = () => {
                                     </ListItem>
                                 </List>
                             </VStack>
+                        </CardBody>
+                    </Card>
+                </GridItem>
+            </Grid>
+
+
+            <Grid templateColumns='repeat(5, 1fr)' gap={2} mt={6}>
+                <GridItem colSpan={2}>
+                    <Card bg={'#191e22'} borderRadius={15}>
+                        <CardBody>
+                            <Text fontSize={25} fontWeight={'bold'} color={'#e1e2e2'}>BTC Price Statistics</Text>
+                            <List w={'100%'} spacing={3} mt={5}>
+                                <ListItem>
+                                    <Flex justify={'space-between'} align={'center'}>
+                                        <Text color={'#888b8d'}>Bitcoin Price</Text>
+                                        <Text fontWeight={'semibold'}>$43,649.80</Text>
+                                    </Flex>
+                                </ListItem>
+                                <Divider />
+                                <ListItem>
+                                    <Flex justify={'space-between'} align={'center'}>
+                                        <Text color={'#888b8d'}>24h Low / 24h High</Text>
+                                        <Text fontWeight={'semibold'}>$40,766.45 / $44,217.04</Text>
+                                    </Flex>
+                                </ListItem>
+                                <Divider />
+                                <ListItem>
+                                    <Flex justify={'space-between'} align={'center'}>
+                                        <Text color={'#888b8d'}>7d Low / 7d High</Text>
+                                        <Text fontWeight={'semibold'}>$40,766.45 / $44,217.04</Text>
+                                    </Flex>
+                                </ListItem>
+                                <Divider />
+                                <ListItem>
+                                    <Flex justify={'space-between'} align={'center'}>
+                                        <Text color={'#888b8d'}>Trading Volume</Text>
+                                        <Text fontWeight={'semibold'}>$13,956,918,615</Text>
+                                    </Flex>
+                                </ListItem>
+                                <Divider />
+                                <ListItem>
+                                    <Flex justify={'space-between'} align={'center'}>
+                                        <Text color={'#888b8d'}>Market Cap Rank</Text>
+                                        <Text fontWeight={'semibold'}>#1</Text>
+                                    </Flex>
+                                </ListItem>
+                                <Divider />
+                                <ListItem>
+                                    <Flex justify={'space-between'} align={'center'}>
+                                        <Text color={'#888b8d'}>Market Cap</Text>
+                                        <Text fontWeight={'semibold'}>$854,003,314,585</Text>
+                                    </Flex>
+                                </ListItem>
+                                <Divider />
+                                <ListItem>
+                                    <Flex justify={'space-between'} align={'center'}>
+                                        <Text color={'#888b8d'}>Market Cap Dominance</Text>
+                                        <Text fontWeight={'semibold'}>49.309%</Text>
+                                    </Flex>
+                                </ListItem>
+                            </List>
                         </CardBody>
                     </Card>
                 </GridItem>
