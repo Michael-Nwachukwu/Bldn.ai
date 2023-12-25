@@ -1,6 +1,7 @@
 import React from 'react'
 import CanvasJSReact from '@canvasjs/react-charts';
 import { Box } from '@chakra-ui/react';
+import { useColorMode } from '@chakra-ui/react';
 
 
 const jsonData = [
@@ -3463,34 +3464,37 @@ const dataPoints = jsonData[0].prices.map(([timestamp, price]) => ({
     y: price,
 }));
 
-const options = {
-    backgroundColor: 'transparent', 
-    axisX: {
-      lineThickness: 0,
-      labelFontColor: '#dfe5ed', // Change color of X-axis labels
-      valueFormatString: 'DD MMM',
-    },
-    axisY: {
-      gridColor: 'rgba(145, 162, 184, 0.2)',
-      lineThickness: 0,
-      labelFontColor: '#dfe5ed', // Change color of X-axis labels
-    },
-    animationEnabled: true,
-    zoomEnabled: true,
-    data: [
-      {
-        type: 'area',
-        fillOpacity: 0.1,
-        color: '#912f13',
-        dataPoints: dataPoints,
-      },
-    ],
-};
-  
-const CanvasJS = CanvasJSReact.CanvasJS;
-const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const Chart = () => {
+    // const  labelFontColor = useColorModeValue('#912f13', '#dfe5ed')
+    const { colorMode } = useColorMode()
+    
+    const options = {
+        backgroundColor: 'transparent', 
+        axisX: {
+          lineThickness: 0,
+          labelFontColor: colorMode == 'light' ? 'gray' : '#dfe5ed', // Change color of X-axis labels
+          valueFormatString: 'DD MMM',
+        },
+        axisY: {
+          gridColor: 'rgba(145, 162, 184, 0.2)',
+          lineThickness: 0,
+          labelFontColor: colorMode == 'light' ? 'gray' : '#dfe5ed', // Change color of X-axis labels
+        },
+        animationEnabled: true,
+        zoomEnabled: true,
+        data: [
+          {
+            type: 'area',
+            fillOpacity: 0.1,
+            color: '#912f13',
+            dataPoints: dataPoints,
+          },
+        ],
+    };
+      
+    const CanvasJS = CanvasJSReact.CanvasJS;
+    const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
     return (
         <Box p={3}>

@@ -17,7 +17,7 @@ const theme = extendTheme({
     },
     fonts: {
         heading: `'syncopate', sans-serif`,
-        body: `'space-grotesk', sans-serif`,
+        body: `'Montserrat', sans-serif`,
     },
     initialColorMode: 'system',
     useSystemColorMode: true,
