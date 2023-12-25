@@ -26,8 +26,9 @@ const CryptyHome = () => {
     return (
         <>
             <Box>
-                <Flex>
-                    <Box pt={2}>
+                <Flex direction={{ base:'column', md:'row' }}>
+
+                    <Box pt={2} minW={'sm'}>
                         <Stat>
                             <StatLabel>
                                 <Flex align={'center'} gap={1.5} fontWeight={'semibold'}>
@@ -37,7 +38,7 @@ const CryptyHome = () => {
                             </StatLabel>
                             <Flex align={'center'} gap={2}>
                                 <StatNumber 
-                                    fontSize={50}
+                                    fontSize={{ base:30, lg:50 }}
                                     fontFamily={'syncopate'}
                                 >$42,222.62</StatNumber>
                                 <StatHelpText fontSize={18}>
@@ -47,9 +48,11 @@ const CryptyHome = () => {
                             </Flex>
                         </Stat>
                     </Box>
+
                     <Spacer />
-                    <Flex direction={'column'} alignItems={'end'} gap={2}>
-                        <Flex alignItems={'center'} gap={3}>
+
+                    <Flex direction={'column'} alignItems={{ lg:'end' }} gap={2} >
+                        <Flex alignItems={'center'} display={{ base:'none', md:'flex' }} gap={3}>
                             <small style={{ color:smallStatsLabelColor }}>
                                 Cryptos: <span style={{ color:smallStatsValueColor }}>2M+</span>
                             </small>
@@ -69,14 +72,14 @@ const CryptyHome = () => {
                                 </Flex>
                             </small>
                         </Flex>
-                        <Flex alignItems={"center"} gap={3}>
-                            <Tag size={'md'} variant={colorMode == 'light' ? 'outline' : 'subtle'} colorScheme='brand' py={1} _hover={{ 
+                        <Flex direction={{ base:'column', md:'row' }} alignItems={"center"} gap={3}>
+                            <Tag display={{ base:'none', md:'flex' }} size={'md'} variant={colorMode == 'light' ? 'outline' : 'subtle'} colorScheme='brand' py={1} _hover={{ 
                                 color:'brand.300',
                              }}>
                                 <TagLabel pr={2}>Add to Watchlist</TagLabel>
                                 <TagRightIcon as={starSvg} />
                             </Tag>
-                            <Card size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10} >
+                            <Card minW={{base:'xs', md:'auto'}} size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10} >
                                 <CardBody>
                                     <VStack align={'start'}>
                                         <Text fontSize={'lg'} fontWeight={'bold'} color={topCardColor}>
@@ -88,7 +91,7 @@ const CryptyHome = () => {
                                     </VStack>
                                 </CardBody>
                             </Card>
-                            <Card size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10} >
+                            <Card minW={{base:'xs', md:'auto'}} size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10} >
                                 <CardBody >
                                     <VStack align={'start'}>
                                         <Text fontSize={'lg'} fontWeight={'bold'} color={topCardColor}>
@@ -102,12 +105,13 @@ const CryptyHome = () => {
                             </Card>
                         </Flex>
                     </Flex>
+
                 </Flex>
             </Box>
 
             <Box>
-                <Flex justify={'space-between'} align={'center'}>
-                    <List minW={'sm'} spacing={1.5} color={color} fontSize={'sm'}>
+                <Flex direction={{ base:'column', md:'row' }} justify={'space-between'} align={{base:'end',  md:'center' }}>
+                    <List px={3} spacing={1.5} color={color} fontSize={'sm'}>
                         <ListItem>
                             <Flex justify={'space-between'} align={'center'}>
                                 <Text color={'#888b8d'}>Market Cap</Text>
@@ -157,7 +161,7 @@ const CryptyHome = () => {
                 </Flex>
             </Box>
 
-            <Grid templateColumns='repeat(3, 1fr)' gap={2} mt={6}>
+            <Grid templateColumns={{ base:'repeat(1, 1fr)', lg:'repeat(3, 1fr)' }} gap={2} mt={6}>
                 <GridItem w='100%'>
                     <Card size={'sm'} h={'auto'} minH={48} variant={'outline'} bg={'transparent'} borderRadius={10} border={'2px'} borderColor={borderColor} >
                         <CardBody>
