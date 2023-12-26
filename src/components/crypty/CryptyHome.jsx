@@ -2,6 +2,7 @@ import { Box, Flex, Text, Spacer, Card, CardBody, VStack, Grid, GridItem,  useCo
 import React from 'react'
 import Chart from './Chart'
 import { Gas } from '../Icons'
+import GeneralStats from './GeneralStats'
 
 const starSvg = () => {
     return <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
@@ -28,7 +29,7 @@ const CryptyHome = () => {
             <Box>
                 <Flex direction={{ base:'column', md:'row' }}>
 
-                    <Box pt={2} minW={'sm'}>
+                    <Box p={2} minW={'sm'}>
                         <Stat>
                             <StatLabel>
                                 <Flex align={'center'} gap={1.5} fontWeight={'semibold'}>
@@ -72,14 +73,14 @@ const CryptyHome = () => {
                                 </Flex>
                             </small>
                         </Flex>
-                        <Flex direction={{ base:'column', md:'row' }} alignItems={"center"} gap={3}>
-                            <Tag display={{ base:'none', md:'flex' }} size={'md'} variant={colorMode == 'light' ? 'outline' : 'subtle'} colorScheme='brand' py={1} _hover={{ 
+                        <Flex alignItems={"center"} display={{ base:'none', md:'flex' }} gap={3}>
+                            <Tag size={'md'} variant={colorMode == 'light' ? 'outline' : 'subtle'} colorScheme='brand' py={1} _hover={{ 
                                 color:'brand.300',
                              }}>
                                 <TagLabel pr={2}>Add to Watchlist</TagLabel>
                                 <TagRightIcon as={starSvg} />
                             </Tag>
-                            <Card minW={{base:'xs', md:'auto'}} size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10} >
+                            <Card size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10} >
                                 <CardBody>
                                     <VStack align={'start'}>
                                         <Text fontSize={'lg'} fontWeight={'bold'} color={topCardColor}>
@@ -91,7 +92,7 @@ const CryptyHome = () => {
                                     </VStack>
                                 </CardBody>
                             </Card>
-                            <Card minW={{base:'xs', md:'auto'}} size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10} >
+                            <Card size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10} >
                                 <CardBody >
                                     <VStack align={'start'}>
                                         <Text fontSize={'lg'} fontWeight={'bold'} color={topCardColor}>
@@ -110,8 +111,8 @@ const CryptyHome = () => {
             </Box>
 
             <Box>
-                <Flex direction={{ base:'column', md:'row' }} justify={'space-between'} align={{base:'end',  md:'center' }}>
-                    <List px={3} spacing={1.5} color={color} fontSize={'sm'}>
+                <Flex justify={'space-between'} align={{base:'start',  md:'center' }}>
+                    <List px={3} spacing={1.5} color={color} fontSize={{ base:'xs', sm:'sm' }} w={{ base:'100%', sm:'sm' }}>
                         <ListItem>
                             <Flex justify={'space-between'} align={'center'}>
                                 <Text color={'#888b8d'}>Market Cap</Text>
@@ -133,7 +134,7 @@ const CryptyHome = () => {
                             </Flex>
                         </ListItem>
                     </List>
-                    <InputGroup size='md' maxW={'xs'}>
+                    <InputGroup size='md' display={{ base:'none', md:'flex' }} maxW={'xs'}>
                         <Input
                             focusBorderColor={ useColorModeValue('brand.800', '#dfe5ed') }
                             border={useColorModeValue('1px', '')}
@@ -161,7 +162,7 @@ const CryptyHome = () => {
                 </Flex>
             </Box>
 
-            <Grid templateColumns={{ base:'repeat(1, 1fr)', lg:'repeat(3, 1fr)' }} gap={2} mt={6}>
+            <Grid display={{ base:'none', sm:'grid' }} templateColumns={{ base:'repeat(1, 1fr)', lg:'repeat(3, 1fr)' }} gap={2} mt={6}>
                 <GridItem w='100%'>
                     <Card size={'sm'} h={'auto'} minH={48} variant={'outline'} bg={'transparent'} borderRadius={10} border={'2px'} borderColor={borderColor} >
                         <CardBody>
@@ -385,14 +386,18 @@ const CryptyHome = () => {
                     </Card>
                 </GridItem>
             </Grid>
+            
+            <Box display={{ sm:'none' }} mt={4}>
+                <GeneralStats />
+            </Box>
 
-            <Grid templateColumns='repeat(5, 1fr)' gap={2} mt={6}>
-                <GridItem colSpan={2}>
+            <Grid templateColumns={{ md:'repeat(5, 1fr)' }} gap={2} my={6}>
+                <GridItem colSpan={{ md:2 }}>
                     <Card bg={ useColorModeValue('brand.700', '#191e22')} borderRadius={15}>
                         <CardBody>
                             <Text fontSize={25} fontWeight={'bold'} color={useColorModeValue('white', '#e1e2e2')}>BTC Price Statistics</Text>
 
-                            <List w={'100%'} spacing={2.5} mt={4}>
+                            <List w={'100%'} spacing={2.5} mt={4} fontSize={{ base:'sm', sm:'md' }}>
                                 <ListItem>
                                     <Flex justify={'space-between'} align={'center'}>
                                         <Text color={statCardColor}>Bitcoin Price</Text>
@@ -493,7 +498,7 @@ const CryptyHome = () => {
 
                             <Card bg={"#0e1217"} opacity={'60%'} borderRadius={20} minH={48} mt={3}>
                                 <CardBody>
-                                    <Flex direction={'column'} justify={'space-between'} gap={2}>
+                                    <Flex direction={'column'} justify={'space-between'} gap={{ base:4, sm:3 }}>
                                         <Text fontSize={'sm'} color={'white'}>
                                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui error est sit officiis eum ea? Expedita molestiae ipsam rem nisi placeat impedit porro cupiditate culpa rerum ipsa. Accusantium, nulla id! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, commodi!
                                         </Text>
@@ -515,13 +520,13 @@ const CryptyHome = () => {
                         </CardBody>
                     </Card>
                 </GridItem>
-                <GridItem colSpan={3} w={'100%'}>
+                <GridItem colSpan={{ md:3 }} w={'100%'}>
                     <Chart />
                     <Box p={3}>
                         <Heading py={3}>
                             About Coin.
                         </Heading>
-                        <Text h={64} overflow={'scroll'} color={useColorModeValue('','#9fa0a2')}>
+                        <Text h={60} overflow={'scroll'} color={useColorModeValue('','#9fa0a2')}>
                             Ethereum is a global, open-source platform for decentralized applications. In other words, the vision is to create a world computer that anyone can build applications in a decentralized manner; while all states and data are distributed and publicly accessible. Ethereum supports smart contracts in which developers can write code in order to program digital value. Examples of decentralized apps (dapps) that are built on Ethereum includes tokens, non-fungible tokens, decentralized finance apps, lending protocol, decentralized exchanges, and much more.\r\n\r\nOn Ethereum, all transactions and smart contract executions require a small fee to be paid. This fee is called Gas. In technical terms, Gas refers to the unit of measure on the amount of computational effort required to execute an operation or a smart contract. The more complex the execution operation is, the more gas is required to fulfill that operation. Gas fees are paid entirely in Ether (ETH), which is the native coin of the blockchain. The price of gas can fluctuate from time to time depending on the network demand.
                         </Text>
                     </Box>

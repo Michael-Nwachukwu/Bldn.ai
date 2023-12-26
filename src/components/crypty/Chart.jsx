@@ -3497,7 +3497,7 @@ const Chart = () => {
     const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
     return (
-        <Box p={3}>
+        <Box p={{ md:3 }}>
             <CanvasJSChart options={options} />
         </Box>
     )

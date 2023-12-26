@@ -58,13 +58,7 @@ const Main = ({ session}) => {
               <Chatinput onSendMessage={onSendMessage} />
             </Flex>
           </TabPanel>
-          <TabPanel>
-            {/* <Input
-              border={"1px"}
-              bg={"transparent"}
-              py={7}
-              placeholder="Basic usage"
-            /> */}
+          <TabPanel p={-10}>
             <CryptyHome />
           </TabPanel>
           <TabPanel>
