@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Spacer, Card, CardBody, VStack, Grid, GridItem,  useColorMode, useColorModeValue, List, ListItem , Image, Divider, InputGroup, Input, InputRightElement, Tag, TagLabel, Stat, StatHelpText, StatLabel, StatNumber ,StatArrow, Heading, TagRightIcon} from '@chakra-ui/react'
+import { Box, Flex, Text, Spacer, Card, CardBody, VStack, Grid, GridItem,  useColorMode, useColorModeValue, List, ListItem , Image, Divider, InputGroup, Input, InputRightElement, Button, Tag, TagLabel, Stat, StatHelpText, StatLabel, StatNumber ,StatArrow, Heading, TagRightIcon} from '@chakra-ui/react'
 import React from 'react'
 import Chart from './Chart'
 import { Gas, Search, starSvg } from '../Icons'
@@ -569,7 +569,7 @@ const CryptyHome = () => {
                     </Card>
                 </GridItem>
                 <GridItem colSpan={{ lg:3 }} w={'100%'}>
-                    <Chart />
+                    {/* <Chart /> */}
                     <Box p={3}>
                         <Heading py={3}>
                             About Coin.
