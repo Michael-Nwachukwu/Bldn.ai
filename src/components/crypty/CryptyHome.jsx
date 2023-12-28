@@ -1,9 +1,8 @@
-import { Box, Flex, Text, Spacer, Card, CardBody, VStack, Grid, GridItem,  useColorMode, useColorModeValue, List, ListItem , Image, Divider, InputGroup, Input, InputRightElement, Button, Tag, TagLabel, Stat, StatHelpText, StatLabel, StatNumber ,StatArrow, Heading, TagRightIcon} from '@chakra-ui/react'
+import { Box, Flex, Text, Spacer, Card, CardBody, VStack, Grid, GridItem,  useColorMode, useColorModeValue, List, ListItem , Image, Divider, InputGroup, Input, InputRightElement, Tag, TagLabel, Stat, StatHelpText, StatLabel, StatNumber ,StatArrow, Heading, TagRightIcon} from '@chakra-ui/react'
 import React from 'react'
 import Chart from './Chart'
 import { Gas, Search, starSvg } from '../Icons'
 import GeneralStats from './GeneralStats'
-// import Floating from './Floating'
 
 const CryptyHome = () => {
   const { colorMode } = useColorMode()
@@ -435,9 +434,9 @@ const CryptyHome = () => {
                 </GridItem>
             </Grid>
             
-            {/* <Box display={{ sm:'none' }} mt={2}>
+            <Box display={{ sm:'none' }} mt={2}>
                 <GeneralStats />
-            </Box> */}
+            </Box>
 
             <Grid templateColumns={{ lg:'repeat(5, 1fr)' }} gap={2} my={6}>
                 <GridItem colSpan={{ lg:2 }}>
@@ -569,7 +568,7 @@ const CryptyHome = () => {
                     </Card>
                 </GridItem>
                 <GridItem colSpan={{ lg:3 }} w={'100%'}>
-                    {/* <Chart /> */}
+                    <Chart />
                     <Box p={3}>
                         <Heading py={3}>
                             About Coin.
