@@ -13,19 +13,29 @@ import Chatinput from "./Chatinput";
 import { onSendMessage } from "../services/supabaseService";
 import Header from "./Header";
 import Chatwidget from "./Chatwidget";
-import Home from "./crypty/Home";
+import Home from "./crypty/CryptyHome";
+import CryptyHome from "./crypty/CryptyHome";
+import { useState } from "react";
 
-const Main = ({ session, heading}) => {
+const Main = ({ session}) => {
   const headings = [
     "Paste in your text below and we'll extract the keywords for you.",
     "Pate in an address and we'll extract the details for you.",
     "Ask a question about taxt and we'll fetch the answers for you."
   ];
-  
+  const [heading, setHeading] = useState(headings[0]);
+  // maxH="100vh"
   return (
-    <VStack maxH="100vh" spacing={0}>
-      <Header session={session} />
-      <Tabs isFitted variant="enclosed" mx={{ lg:20 }} w={'100%'} mt={{ base:3, md:10, lg:5 }}>
+    <VStack  spacing={0}>
+      <Header session={session} heading={heading} />
+      <Tabs 
+        isFitted 
+        variant="enclosed" 
+        mx={{ lg:20 }} 
+        w={'100%'} 
+        mt={{ base:3, md:10, lg:5 }} 
+        onChange={(index) => setHeading(headings[index])}
+      >
         <TabList mb="0.5em" fontFamily="syncopate">
           <Tab
             borderBottom={"1px"}
@@ -57,14 +67,8 @@ const Main = ({ session, heading}) => {
               <Chatinput onSendMessage={onSendMessage} />
             </Flex>
           </TabPanel>
-          <TabPanel>
-            {/* <Input
-              border={"1px"}
-              bg={"transparent"}
-              py={7}
-              placeholder="Basic usage"
-            /> */}
-            <Home />
+          <TabPanel p={-10}>
+            <CryptyHome />
           </TabPanel>
           <TabPanel>
             <Input

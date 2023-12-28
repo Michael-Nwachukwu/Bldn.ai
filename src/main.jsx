@@ -4,9 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { ChakraProvider } from '@chakra-ui/react'
 import { ColorModeScript } from '@chakra-ui/react'
-import "@fontsource/open-sans"
 import '@fontsource/syncopate';
-import '@fontsource-variable/space-grotesk';
 import theme from './theme'
 
 ReactDOM.createRoot(document.getElementById('root')).render(

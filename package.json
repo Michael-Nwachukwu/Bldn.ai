@@ -10,11 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@canvasjs/react-charts": "^1.0.0",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@fontsource-variable/space-grotesk": "^5.0.15",
-    "@fontsource/open-sans": "^5.0.17",
     "@fontsource/syncopate": "^5.0.17",
     "@supabase/supabase-js": "^2.38.5",
     "dateformat": "^5.0.3",
@@ -23,7 +22,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.0",
-    "react-scroll-to-bottom": "^4.2.0"
+    "react-scroll-to-bottom": "^4.2.0",
+    "swiper": "^11.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
