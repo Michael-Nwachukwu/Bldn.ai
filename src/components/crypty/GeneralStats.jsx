@@ -7,7 +7,6 @@ import 'swiper/css/pagination';
 import 'swiper/swiper-bundle.css';
 
 
-
 const GeneralStats = () => {
   const colorMode = useColorMode();
   const color = useColorModeValue('gray', '#dfe5ed');
