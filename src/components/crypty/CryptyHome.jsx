@@ -1,15 +1,14 @@
 import { Box, Flex, Text, Spacer, Card, CardBody, VStack, Grid, GridItem,  useColorMode, useColorModeValue, List, ListItem , Image, Divider, InputGroup, Input, InputRightElement, Button, Tag, TagLabel, Stat, StatHelpText, StatLabel, StatNumber ,StatArrow, Heading, TagRightIcon} from '@chakra-ui/react'
 import React from 'react'
 import Chart from './Chart'
-import { Gas } from '../Icons'
+import { Gas, Search } from '../Icons'
 import GeneralStats from './GeneralStats'
+import Floating from './Floating'
 
 const starSvg = () => {
     return <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
     <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
     </svg>
-
-    
 }
 
 const CryptyHome = () => {
@@ -27,33 +26,71 @@ const CryptyHome = () => {
     return (
         <>
             <Box>
-                <Flex direction={{ base:'column', md:'row' }}>
+                <Flex alignItems={'center'} 
+                    display={{ lg:'none' }} 
+                    flexWrap={'nowrap'}
+                    gap={3}
+                    whiteSpace="nowrap"
+                    overflowX="auto"   
+                    p={1}
+                    bg={useColorModeValue('rgba(248, 198, 169, 0.25)', '#1b232d')}
+                    borderRadius={'15px 0 0 15px '}
+                    mr={-4}
+                    mb={1}
+                >
+                    <small style={{ color:smallStatsLabelColor, marginLeft:'7px' }}>
+                        Cryptos: <span style={{ color:smallStatsValueColor }}>2M+</span>
+                    </small>
+                    <small style={{ color:smallStatsLabelColor, marginLeft:'7px' }}>
+                        Exchanges: <span style={{ color:smallStatsValueColor }}>687</span>
+                    </small>
+                    <small style={{ color:smallStatsLabelColor, marginLeft:'7px' }}>
+                        Exchanges: <span style={{ color:smallStatsValueColor }}>687</span>
+                    </small>
+                    <small style={{ color:smallStatsLabelColor, marginLeft:'7px' }}>
+                        Exchanges: <span style={{ color:smallStatsValueColor }}>687</span>
+                    </small>
+                    <small style={{ color:smallStatsLabelColor, marginLeft:'7px' }}>
+                        Dominance: <span style={{ color:smallStatsValueColor }}>BTC: 51.4% ETH: 16.8%</span>
+                    </small>
+                    <small style={{ color:smallStatsLabelColor, marginLeft:'7px' }}>
+                        ETH GAS:<span style={{ color:smallStatsValueColor }}>52 GWEI </span>
+                    </small>
+                </Flex>
+                <Flex align={'center'} justify={'space-between'} direction={{ base:'column', md:'row' }}>
 
-                    <Box p={2} minW={'sm'}>
-                        <Stat>
-                            <StatLabel>
-                                <Flex align={'center'} gap={1.5} fontWeight={'semibold'}>
-                                    <img src="https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1696501400" alt="" />
-                                    Bitcoin BTC
+                    <Box p={2} minW={{ sm:'sm' }} w={{ base:'100%', sm:'auto' }}>
+                        <Flex justify={'space-between'} align={'center'}>
+                            <Stat>
+                                <StatLabel>
+                                    <Flex align={'center'} gap={1.5} fontWeight={'semibold'}>
+                                        <img src="https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1696501400" alt="" />
+                                        Bitcoin BTC
+                                    </Flex>
+                                </StatLabel>
+                                <Flex align={'center'} gap={2}>
+                                    <StatNumber 
+                                        fontSize={{ base:27, lg:50 }}
+                                        fontFamily={'syncopate'}
+                                    >$42,222.62</StatNumber>
+                                    <StatHelpText fontSize={{ base:14, sm:18 }}>
+                                        <StatArrow color={'red'} type='decrease' />
+                                        23.36%
+                                    </StatHelpText>
                                 </Flex>
-                            </StatLabel>
-                            <Flex align={'center'} gap={2}>
-                                <StatNumber 
-                                    fontSize={{ base:30, lg:50 }}
-                                    fontFamily={'syncopate'}
-                                >$42,222.62</StatNumber>
-                                <StatHelpText fontSize={18}>
-                                    <StatArrow color={'red'} type='decrease' />
-                                    23.36%
-                                </StatHelpText>
-                            </Flex>
-                        </Stat>
+                            </Stat>
+                            <Tag display={{ sm:'none' }} size={'md'} variant={colorMode == 'light' ? 'outline' : 'subtle'} colorScheme='brand' py={1} _hover={{ 
+                                color:'brand.300',
+                             }}>
+                                <TagRightIcon as={starSvg} />
+                            </Tag>
+                        </Flex>
                     </Box>
 
                     <Spacer />
 
                     <Flex direction={'column'} alignItems={{ lg:'end' }} gap={2} >
-                        <Flex alignItems={'center'} display={{ base:'none', md:'flex' }} gap={3}>
+                        <Flex alignItems={'center'} display={{ base:'none', lg:'flex' }} gap={3}>
                             <small style={{ color:smallStatsLabelColor }}>
                                 Cryptos: <span style={{ color:smallStatsValueColor }}>2M+</span>
                             </small>
@@ -77,12 +114,12 @@ const CryptyHome = () => {
                             <Tag size={'md'} variant={colorMode == 'light' ? 'outline' : 'subtle'} colorScheme='brand' py={1} _hover={{ 
                                 color:'brand.300',
                              }}>
-                                <TagLabel pr={2}>Add to Watchlist</TagLabel>
+                                <TagLabel display={{ base:'none', lg:'block' }} pr={2}>Add to Watchlist</TagLabel>
                                 <TagRightIcon as={starSvg} />
                             </Tag>
                             <Card size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10} >
                                 <CardBody>
-                                    <VStack align={'start'}>
+                                    <VStack align={'start'} mb={{ base:3, lg:0 }}>
                                         <Text fontSize={'lg'} fontWeight={'bold'} color={topCardColor}>
                                             $1,655,669,299,690
                                         </Text>
@@ -90,9 +127,17 @@ const CryptyHome = () => {
                                             Market Capitalization 
                                         </Text>
                                     </VStack>
+                                    <VStack align={'start'} display={{ lg:'none' }}>
+                                        <Text fontSize={'lg'} fontWeight={'bold'} color={topCardColor}>
+                                        $54,691,566,748
+                                        </Text>
+                                        <Text fontSize={'sm'} color={colorMode == 'light' ? 'brand.600' : '#91a2b8'} >
+                                            24h Trading Volume
+                                        </Text>
+                                    </VStack>
                                 </CardBody>
                             </Card>
-                            <Card size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10} >
+                            <Card display={{ base:'none', lg:'block' }} size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10} >
                                 <CardBody >
                                     <VStack align={'start'}>
                                         <Text fontSize={'lg'} fontWeight={'bold'} color={topCardColor}>
@@ -111,7 +156,7 @@ const CryptyHome = () => {
             </Box>
 
             <Box>
-                <Flex justify={'space-between'} align={{base:'start',  md:'center' }}>
+                <Flex mt={{ base:0, md:-7, lg:0 }} justify={'space-between'} align={{base:'end',  lg:'center' }}>
                     <List px={3} spacing={1.5} color={color} fontSize={{ base:'xs', sm:'sm' }} w={{ base:'100%', sm:'sm' }}>
                         <ListItem>
                             <Flex justify={'space-between'} align={'center'}>
@@ -134,7 +179,7 @@ const CryptyHome = () => {
                             </Flex>
                         </ListItem>
                     </List>
-                    <InputGroup size='md' display={{ base:'none', md:'flex' }} maxW={'xs'}>
+                    <InputGroup ml={'auto'} size='md' display={{ base:'none', md:'flex' }} maxW={'xs'}>
                         <Input
                             focusBorderColor={ useColorModeValue('brand.800', '#dfe5ed') }
                             border={useColorModeValue('1px', '')}
@@ -162,7 +207,16 @@ const CryptyHome = () => {
                 </Flex>
             </Box>
 
-            <Grid display={{ base:'none', sm:'grid' }} templateColumns={{ base:'repeat(1, 1fr)', lg:'repeat(3, 1fr)' }} gap={2} mt={6}>
+            <Box maxW={'70%'} ml={'auto'} pt={3} display={{ sm:'none' }}>
+                <div className="form-control">
+                    <input className="input-search input-alt" placeholder='Search' required="" type="text" style={{ textAlign: 'right' }} />
+                    <span className="input-border input-border-alt"></span>
+                    <Search fill={'#464a4d'} />
+                </div>
+            </Box>
+
+
+            <Grid display={{ base:'none', sm:'grid' }} templateColumns={{ base:'repeat(1, 1fr)', md:'repeat(3, 1fr)' }} gap={2} mt={6}>
                 <GridItem w='100%'>
                     <Card size={'sm'} h={'auto'} minH={48} variant={'outline'} bg={'transparent'} borderRadius={10} border={'2px'} borderColor={borderColor} >
                         <CardBody>
@@ -387,12 +441,12 @@ const CryptyHome = () => {
                 </GridItem>
             </Grid>
             
-            <Box display={{ sm:'none' }} mt={4}>
+            <Box display={{ sm:'none' }} mt={2}>
                 <GeneralStats />
             </Box>
 
-            <Grid templateColumns={{ md:'repeat(5, 1fr)' }} gap={2} my={6}>
-                <GridItem colSpan={{ md:2 }}>
+            <Grid templateColumns={{ lg:'repeat(5, 1fr)' }} gap={2} my={6}>
+                <GridItem colSpan={{ lg:2 }}>
                     <Card bg={ useColorModeValue('brand.700', '#191e22')} borderRadius={15}>
                         <CardBody>
                             <Text fontSize={25} fontWeight={'bold'} color={useColorModeValue('white', '#e1e2e2')}>BTC Price Statistics</Text>
@@ -520,7 +574,7 @@ const CryptyHome = () => {
                         </CardBody>
                     </Card>
                 </GridItem>
-                <GridItem colSpan={{ md:3 }} w={'100%'}>
+                <GridItem colSpan={{ lg:3 }} w={'100%'}>
                     <Chart />
                     <Box p={3}>
                         <Heading py={3}>
@@ -532,6 +586,8 @@ const CryptyHome = () => {
                     </Box>
                 </GridItem>
             </Grid>
+
+            {/* <Floating /> */}
 
         </>
     )

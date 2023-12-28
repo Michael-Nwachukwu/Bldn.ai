@@ -79,7 +79,7 @@ const Form = ({ firstFieldRef, onCancel, setUsername, updateProfile, username, i
 }
 
 
-const Header = ({ session, setSession, fill, }) => {
+const Header = ({ session, setSession, fill, heading }) => {
   const { onOpen, onClose, isOpen } = useDisclosure()
   const firstFieldRef = React.useRef(null)
   const { user } = session;
@@ -389,7 +389,7 @@ const Header = ({ session, setSession, fill, }) => {
 
       <Heading fontWeight="bold" textAlign="center" pt={{ base:3, md:6, lg:5}} 
       fontSize={{ base:'16px', md:'22px', lg:'30px' }}>
-        Pate in an address and we'll extract the details
+        {heading}
       </Heading>
     </Box>
   );

@@ -15,6 +15,7 @@ import Header from "./Header";
 import Chatwidget from "./Chatwidget";
 import Home from "./crypty/CryptyHome";
 import CryptyHome from "./crypty/CryptyHome";
+import { useState } from "react";
 
 const Main = ({ session}) => {
   const headings = [
@@ -22,11 +23,19 @@ const Main = ({ session}) => {
     "Pate in an address and we'll extract the details for you.",
     "Ask a question about taxt and we'll fetch the answers for you."
   ];
+  const [heading, setHeading] = useState(headings[0]);
   // maxH="100vh"
   return (
     <VStack  spacing={0}>
-      <Header session={session} />
-      <Tabs isFitted variant="enclosed" mx={{ lg:20 }} w={'100%'} mt={{ base:3, md:10, lg:5 }}>
+      <Header session={session} heading={heading} />
+      <Tabs 
+        isFitted 
+        variant="enclosed" 
+        mx={{ lg:20 }} 
+        w={'100%'} 
+        mt={{ base:3, md:10, lg:5 }} 
+        onChange={(index) => setHeading(headings[index])}
+      >
         <TabList mb="0.5em" fontFamily="syncopate">
           <Tab
             borderBottom={"1px"}
