@@ -1,7 +1,7 @@
 import React from 'react'
-import CanvasJSReact from '@canvasjs/react-charts';
 import { Box } from '@chakra-ui/react';
-import { useColorMode } from '@chakra-ui/react';
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { useEffect } from 'react';
 
 
 const jsonData = [
@@ -3466,20 +3466,23 @@ const dataPoints = jsonData[0].prices.map(([timestamp, price]) => ({
 
 
 const Chart = () => {
-    // const  labelFontColor = useColorModeValue('#912f13', '#dfe5ed')
-    const { colorMode } = useColorMode()
-    
-    const options = {
+    const { colorMode } = useColorMode();
+    const labelFontColor = useColorModeValue('gray', '#dfe5ed');
+
+    useEffect(() => {
+      // Sample CanvasJS chart code
+      const chart = new window.CanvasJS.Chart("chartContainer", {
+        // Your chart configuration options
         backgroundColor: 'transparent', 
         axisX: {
           lineThickness: 0,
-          labelFontColor: colorMode == 'light' ? 'gray' : '#dfe5ed', // Change color of X-axis labels
+          labelFontColor: labelFontColor, // Change color of X-axis labels
           valueFormatString: 'DD MMM',
         },
         axisY: {
           gridColor: 'rgba(145, 162, 184, 0.2)',
           lineThickness: 0,
-          labelFontColor: colorMode == 'light' ? 'gray' : '#dfe5ed', // Change color of X-axis labels
+          labelFontColor: labelFontColor, // Change color of X-axis labels
         },
         animationEnabled: true,
         zoomEnabled: true,
@@ -3491,14 +3494,14 @@ const Chart = () => {
             dataPoints: dataPoints,
           },
         ],
-    };
-      
-    // const CanvasJS = CanvasJSReact.CanvasJS;
-    const CanvasJSChart = CanvasJSReact.CanvasJSChart;
-
+      });
+  
+      chart.render();
+    }, []);
+    
     return (
         <Box p={{ md:3 }}>
-            <CanvasJSChart options={options} />
+          <div id="chartContainer" style={{ height: "400px", width: "100%" }}></div>
         </Box>
     )
 }
