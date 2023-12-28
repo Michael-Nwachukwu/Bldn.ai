@@ -3,7 +3,7 @@ import React from 'react'
 import Chart from './Chart'
 import { Gas, Search } from '../Icons'
 import GeneralStats from './GeneralStats'
-import Floating from './Floating'
+// import Floating from './Floating'
 
 const starSvg = () => {
     return <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
@@ -575,7 +575,7 @@ const CryptyHome = () => {
                     </Card>
                 </GridItem>
                 <GridItem colSpan={{ lg:3 }} w={'100%'}>
-                    <Chart />
+                    {/* <Chart /> */}
                     <Box p={3}>
                         <Heading py={3}>
                             About Coin.
