@@ -2,7 +2,7 @@ import { Box, Flex, Text, Spacer, Card, CardBody, VStack, Grid, GridItem,  useCo
 import React from 'react'
 // import Chart from './Chart'
 import { Gas, Search, starSvg } from '../Icons'
-// import GeneralStats from './GeneralStats'
+import GeneralStats from './GeneralStats'
 
 const CryptyHome = () => {
   const { colorMode } = useColorMode()
@@ -434,9 +434,9 @@ const CryptyHome = () => {
                 </GridItem>
             </Grid>
             
-            {/* <Box display={{ sm:'none' }} mt={2}>
+            <Box display={{ sm:'none' }} mt={2}>
                 <GeneralStats />
-            </Box> */}
+            </Box>
 
             <Grid templateColumns={{ lg:'repeat(5, 1fr)' }} gap={2} my={6}>
                 <GridItem colSpan={{ lg:2 }}>
