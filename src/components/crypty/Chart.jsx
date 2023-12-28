@@ -3493,7 +3493,7 @@ const Chart = () => {
         ],
     };
       
-    const CanvasJS = CanvasJSReact.CanvasJS;
+    // const CanvasJS = CanvasJSReact.CanvasJS;
     const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
     return (
