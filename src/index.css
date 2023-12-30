@@ -133,7 +133,9 @@
   overflow-y: hidden;
 } */
 
-
+#chartContainer{
+  min-width: 100% !important;
+}
 
 
 

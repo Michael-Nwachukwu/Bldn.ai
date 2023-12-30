@@ -22,7 +22,7 @@ export const Sunshine = ({fill}) => {
 
 
 export const Gas = () => {
-    return <svg xmlns="http://www.w3.org/2000/svg" style={{ paddingBottom:'1.5px' }} width="13" height="13" fill="currentColor" class="bi bi-fuel-pump" viewBox="0 0 16 16">
+    return <svg xmlns="http://www.w3.org/2000/svg" style={{ paddingBottom:'1.5px' }} width="13" height="13" fill="currentColor" className="bi bi-fuel-pump" viewBox="0 0 16 16">
     <path d="M3 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5z"/>
     <path d="M1 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8a2 2 0 0 1 2 2v.5a.5.5 0 0 0 1 0V8h-.5a.5.5 0 0 1-.5-.5V4.375a.5.5 0 0 1 .5-.5h1.495c-.011-.476-.053-.894-.201-1.222a.97.97 0 0 0-.394-.458c-.184-.11-.464-.195-.9-.195a.5.5 0 0 1 0-1c.564 0 1.034.11 1.412.336.383.228.634.551.794.907.295.655.294 1.465.294 2.081v3.175a.5.5 0 0 1-.5.501H15v4.5a1.5 1.5 0 0 1-3 0V12a1 1 0 0 0-1-1v4h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1zm9 0a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v13h8z"/>
     </svg>
@@ -30,19 +30,19 @@ export const Gas = () => {
 
 
 // export const Search = ({fill}) => {
-//     return <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill={fill} class="bi bi-search" viewBox="0 0 16 16">
+//     return <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill={fill} className="bi bi-search" viewBox="0 0 16 16">
 //     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
 //   </svg>
 // }
 
 export const Search = ({fill}) => {
-    return <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill={fill} class="bi bi-search srch" viewBox="0 0 16 16">
+    return <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill={fill} className="bi bi-search srch" viewBox="0 0 16 16">
     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
   </svg>
 }
 
 export const starSvg = () => {
-    return <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+    return <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-star" viewBox="0 0 16 16">
     <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
     </svg>
 }

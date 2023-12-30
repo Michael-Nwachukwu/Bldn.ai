@@ -3,212 +3,114 @@ import React from 'react'
 import Chart from './Chart'
 import { Gas, Search, starSvg } from '../Icons'
 import GeneralStats from './GeneralStats'
+import SmallDetails from './Micros/SmallDetails'
+import PriceStats from './Micros/PriceStats'
+import GlobalMarket from './GlobalMarket'
+import Watchlist from './Micros/Watchlist'
+import ListDetails from './ListDetails'
+import SearchInput from './Micros/SearchInput'
 
 const CryptyHome = () => {
   const { colorMode } = useColorMode()
   const borderColor = useColorModeValue('#e3ccbf', '#212d3b')
   const color = useColorModeValue('gray', '#dfe5ed')
   const topCardColor= useColorModeValue('brand.600', '#dfe5ed');
-  const smallStatsLabelColor= useColorModeValue('black', '#dfe5ed');
+//   const smallStatsLabelColor= useColorModeValue('black', '#dfe5ed');
   const smallStatsValueColor= useColorModeValue('red', '#f8c6a9');
   const statCardColor = useColorModeValue('#F7F1ED', '#888b8d');
 
-
-
-
     return (
         <>
-            <Box>
+            <Box overflowX={'hidden'}>
+
+                {/* smallDetails for smalla dn medium screens */}
                 <Flex alignItems={'center'} 
                     display={{ lg:'none' }} 
-                    flexWrap={'nowrap'}
+                    // flexWrap={'nowrap'}
                     gap={3}
                     whiteSpace="nowrap"
                     overflowX="auto"   
                     p={1}
                     bg={useColorModeValue('rgba(248, 198, 169, 0.25)', '#1b232d')}
-                    borderRadius={'15px 0 0 15px '}
-                    mr={-4}
+                    borderRadius={'15px 0 0 15px'}
+                    // mr={-4}
                     mb={1}
                 >
-                    <small style={{ color:smallStatsLabelColor, marginLeft:'7px' }}>
-                        Cryptos: <span style={{ color:smallStatsValueColor }}>2M+</span>
-                    </small>
-                    <small style={{ color:smallStatsLabelColor, marginLeft:'7px' }}>
-                        Exchanges: <span style={{ color:smallStatsValueColor }}>687</span>
-                    </small>
-                    <small style={{ color:smallStatsLabelColor, marginLeft:'7px' }}>
-                        Exchanges: <span style={{ color:smallStatsValueColor }}>687</span>
-                    </small>
-                    <small style={{ color:smallStatsLabelColor, marginLeft:'7px' }}>
-                        Exchanges: <span style={{ color:smallStatsValueColor }}>687</span>
-                    </small>
-                    <small style={{ color:smallStatsLabelColor, marginLeft:'7px' }}>
-                        Dominance: <span style={{ color:smallStatsValueColor }}>BTC: 51.4% ETH: 16.8%</span>
-                    </small>
-                    <small style={{ color:smallStatsLabelColor, marginLeft:'7px' }}>
-                        ETH GAS:<span style={{ color:smallStatsValueColor }}>52 GWEI </span>
-                    </small>
+                    <SmallDetails label={'Cryptos:'} value={'2M+'} />
+                    
+                    <SmallDetails label={'Exchanges:'} value={'687'} />
+
+                    <SmallDetails label={'Market Cap:'} value={'$1,655,669,299,690'} />
+                    
+                    <SmallDetails label={'24H Volume:'} value={'$1,655,669,299,690'} />
+
+                    <SmallDetails label={'Dominance:'} value={'BTC: 51.4% ETH: 16.8%'} />
+
+                    <SmallDetails label={'ETH GAS:'} value={'52 GWEI'} />
+                   
                 </Flex>
+
+                {/* PriceStars and global stats details */}
                 <Flex align={'center'} justify={'space-between'} direction={{ base:'column', md:'row' }}>
 
-                    <Box p={2} minW={{ sm:'sm' }} w={{ base:'100%', sm:'auto' }}>
-                        <Flex justify={'space-between'} align={'center'}>
-                            <Stat>
-                                <StatLabel>
-                                    <Flex align={'center'} gap={1.5} fontWeight={'semibold'}>
-                                        <img src="https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1696501400" alt="" />
-                                        Bitcoin BTC
-                                    </Flex>
-                                </StatLabel>
-                                <Flex align={'center'} gap={2}>
-                                    <StatNumber 
-                                        fontSize={{ base:27, lg:50 }}
-                                        fontFamily={'syncopate'}
-                                    >$42,222.62</StatNumber>
-                                    <StatHelpText fontSize={{ base:14, sm:18 }}>
-                                        <StatArrow color={'red'} type='decrease' />
-                                        23.36%
-                                    </StatHelpText>
-                                </Flex>
-                            </Stat>
-                            <Tag display={{ sm:'none' }} size={'md'} variant={colorMode == 'light' ? 'outline' : 'subtle'} colorScheme='brand' py={1} _hover={{ 
-                                color:'brand.300',
-                             }}>
-                                <TagRightIcon as={starSvg} />
-                            </Tag>
-                        </Flex>
-                    </Box>
+                    {/* custom component fro price display */}
+                    <PriceStats />
 
                     <Spacer />
-
+                    
+                    {/* smallDetails for only lg screens and startsCard for md and lg screens */}
                     <Flex direction={'column'} alignItems={{ lg:'end' }} gap={2} >
-                        <Flex alignItems={'center'} display={{ base:'none', lg:'flex' }} gap={3}>
-                            <small style={{ color:smallStatsLabelColor }}>
-                                Cryptos: <span style={{ color:smallStatsValueColor }}>2M+</span>
-                            </small>
-                            <small style={{ color:smallStatsLabelColor }}>
-                                Exchanges: <span style={{ color:smallStatsValueColor }}>687</span>
-                            </small>
-                            <small style={{ color:smallStatsLabelColor }}>
-                                Dominance: <span style={{ color:smallStatsValueColor }}>BTC: 51.4% ETH: 16.8%</span>
-                            </small>
-                            <small style={{ color:smallStatsLabelColor }}>
-                                <Flex align={'center'} gap={1}>
-                                    <Flex  align={'center'} gap={1}>
-                                        <Gas />
-                                        ETH GAS: 
-                                    </Flex>
-                                <span style={{ color:smallStatsValueColor }}>52 GWEI </span>
+
+                        {/* Visible only on lg screens. */}
+                        <Flex alignItems={'center'} display={{ base:'none', lg:'flex' }}>
+                            
+                            <SmallDetails label={'Cryptos:'} value={'2M+'} />
+                            
+                            <SmallDetails label={'Exchanges:'} value={'687'} />
+
+                            <SmallDetails label={'Dominance:'} value={'BTC: 51.4% ETH: 16.8%'} />
+                            
+                            <Flex align={'center'} fontSize={'xs'} ml={2} gap={1}>
+                                <Flex  align={'center'} gap={1}>
+                                    <Gas />
+                                    ETH GAS: 
                                 </Flex>
-                            </small>
+                            <span style={{ color:smallStatsValueColor }}>52 GWEI </span>
+                            </Flex>
                         </Flex>
+                        
+                        
                         <Flex alignItems={"center"} display={{ base:'none', md:'flex' }} gap={3}>
-                            <Tag size={'md'} variant={colorMode == 'light' ? 'outline' : 'subtle'} colorScheme='brand' py={1} _hover={{ 
-                                color:'brand.300',
-                             }}>
-                                <TagLabel display={{ base:'none', lg:'block' }} pr={2}>Add to Watchlist</TagLabel>
-                                <TagRightIcon as={starSvg} />
-                            </Tag>
-                            <Card size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10} >
-                                <CardBody>
-                                    <VStack align={'start'} mb={{ base:3, lg:0 }}>
-                                        <Text fontSize={'lg'} fontWeight={'bold'} color={topCardColor}>
-                                            $1,655,669,299,690
-                                        </Text>
-                                        <Text fontSize={'sm'} color={colorMode == 'light' ? 'brand.600' : '#91a2b8'} >
-                                            Market Capitalization 
-                                        </Text>
-                                    </VStack>
-                                    <VStack align={'start'} display={{ lg:'none' }}>
-                                        <Text fontSize={'lg'} fontWeight={'bold'} color={topCardColor}>
-                                        $54,691,566,748
-                                        </Text>
-                                        <Text fontSize={'sm'} color={colorMode == 'light' ? 'brand.600' : '#91a2b8'} >
-                                            24h Trading Volume
-                                        </Text>
-                                    </VStack>
-                                </CardBody>
-                            </Card>
-                            <Card display={{ base:'none', lg:'block' }} size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10} >
-                                <CardBody >
-                                    <VStack align={'start'}>
-                                        <Text fontSize={'lg'} fontWeight={'bold'} color={topCardColor}>
-                                        $54,691,566,748
-                                        </Text>
-                                        <Text fontSize={'sm'} color={colorMode == 'light' ? 'brand.600' : '#91a2b8'} >
-                                            24h Trading Volume
-                                        </Text>
-                                    </VStack>
-                                </CardBody>
-                            </Card>
+
+                            {/* Add to watchlist md/lg screens */}
+                            <Watchlist colorMode={colorMode} />
+
+                            <GlobalMarket />
+
                         </Flex>
+
                     </Flex>
 
                 </Flex>
             </Box>
 
             <Box>
-                <Flex mt={{ base:0, md:-7, lg:0 }} justify={'space-between'} align={{base:'end',  lg:'center' }}>
-                    <List px={3} spacing={1.5} color={color} fontSize={{ base:'xs', sm:'sm' }} w={{ base:'100%', sm:'sm' }}>
-                        <ListItem>
-                            <Flex justify={'space-between'} align={'center'}>
-                                <Text color={'#888b8d'}>Market Cap</Text>
-                                <Text fontWeight={'semibold'}>$854,003,314,585</Text>
-                            </Flex>
-                        </ListItem>
-                        <Divider />
-                        <ListItem>
-                            <Flex justify={'space-between'} align={'center'}>
-                                <Text color={'#888b8d'}>24 Hour Trading Vol</Text>
-                                <Text fontWeight={'semibold'}>$11,616,118,861</Text>
-                            </Flex>
-                        </ListItem>
-                        <Divider />
-                        <ListItem>
-                            <Flex justify={'space-between'} align={'center'}>
-                                <Text color={'#888b8d'}>Fully Diluted Valuation </Text>
-                                <Text fontWeight={'semibold'}>$916,014,813,000</Text>
-                            </Flex>
-                        </ListItem>
-                    </List>
-                    <InputGroup ml={'auto'} size='md' display={{ base:'none', md:'flex' }} maxW={'xs'}>
-                        <Input
-                            focusBorderColor={ useColorModeValue('brand.800', '#dfe5ed') }
-                            border={useColorModeValue('1px', '')}
-                            // borderColor={'brand.800'}
-                            bg={colorMode == 'light' ? 'transparent' : "#1b232d"}
-                            // opacity={'40%'}
-                            py={5}
-                            // pr='2.5rem'
-                            // variant='outline' 
-                            placeholder='Search'
-                            color={useColorModeValue('brand.800', 'white')}
-                            name={"password"}
-                            _hover={{ border:'' }}
-                            _placeholder={{ color: useColorModeValue('brand.800', '#dfe5ed') }}
-                            required
-                        />
-                        <InputRightElement width='4.5rem'>
-                            <Flex justifyContent={'center'} w={6} bg={colorMode == 'light' ? 'brand.700' : "#384a61"} opacity={'70%'} color={"white"} borderRadius={5} fontWeight={'bold'}
-                                _hover={{ bg:'' }} 
-                            >
-                                /
-                            </Flex>
-                        </InputRightElement>
-                    </InputGroup>
+                <Flex direction={{ base:'column', sm:'row' }} justify={{ sm:'space-between' }} align={{base:'end',  lg:'center' }}>
+
+                    {/* Active token market stats: stats under the pricestats */}
+                    <ListDetails color={color} />
+                    
+                    {/* search input component for md and lg screens only */}
+                    <SearchInput />
                 </Flex>
             </Box>
 
-            <Box maxW={'70%'} ml={'auto'} pt={3} display={{ sm:'none' }}>
-                <div className="form-control">
-                    <input className="input-search input-alt" placeholder='Search' required="" type="text" style={{ textAlign: 'right' }} />
-                    <span className="input-border input-border-alt"></span>
-                    <Search fill={'#464a4d'} />
-                </div>
-            </Box>
 
 
+
+            
+
+            {/* <Categories /> */}
             <Grid display={{ base:'none', sm:'grid' }} templateColumns={{ base:'repeat(1, 1fr)', md:'repeat(3, 1fr)' }} gap={2} mt={6}>
                 <GridItem w='100%'>
                     <Card size={'sm'} h={'auto'} minH={48} variant={'outline'} bg={'transparent'} borderRadius={10} border={'2px'} borderColor={borderColor} >
@@ -433,6 +335,11 @@ const CryptyHome = () => {
                     </Card>
                 </GridItem>
             </Grid>
+
+
+
+
+
             
             <Box display={{ sm:'none' }} mt={2}>
                 <GeneralStats />

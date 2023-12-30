@@ -3466,7 +3466,6 @@ const dataPoints = jsonData[0].prices.map(([timestamp, price]) => ({
 
 
 const Chart = () => {
-    const { colorMode } = useColorMode();
     const labelFontColor = useColorModeValue('gray', '#dfe5ed');
 
     useEffect(() => {
@@ -3500,8 +3499,8 @@ const Chart = () => {
     }, []);
     
     return (
-        <Box p={{ md:3 }}>
-          <div id="chartContainer" style={{ height: "400px", width: "100%" }}></div>
+        <Box p={{ md:3 }} minW={'100%'}>
+          <div id="chartContainer" style={{ height: "400px", minWidth:"100%" }}></div>
         </Box>
     )
 }
