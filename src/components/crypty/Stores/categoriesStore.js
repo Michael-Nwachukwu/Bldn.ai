@@ -57,9 +57,7 @@ const useCategoriesStore = create(set => ({
       const response = await fetch('https://api.geckoterminal.com/api/v2/networks/trending_pools');
       if (!response.ok) throw new Error('Error fetching trending pools');
       const data = await response.json();
-  
-      // Log the data to the console for inspection
-      // console.log('Trending Pools Data:', data);
+      // console.log(data);
   
       // Assuming 'data' is an array
       const trendingPools = data.data.slice(0, 3).map(pool => ({
@@ -69,7 +67,7 @@ const useCategoriesStore = create(set => ({
       }));
   
       set({ trendingPools: trendingPools });
-      console.log(trendingPools);
+      // console.log(trendingPools);
   
     } catch (error) {
       console.error(error);

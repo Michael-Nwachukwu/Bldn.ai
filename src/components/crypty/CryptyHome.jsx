@@ -105,24 +105,239 @@ const CryptyHome = () => {
                     <SearchInput />
                 </Flex>
             </Box>
-
-
-
-
             
+
 
             <Categories />
 
+            {/* <Grid display={{ base:'none', sm:'grid' }} templateColumns={{ base:'repeat(1, 1fr)', md:'repeat(3, 1fr)' }} gap={2} mt={6}>
+                <GridItem w='100%'>
+                    <Card size={'sm'} h={'auto'} minH={48} variant={'outline'} bg={'transparent'} borderRadius={10} border={'2px'} borderColor={borderColor} >
+                        <CardBody>
+                            <VStack>
+                                <Flex alignItems={'center'} w={'100%'}>
+                                    <Text fontSize={18} fontWeight={'semibold'} color={colorMode === "light" ? 'gray.600' : 'white'}>🔥 Trending</Text>
+                                    <Spacer />
+                                    <Box w={4} h={4} borderRadius={'full'} bg={colorMode === "light" ? 'gray.700' : '#dfe5ed'}></Box>
+                                </Flex>
+                                <List w={'100%'} spacing={2.5} mt={2.5} color={color}>
+                                    <ListItem>
+                                        <Flex alignItems={'center'}>
+                                            <Flex alignItems={'center'} gap={4}>
+                                                <Image
+                                                    borderRadius='full'
+                                                    boxSize='24px'
+                                                    src="https://assets.coingecko.com/coins/images/24383/small/apecoin.jpg?1696523566"
+                                                    alt='Dan Abramov'
+                                                />
+                                                <Text fontWeight={'semibold'} fontSize={14}>
+                                                    APE
+                                                </Text>
+                                            </Flex>
+                                            <Spacer />
+                                            <Text>1.56568341</Text>
+                                        </Flex>
+                                    </ListItem>
+                                    <Divider />
+                                    <ListItem>
+                                        <Flex alignItems={'center'}>
+                                            <Flex alignItems={'center'} gap={4}>
+                                                <Image
+                                                    borderRadius='full'
+                                                    boxSize='24px'
+                                                    src="https://assets.coingecko.com/coins/images/28600/small/bonk.jpg?1696527587"
+                                                    alt='Dan Abramov'
+                                                />
+                                                <Text fontWeight={'semibold'} fontSize={14}>
+                                                    BONK
+                                                </Text>
+                                            </Flex>
+                                            <Spacer />
+                                            <Text>1.56568341</Text>
+                                        </Flex>
+                                    </ListItem>
+                                    <Divider />
+                                    <ListItem>
+                                        <Flex alignItems={'center'}>
+                                            <Flex alignItems={'center'} gap={4}>
+                                                <Image
+                                                    borderRadius='full'
+                                                    boxSize='24px'
+                                                    src="https://assets.coingecko.com/coins/images/24383/small/apecoin.jpg?1696523566"
+                                                    alt='Dan Abramov'
+                                                />
+                                                <Text fontWeight={'semibold'} fontSize={14}>
+                                                    COQ INU
+                                                </Text>
+                                            </Flex>
+                                            <Spacer />
+                                            <Text>1.56568341</Text>
+                                        </Flex>
+                                    </ListItem>
+                                </List>
+                            </VStack>
+                        </CardBody>
+                    </Card>
+                </GridItem>
+                
+                <GridItem w='100%'>
+                    <Card size={'sm'} h={'auto'} minH={48} variant={'outline'} bg={'transparent'} borderRadius={10} border={'2px'} borderColor={borderColor} >
+                        <CardBody>
+                            <VStack>
+                                <Flex alignItems={'center'} w={'100%'}>
+                                    <Text fontSize={18} fontWeight={'semibold'} color={colorMode === "light" ? 'gray.600' : 'white'}>🚀 Top Gainers</Text>
+                                    <Spacer />
+                                    <Box w={4} h={4} borderRadius={'full'} bg={colorMode === "light" ? 'gray.700' : '#dfe5ed'}></Box>
+                                </Flex>
+                                <List w={'100%'} spacing={2.5} mt={2.5} color={color}>
+                                    <ListItem>
+                                        <Flex alignItems={'center'}>
+                                            <Flex alignItems={'center'} gap={4}>
+                                                <Image
+                                                    borderRadius='full'
+                                                    boxSize='24px'
+                                                    src="https://assets.coingecko.com/coins/images/24383/small/apecoin.jpg?1696523566"
+                                                    alt='Dan Abramov'
+                                                />
+                                                <Text fontWeight={'semibold'} fontSize={14}>
+                                                    APE
+                                                </Text>
+                                            </Flex>
+                                            <Spacer />
+                                            <Text>1.56568341</Text>
+                                        </Flex>
+                                    </ListItem>
+                                    <Divider />
+                                    <ListItem>
+                                        <Flex alignItems={'center'}>
+                                            <Flex alignItems={'center'} gap={4}>
+                                                <Image
+                                                    borderRadius='full'
+                                                    boxSize='24px'
+                                                    src="https://assets.coingecko.com/coins/images/28600/small/bonk.jpg?1696527587"
+                                                    alt='Dan Abramov'
+                                                />
+                                                <Text fontWeight={'semibold'} fontSize={14}>
+                                                    BONK
+                                                </Text>
+                                            </Flex>
+                                            <Spacer />
+                                            <Text>1.56568341</Text>
+                                        </Flex>
+                                    </ListItem>
+                                    <Divider />
+                                    <ListItem>
+                                        <Flex alignItems={'center'}>
+                                            <Flex alignItems={'center'} gap={4}>
+                                                <Image
+                                                    borderRadius='full'
+                                                    boxSize='24px'
+                                                    src="https://assets.coingecko.com/coins/images/24383/small/apecoin.jpg?1696523566"
+                                                    alt='Dan Abramov'
+                                                />
+                                                <Text fontWeight={'semibold'} fontSize={14}>
+                                                    COQ INU
+                                                </Text>
+                                            </Flex>
+                                            <Spacer />
+                                            <Text>1.56568341</Text>
+                                        </Flex>
+                                    </ListItem>
+                                </List>
+                            </VStack>
+                        </CardBody>
+                    </Card>
+                </GridItem>
 
-
+                <GridItem w='100%'>
+                    <Card size={'sm'} h={'auto'} minH={48} variant={'outline'} bg={'transparent'} borderRadius={10} border={'2px'} borderColor={borderColor} >
+                        <CardBody>
+                            <VStack>
+                                <Flex alignItems={'center'} w={'100%'}>
+                                    <Text fontSize={18} fontWeight={'semibold'} color={colorMode === "light" ? 'gray.600' : 'white'}>🎱 Top Pools</Text>
+                                    <Spacer />
+                                    <Box w={4} h={4} borderRadius={'full'} bg={colorMode === "light" ? 'gray.700' : '#dfe5ed'}></Box>
+                                </Flex>
+                                <List w={'100%'} spacing={2.5} mt={2.5} color={color}>
+                                    <ListItem>
+                                        <Flex alignItems={'center'}>
+                                            <Flex alignItems={'center'} gap={4}>
+                                                <Image
+                                                    borderRadius='full'
+                                                    boxSize='24px'
+                                                    src="https://assets.coingecko.com/coins/images/24383/small/apecoin.jpg?1696523566"
+                                                    alt='Dan Abramov'
+                                                />
+                                                <Text fontWeight={'semibold'} fontSize={14}>
+                                                    APE
+                                                </Text>
+                                            </Flex>
+                                            <Spacer />
+                                            <Text>1.56568341</Text>
+                                            <Tag ml={2} py={0.5} colorScheme='brand' opacity={useColorModeValue('70%', '100%')}>
+                                                <TagLabel>
+                                                    Ftm
+                                                </TagLabel>
+                                            </Tag>
+                                        </Flex>
+                                    </ListItem>
+                                    <Divider />
+                                    <ListItem>
+                                        <Flex alignItems={'center'}>
+                                            <Flex alignItems={'center'} gap={4}>
+                                                <Image
+                                                    borderRadius='full'
+                                                    boxSize='24px'
+                                                    src="https://assets.coingecko.com/coins/images/28600/small/bonk.jpg?1696527587"
+                                                    alt='Dan Abramov'
+                                                />
+                                                <Text fontWeight={'semibold'} fontSize={14}>
+                                                    BONK
+                                                </Text>
+                                            </Flex>
+                                            <Spacer />
+                                            <Text>1.56568341</Text>
+                                            <Tag ml={2} py={0.5} colorScheme='brand' opacity={useColorModeValue('70%', '100%')}>
+                                                <TagLabel>
+                                                    Eth
+                                                </TagLabel>
+                                            </Tag>
+                                        </Flex>
+                                    </ListItem>
+                                    <Divider />
+                                    <ListItem>
+                                        <Flex alignItems={'center'}>
+                                            <Flex alignItems={'center'} gap={4}>
+                                                <Image
+                                                    borderRadius='full'
+                                                    boxSize='24px'
+                                                    src="https://assets.coingecko.com/coins/images/24383/small/apecoin.jpg?1696523566"
+                                                    alt='Dan Abramov'
+                                                />
+                                                <Text fontWeight={'semibold'} fontSize={14}>
+                                                    COQ INU
+                                                </Text>
+                                            </Flex>
+                                            <Spacer />
+                                            <Text>1.56568341</Text>
+                                            <Tag ml={2} py={0.5} colorScheme='brand' opacity={useColorModeValue('70%', '100%')}>
+                                                <TagLabel>
+                                                    BNB
+                                                </TagLabel>
+                                            </Tag>
+                                        </Flex>
+                                    </ListItem>
+                                </List>
+                            </VStack>
+                        </CardBody>
+                    </Card>
+                </GridItem>
+            </Grid> */}
 
 
             
-            <Box display={{ sm:'none' }} mt={2}>
-                <GeneralStats />
-            </Box>
-
             <Grid templateColumns={{ lg:'repeat(5, 1fr)' }} gap={2} my={6}>
+                
                 <GridItem colSpan={{ lg:2 }}>
                     <Card bg={ useColorModeValue('brand.700', '#191e22')} borderRadius={15}>
                         <CardBody>
@@ -251,6 +466,7 @@ const CryptyHome = () => {
                         </CardBody>
                     </Card>
                 </GridItem>
+
                 <GridItem colSpan={{ lg:3 }} w={'100%'}>
 
                     <Chart />
@@ -265,6 +481,7 @@ const CryptyHome = () => {
                         </Text>
                     </Box>
                 </GridItem>
+
             </Grid>
 
             {/* <Floating /> */}

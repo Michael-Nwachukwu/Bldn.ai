@@ -27,15 +27,15 @@ const BigCard = ({heading}) => {
 
     return (
         <>
-            <Card size={'sm'} h={'auto'} minH={48} variant={'outline'} bg={'transparent'} borderRadius={10} border={'2px'} borderColor={borderColor} >
+            <Card size={'sm'} h={'auto'} minH={48} pb={{ base:5, sm:0 }} variant={'outline'} bg={'transparent'} borderRadius={10} border={'2px'} borderColor={borderColor} >
                 <CardBody>
                     <VStack>
                         <Flex alignItems={'center'} w={'100%'}>
-                            <Text fontSize={18} fontWeight={'semibold'} color={colorMode === "light" ? 'gray.600' : 'white'}>
+                            <Text fontSize={18} fontWeight={'semibold'} color={useColorModeValue('gray.600', 'white')}>
                                 {heading}
                             </Text>
                             <Spacer />
-                            <Box w={4} h={4} borderRadius={'full'} bg={colorMode === "light" ? 'gray.700' : '#dfe5ed'}></Box>
+                            <Box w={4} h={4} borderRadius={'full'} bg={useColorModeValue('gray.700', '#dfe5ed')}></Box>
                         </Flex>
                         <List w={'100%'} spacing={2.5} mt={2.5} color={color}>
                             {data.map((item, index) => (
