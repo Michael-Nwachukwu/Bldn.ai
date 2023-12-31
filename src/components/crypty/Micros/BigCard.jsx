@@ -4,21 +4,21 @@ import useCategoriesStore from '../Stores/categoriesStore';
 
 
 const BigCard = ({heading}) => {
-    const { trending, topGainers, trendingPools } = useCategoriesStore();
+    const { trending, recentlyUpdated, trendingPools } = useCategoriesStore();
 
     const borderColor = useColorModeValue('#e3ccbf', '#212d3b');
     const color = useColorModeValue('brand.600', '#dfe5ed');
     const colorMode = useColorMode();
 
-    let data
+    let data;
     switch (heading) {
         case '🔥 Trending':
             data = trending
             break
-        case '🚀 Top Gainers':
-            data = topGainers
+        case '🚀 Updated':
+            data = recentlyUpdated
             break
-        case '🚀 Trending pools':
+        case '🎱 Trending pools':
             data = trendingPools
             break
         default:
@@ -43,19 +43,7 @@ const BigCard = ({heading}) => {
                                     <ListItem>
                                         <Flex alignItems={'center'}>
                                             <Flex alignItems={'center'} gap={4}>
-                                                <Image
-                                                    borderRadius='full'
-                                                    boxSize='24px'
-                                                    src={item.image}
-                                                    alt={item.symbol}
-                                                />
-                                                <Text fontWeight={'semibold'} fontSize={14}>
-                                                    {item.symbol}
-                                                </Text>
-                                            </Flex>
-                                            <Spacer />
-                                            <Text>{item.price || item.volume}</Text>
-                                                {item.network && 
+                                                { item.network ? 
                                                     <Tag 
                                                         ml={2} 
                                                         py={0.5} 
@@ -66,7 +54,26 @@ const BigCard = ({heading}) => {
                                                             {item.network}
                                                         </TagLabel>
                                                     </Tag>
+                                                    : null
                                                 }
+
+                                                { item.image ?
+                                                    <Image
+                                                        borderRadius='full'
+                                                        boxSize='24px'
+                                                        src={item.image}
+                                                        alt={item.symbol}
+                                                    />
+                                                    : null
+                                                }
+                                                
+
+                                                <Text fontWeight={'semibold'} fontSize={14}>
+                                                    {item.symbol}
+                                                </Text>
+                                            </Flex>
+                                            <Spacer />
+                                            <Text>{item.price ? item.price : item.volume}</Text>
                                         </Flex>
                                     </ListItem>
                                     {index < data.length - 1 && <Divider />}

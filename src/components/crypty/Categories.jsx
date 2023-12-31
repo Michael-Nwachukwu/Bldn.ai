@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import BigCard from './Micros/BigCard';
 import { Grid, GridItem } from '@chakra-ui/react';
 import useCategoriesStore from './Stores/categoriesStore';
-import { useEffect } from 'react';
+import useBaseUrl from './Stores/baseUrlStore';
 
 
 const Categories = () => {
-    const { fetchTrending, fetchTopGainers, fetchTrendingPools } = useCategoriesStore();
-    const categories = ['🔥 Trending', '🚀 Top Gainers', '🎱 Trending pools'];
+    const baseUrl = useBaseUrl(state => state.baseUrl);
+    const { fetchTrending, fetchRecentlyUpdated, fetchTrendingPools } = useCategoriesStore();
+    const categories = ['🔥 Trending', '🚀 Updated', '🎱 Trending pools'];
     
     useEffect(() => {
-        fetchTrending();
-        fetchTopGainers();
+        fetchTrending(baseUrl);
+        fetchRecentlyUpdated();
         fetchTrendingPools();
     }, [])
 

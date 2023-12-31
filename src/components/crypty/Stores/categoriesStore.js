@@ -1,21 +1,19 @@
 import { create } from "zustand";
-import useBaseUrl from './baseUrlStore';  // import useBaseUrl from baseUrlStore.js
+// import useBaseUrl from './baseUrlStore';  // import useBaseUrl from baseUrlStore.js
 
 const useCategoriesStore = create(set => ({
   trending: [],
-  topGainers: [],
+  recentlyUpdated: [],
   trendingPools: [],
-  fetchTrending: async () => {
+  fetchTrending: async (baseUrl) => {
     try {
-      const baseUrl = useBaseUrl(state => state.baseUrl);
-
       // Fetch the trnding coins
       const response = await fetch(`${baseUrl}/search/trending`);
       if (!response.ok) throw new Error('Error fetching trending coins');
       const data = await response.json();
 
       // Slice the first 3 items in response and map through to extract only the symbol, image, and price from the first 3 trending
-      const trending = data.slice(0, 3).map(coin => ({
+      const trending = data.coins.slice(0, 3).map(coin => ({
         symbol: coin.item.symbol,
         image: coin.item.thumb,
         price: coin.item.data.price,
@@ -23,6 +21,7 @@ const useCategoriesStore = create(set => ({
       }))
 
       set({ trending: trending });
+      // console.log(trending);
 
     } catch (error) {
       console.error(error);
@@ -30,23 +29,21 @@ const useCategoriesStore = create(set => ({
     }
   },
 
-  fetchTopGainers: async () => {
+  fetchRecentlyUpdated: async () => {
     try {
-      const baseUrl = useBaseUrl(state => state.baseUrl);
-
       // Fetch the 3 top gainers from coingecko API
-      const response = await fetch(`${baseUrl}/coins/markets?vs_currency=usd&order=price_change_percentage_24h_desc&per_page=3&page=1&sparkline=false`);
+      const response = await fetch('https://api.geckoterminal.com/api/v2/tokens/info_recently_updated');
       if (!response.ok) throw new Error('Error fetching top gainers');
       const data = await response.json();
+      // console.log('Top gainers Data:', data);
 
       // Extract only the symbol, image, and price from the response
-      const topGainers = data.map(coin => ({
-        symbol: coin.symbol,
-        image: coin.image,
-        price: coin.current_price,
-        priceChangePercentage24h: coin.price_change_percentage_24h,
+      const recentlyUpdated = data.data.slice(0, 3).map(coin => ({
+        symbol: coin.attributes.symbol,
+        image: coin.attributes.image_url,
+        price: coin.attributes.gt_score,
       }));
-      set({ topGainers: topGainers });
+      set({ recentlyUpdated: recentlyUpdated });
 
     } catch (error) {
       console.error(error);
@@ -60,21 +57,27 @@ const useCategoriesStore = create(set => ({
       const response = await fetch('https://api.geckoterminal.com/api/v2/networks/trending_pools');
       if (!response.ok) throw new Error('Error fetching trending pools');
       const data = await response.json();
-      
-      const trendingPools = data.slice(0, 3).map(pool => ({
+  
+      // Log the data to the console for inspection
+      // console.log('Trending Pools Data:', data);
+  
+      // Assuming 'data' is an array
+      const trendingPools = data.data.slice(0, 3).map(pool => ({
         symbol: pool.attributes.name,
-        volume: pool.attributes.volume_usd.h24,
+        volume: Math.round(pool.attributes.volume_usd.h24 * 100) / 100,
         network: pool.relationships.network.data.id,
-        image: pool.attributes.image_url,
-        
       }));
+  
       set({ trendingPools: trendingPools });
-
+      console.log(trendingPools);
+  
     } catch (error) {
       console.error(error);
       alert(error);
     }
   },
+  
+
 }))
 
 export default useCategoriesStore;
