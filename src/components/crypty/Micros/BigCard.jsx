@@ -45,7 +45,6 @@ const BigCard = ({heading}) => {
                                             <Flex alignItems={'center'} gap={4}>
                                                 { item.network ? 
                                                     <Tag 
-                                                        ml={2} 
                                                         py={0.5} 
                                                         colorScheme='brand' 
                                                         opacity={useColorModeValue('70%', '100%')}

@@ -28,7 +28,7 @@ const SearchInput = () => {
                     id="searchInput"
                     focusBorderColor={ useColorModeValue('brand.800', '#dfe5ed') }
                     border={useColorModeValue('1px', '')}
-                    bg={colorMode == 'light' ? 'transparent' : "#1b232d"}
+                    bg={useColorModeValue('transparent', "#1b232d")}
                     py={5}
                     placeholder='Search'
                     color={useColorModeValue('brand.800', 'white')}
@@ -38,7 +38,7 @@ const SearchInput = () => {
                     required
                 />
                 <InputRightElement width='4.5rem'>
-                    <Flex justifyContent={'center'} w={6} bg={colorMode == 'light' ? 'brand.700' : "#384a61"} opacity={'70%'} color={"white"} borderRadius={5} fontWeight={'bold'}
+                    <Flex justifyContent={'center'} w={6} bg={useColorModeValue('brand.700', "#384a61")} opacity={'70%'} color={"white"} borderRadius={5} fontWeight={'bold'}
                         _hover={{ bg:'' }} 
                     >
                         /
