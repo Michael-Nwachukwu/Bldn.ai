@@ -2,9 +2,17 @@ import React from 'react'
 import { useColorMode, Input, InputGroup, InputRightElement, Box, Flex, useColorModeValue } from '@chakra-ui/react'
 import { Search } from '../../Icons';
 import { useEffect } from 'react';
+import useTokenDetailsStore from '../Stores/tokenDetailsStore';
 
 const SearchInput = () => {
+    const fetchDetails = useTokenDetailsStore(state => state.fetchDetails);
     const colorMode = useColorMode();
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const input = event.target.elements.searchInput.value;
+        fetchDetails(input);
+    };
     
     useEffect(() => {
         const handleKeyPress = (event) => {
@@ -35,6 +43,7 @@ const SearchInput = () => {
                     name={"password"}
                     _hover={{ border:'' }}
                     _placeholder={{ color: useColorModeValue('brand.800', '#dfe5ed') }}
+                    onSubmit={handleSubmit}
                     required
                 />
                 <InputRightElement width='4.5rem'>

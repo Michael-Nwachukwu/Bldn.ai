@@ -2,9 +2,12 @@ import React from 'react'
 import { Box, Flex, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, Tag, TagRightIcon, useColorMode } from '@chakra-ui/react'
 import { starSvg } from '../../Icons'
 import Watchlist from './Watchlist';
+import useTokenDetailsStore from '../Stores/tokenDetailsStore';
 
 const PriceStats = () => {
+    const {image, name, symbol, price, priceChangePercentageDaily, } = useTokenDetailsStore();
     const colorMode = useColorMode();
+    
     return (
         <>
             {/* PriceStat, statArrow and percentage, and Add to watchlist starSvg button that shows only on small screens*/}
@@ -16,17 +19,17 @@ const PriceStats = () => {
                         <StatLabel>
                             <Flex align={'center'} gap={1.5} fontWeight={'semibold'}>
                                 <img src="https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1696501400" alt="" />
-                                Bitcoin BTC
+                               {name} {symbol}
                             </Flex>
                         </StatLabel>
                         <Flex align={'center'} gap={2}>
                             <StatNumber 
                                 fontSize={{ base:27, lg:50 }}
                                 fontFamily={'syncopate'}
-                            >$42,222.62</StatNumber>
+                            >{price}</StatNumber>
                             <StatHelpText fontSize={{ base:14, sm:18 }}>
                                 <StatArrow color={'red'} type='decrease' />
-                                23.36%
+                                {priceChangePercentageDaily}
                             </StatHelpText>
                         </Flex>
                     </Stat>

@@ -1,5 +1,5 @@
 import { Box, Flex, Text, Spacer, Card, CardBody, Grid, GridItem,  useColorMode, useColorModeValue, List, ListItem , Divider, Stat, StatHelpText, StatNumber ,StatArrow, Heading, VStack, Tag, TagLabel, } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Chart from './Chart'
 import PriceStats from './Micros/PriceStats'
 import GlobalMarket from './GlobalMarket'
@@ -10,14 +10,20 @@ import Categories from './Categories'
 import TokenDetailsCard from './TokenDetailsCard'
 import TokenDescription from './TokenDescription'
 import LineGlobalStats from './LineGlobalStats'
+import useTokenDetailsStore from './Stores/tokenDetailsStore'
 
 const CryptyHome = () => {
-  const { colorMode } = useColorMode()
-  const borderColor = useColorModeValue('#e3ccbf', '#212d3b')
-  const color = useColorModeValue('gray', '#dfe5ed')
-  const topCardColor= useColorModeValue('brand.600', '#dfe5ed');
-  const smallStatsValueColor= useColorModeValue('red', '#f8c6a9');
-  const statCardColor = useColorModeValue('#F7F1ED', '#888b8d');
+    const fetchDetails = useTokenDetailsStore(state => state.fetchDetails);
+    const { colorMode } = useColorMode()
+    const borderColor = useColorModeValue('#e3ccbf', '#212d3b')
+    const color = useColorModeValue('gray', '#dfe5ed')
+    const topCardColor= useColorModeValue('brand.600', '#dfe5ed');
+    const smallStatsValueColor= useColorModeValue('red', '#f8c6a9');
+    const statCardColor = useColorModeValue('#F7F1ED', '#888b8d');
+
+    useEffect(() => {
+        // fetchDetails('0x4d224452801aced8b2f0aebe155379bb5d594381');
+    }, []);
 
     return (
         <>

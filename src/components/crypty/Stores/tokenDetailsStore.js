@@ -1,63 +1,75 @@
 import { create } from "zustand";
 
-const useGlobalStore = create(set => ({
-    cryptos: '',
-    markets: '',
-    globalMarketCap: '',
-    globalVolume: '',
-    btcDominance: '',
-    ethDominance: '',
-    change: '',
-    gwei:[],
+const getAssetPlatformId = async (contractAddress) => {
+    const response = await fetch('https://api.coingecko.com/api/v3/coins/list');
+    const data = await response.json();
+    const coin = data.find(coin => coin.contract_address === contractAddress);
+    return coin ? coin.id : null;
+}
+
+const useTokenDetailsStore = create(set => ({
+    price: '',
+    name: '',
+    symbol: '',
+    priceChangePercentageDaily: '',
+    image: '',
+    marketCap: '',
+    tradingVolume: '',
+    fdv: '',
+    dailyLowHigh: '',
+    weeklyLowHigh: '',
+    marketCapRank: '',
+    marketCapDominance: '',
+    ath: '',
+    athChangePercentage: '',
+    athDate: '',
+    atl: '',
+    atlChangePercentage: '',
+    atlDate: '',
+    tokenChart: [],
+    description: '',
     
-    fetchGlobal: async () => {
+    fetchDetails: async (input) => {
+        let url;
+        const isContractAddress = /^0x[a-fA-F0-9]{40}$/.test(input);
+
+        if (isContractAddress) {
+            const assetPlatformId = await getAssetPlatformId(input);
+            url = `https://api.coingecko.com/api/v3/coins/${assetPlatformId}/contract/${input}`;
+        } else {
+            url = `https://api.coingecko.com/api/v3/coins/${input}`;
+        }
+
         try {
-            // Fetch the trnding coins
-            const response = await fetch('https://api.coingecko.com/api/v3/global');
+            // const response = await axios.get(url);
+            const response = await fetch(url);
             if (!response.ok) throw new Error('Error fetching trending coins');
             const data = await response.json();
-            // console.log(data);
+            console.log(data);
+
+            const price = data.market_data.current_price.usd;
+            const name = data.name;
+            const symbol = data.symbol;
+            const priceChangePercentageDaily = data.market_data.price_change_percentage_24h;
+            const image = data.image.thumb;
             
-            const cryptos = data.data.active_cryptocurrencies;
-            const globalMarketCap = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(data.data.total_market_cap.usd);
-            const globalVolume = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(data.data.total_volume.usd);
-            const btcDominance = `${Math.ceil(data.data.market_cap_percentage.btc * 10) / 10}%`;
-            const ethDominance = `${Math.ceil(data.data.market_cap_percentage.eth * 10) / 10}%`;
-            const marketCapChangePercentage = data.data.market_cap_change_percentage_24h_usd;
-            const markets = data.data.markets;
             
+
+
+
             set({
-                cryptos: cryptos,
-                globalMarketCap: globalMarketCap,
-                globalVolume: globalVolume,
-                btcDominance: btcDominance,
-                ethDominance: ethDominance,
-                change: marketCapChangePercentage,
-                markets: markets
+                price: price,
+                name: name,
+                symbol: symbol,
+                priceChangePercentageDaily: priceChangePercentageDaily,
+                image: image,
             });
-    
         } catch (error) {
-            console.error(error);
+            // set({ error: 'Coin not found' });
             alert(error);
         }
     },
 
-    fetchGwei: async () => {
-        try {
-            const response = await fetch('https://beaconcha.in/api/v1/execution/gasnow');
-            const data = await response.json();
-        
-            // Gas prices are provided in Wei, convert to Gwei
-            const { rapid, fast, standard, slow } = data.data;
-            const weiToGwei = 1e9;
-        
-            set({ gwei: [Math.ceil(rapid / weiToGwei), Math.ceil(fast / weiToGwei), Math.ceil(standard / weiToGwei), Math.ceil(slow / weiToGwei)] });
-            
-        } catch (error) {
-            console.error('Error fetching gas prices: ', error);
-        }
-    }
-  
 }));
 
-export default useGlobalStore;
+export default useTokenDetailsStore;
