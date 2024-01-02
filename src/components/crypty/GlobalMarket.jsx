@@ -6,12 +6,8 @@ import useGlobalStore from './Stores/globalMarketStore'
 
 const GlobalMarket = () => {
   const baseUrl = useBaseUrl(state => state.baseUrl);
-  const { fetchGlobal, globalMarketCap, globalVolume } = useGlobalStore();
+  const { globalMarketCap, globalVolume } = useGlobalStore();
     
-  useEffect(() => {
-    fetchGlobal();
-  }, [])
-
   return (
     <>
         <Grid templateColumns={{ base:'1fr', lg:"1fr 1fr" }} gap={2}>

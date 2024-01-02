@@ -7,6 +7,13 @@ import useTokenDetailsStore from '../Stores/tokenDetailsStore';
 const PriceStats = () => {
     const {image, name, symbol, price, priceChangePercentageDaily, } = useTokenDetailsStore();
     const colorMode = useColorMode();
+    const type = () => {
+        if( priceChangePercentageDaily.includes('-') ){
+            return 'negative'
+        }else{
+            return 'poisitive'
+        }
+    }
     
     return (
         <>
@@ -18,7 +25,7 @@ const PriceStats = () => {
                     <Stat>
                         <StatLabel>
                             <Flex align={'center'} gap={1.5} fontWeight={'semibold'}>
-                                <img src="https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1696501400" alt="" />
+                                <img src={image} alt="" />
                                {name} {symbol}
                             </Flex>
                         </StatLabel>
@@ -28,7 +35,7 @@ const PriceStats = () => {
                                 fontFamily={'syncopate'}
                             >{price}</StatNumber>
                             <StatHelpText fontSize={{ base:14, sm:18 }}>
-                                <StatArrow color={'red'} type='decrease' />
+                                <StatArrow color={type == 'negative' ? 'red' : 'green'} type={type == 'negative' ? 'decrease' : 'increase'} />
                                 {priceChangePercentageDaily}
                             </StatHelpText>
                         </Flex>

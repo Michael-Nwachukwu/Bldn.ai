@@ -47,7 +47,7 @@ const useTokenDetailsStore = create(set => ({
             const data = await response.json();
             console.log(data);
 
-            const price = data.market_data.current_price.usd;
+            const price = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(data.market_data.current_price.usd);
             const name = data.name;
             const symbol = data.symbol;
             const priceChangePercentageDaily = data.market_data.price_change_percentage_24h;

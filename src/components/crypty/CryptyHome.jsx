@@ -11,9 +11,11 @@ import TokenDetailsCard from './TokenDetailsCard'
 import TokenDescription from './TokenDescription'
 import LineGlobalStats from './LineGlobalStats'
 import useTokenDetailsStore from './Stores/tokenDetailsStore'
+import useGlobalStore from './Stores/globalMarketStore'
 
 const CryptyHome = () => {
     const fetchDetails = useTokenDetailsStore(state => state.fetchDetails);
+    const fetchGlobal = useGlobalStore(state => state.fetchGlobal);
     const { colorMode } = useColorMode()
     const borderColor = useColorModeValue('#e3ccbf', '#212d3b')
     const color = useColorModeValue('gray', '#dfe5ed')
@@ -22,37 +24,14 @@ const CryptyHome = () => {
     const statCardColor = useColorModeValue('#F7F1ED', '#888b8d');
 
     useEffect(() => {
-        // fetchDetails('0x4d224452801aced8b2f0aebe155379bb5d594381');
+        fetchDetails('solana');
+        fetchGlobal();
     }, []);
 
     return (
         <>
             <Box overflowX={'hidden'}>
 
-                {/* smallDetails for smalla dn medium screens */}
-                {/* <Flex alignItems={'center'} 
-                    display={{ lg:'none' }} 
-                    whiteSpace="nowrap"
-                    overflowX="auto"   
-                    p={1}
-                    bg={useColorModeValue('rgba(248, 198, 169, 0.25)', '#1b232d')}
-                    borderRadius={'15px 0 0 15px'}
-                    // mr={-4}
-                    mb={1}
-                >
-                    <SmallDetails label={'Cryptos:'} value={'2M+'} />
-                    
-                    <SmallDetails label={'Exchanges:'} value={'687'} />
-
-                    <SmallDetails label={'Market Cap:'} value={'$1,655,669,299,690'} />
-                    
-                    <SmallDetails label={'24H Volume:'} value={'$1,655,669,299,690'} />
-
-                    <SmallDetails label={'Dominance:'} value={'BTC: 51.4% ETH: 16.8%'} />
-
-                    <SmallDetails label={'ETH GAS:'} value={'52 GWEI'} />
-                   
-                </Flex> */}
                 <Box display={{ sm:'none' }}>
                     <LineGlobalStats />
                 </Box>
@@ -69,23 +48,6 @@ const CryptyHome = () => {
                     <Flex direction={'column'} alignItems={{ lg:'end' }} gap={2} >
 
                         {/* Visible only on lg screens. */}
-                        {/* <Flex alignItems={'center'} display={{ base:'none', lg:'flex' }}>
-                            
-                            <SmallDetails label={'Cryptos:'} value={'2M+'} />
-                            
-                            <SmallDetails label={'Exchanges:'} value={'687'} />
-
-                            <SmallDetails label={'Dominance:'} value={'BTC: 51.4% ETH: 16.8%'} />
-                            
-                            <Flex align={'center'} fontSize={'xs'} ml={2} gap={1}>
-                                <Flex  align={'center'} gap={1}>
-                                    <Gas />
-                                    ETH GAS: 
-                                </Flex>
-                                <span style={{ color:smallStatsValueColor }}>52 GWEI </span>
-                            </Flex>
-                        </Flex> */}
-
                         <Box display={{ base:'none', lg:'block' }}>
                             <LineGlobalStats />
                         </Box>
@@ -118,7 +80,7 @@ const CryptyHome = () => {
             
 
 
-            {/* <Categories /> */}
+            <Categories />
 
             {/* <Grid display={{ base:'none', sm:'grid' }} templateColumns={{ base:'repeat(1, 1fr)', md:'repeat(3, 1fr)' }} gap={2} mt={6}>
                 <GridItem w='100%'>
