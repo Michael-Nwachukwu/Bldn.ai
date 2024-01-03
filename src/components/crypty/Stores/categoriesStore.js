@@ -1,5 +1,4 @@
 import { create } from "zustand";
-// import useBaseUrl from './baseUrlStore';  // import useBaseUrl from baseUrlStore.js
 
 const useCategoriesStore = create(set => ({
   trending: [],

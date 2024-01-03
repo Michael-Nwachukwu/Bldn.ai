@@ -29,8 +29,10 @@ const useTokenDetailsStore = create(set => ({
     atl: '',
     atlChangePercentage: '',
     atlDate: '',
-    tokenChart: [],
+    totalSupply: '',
+    circulatingSupply: '',
     description: '',
+    tokenChart: [],
     
     fetchDetails: async (input) => {
         let url;
@@ -72,6 +74,8 @@ const useTokenDetailsStore = create(set => ({
             const atl = data.market_data.atl.usd;
             const atlChangePercentage = data.market_data.atl_change_percentage.usd;
             const atlDate = data.market_data.atl_date.usd;
+            const totalSupply = data.market_data.total_supply;
+            const circulatingSupply = data.market_data.circulating_supply;
             const description = data.description.en;
             const tokenChartData = tokenData.prices;
 
@@ -94,7 +98,9 @@ const useTokenDetailsStore = create(set => ({
                 atlChangePercentage: atlChangePercentage,
                 atlDate: atlDate,
                 description: description,
-
+                totalSupply: totalSupply,
+                circulatingSupply: circulatingSupply,
+                
                 tokenChart: tokenChartData
             });
             

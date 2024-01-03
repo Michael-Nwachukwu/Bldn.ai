@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useColorMode, Input, InputGroup, InputRightElement, Box, Flex, useColorModeValue, FormControl, FormHelperText, FormErrorMessage } from '@chakra-ui/react'
 import { Search } from '../../Icons';
 import { useEffect } from 'react';
@@ -7,14 +7,19 @@ import useTokenDetailsStore from '../Stores/tokenDetailsStore';
 const SearchInput = () => {
     const fetchDetails = useTokenDetailsStore(state => state.fetchDetails);
     const colorMode = useColorMode();
+    const [input, setInput] = useState();
+
+    const handleUpdateInput = (e) => {setInput(e.target.value)};
+
 
     // let isError;
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const input = event.target.elements.searchInput.value;
+        // const input = event.target.elements.searchInput.value;
         // isError = inputValue === ''
         fetchDetails(input);
+        setInput('');
     };
     
     useEffect(() => {
@@ -44,6 +49,7 @@ const SearchInput = () => {
                         py={5}
                         placeholder='Search'
                         color={useColorModeValue('brand.800', 'white')}
+                        onChange={handleUpdateInput}
                         name={"password"}
                         _hover={{ border:'' }}
                         _placeholder={{ color: useColorModeValue('brand.800', '#dfe5ed') }}
@@ -58,12 +64,15 @@ const SearchInput = () => {
                     </InputRightElement>
                 </InputGroup>
             </form>
+
             <Box w={'70%'} ml={'auto'} pt={3} display={{ sm:'none' }}>
-                <div className="form-control">
-                    <input className="input-search input-alt" placeholder='Search' required="" type="text" style={{ textAlign: 'right' }} />
+                <form onSubmit={handleSubmit} style={{ width:'100%' }} className="form-control">
+                    <input className="input-search input-alt" onChange={handleUpdateInput} placeholder='Search' required="" type="text" style={{ textAlign: 'right' }} />
                     <span className="input-border input-border-alt"></span>
-                    <Search fill={'#464a4d'} />
-                </div>
+                    <a href="#" type='submit'>
+                        <Search fill={'#464a4d'} />
+                    </a>
+                </form>
             </Box>
             
         </>
