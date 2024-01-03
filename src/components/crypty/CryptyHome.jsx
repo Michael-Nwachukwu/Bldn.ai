@@ -24,7 +24,7 @@ const CryptyHome = () => {
     const statCardColor = useColorModeValue('#F7F1ED', '#888b8d');
 
     useEffect(() => {
-        fetchDetails('solana');
+        fetchDetails('ethereum');
         fetchGlobal();
     }, []);
 

@@ -45,6 +45,8 @@ const useCategoriesStore = create(set => ({
       }));
       set({ recentlyUpdated: recentlyUpdated });
 
+      console.log(recentlyUpdated.price);
+
     } catch (error) {
       console.error(error);
       alert(error);
