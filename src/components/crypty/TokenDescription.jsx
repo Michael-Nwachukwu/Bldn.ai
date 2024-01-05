@@ -10,7 +10,7 @@ const TokenDescription = () => {
             <Heading py={3}>
                 About Coin.
             </Heading>
-            <Text h={60} overflow={'scroll'} color={useColorModeValue('','#9fa0a2')}>
+            <Text h={{ base:'auto', sm:60 }} overflow={'scroll'} color={useColorModeValue('','#9fa0a2')}>
                 {description}
             </Text>
         </Box>

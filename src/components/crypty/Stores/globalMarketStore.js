@@ -10,10 +10,10 @@ const useGlobalStore = create(set => ({
     change: '',
     gwei:[],
     
-    fetchGlobal: async () => {
+    fetchGlobal: async (baseUrl) => {
         try {
             // Fetch the trnding coins
-            const response = await fetch('https://api.coingecko.com/api/v3/global');
+            const response = await fetch(`${baseUrl}/global?x_cg_demo_api_key=CG-xEDfyZh1gVhZ5LFCEuzwUW6M`);
             if (!response.ok) throw new Error('Error fetching trending coins');
             const data = await response.json();
             // console.log(data);

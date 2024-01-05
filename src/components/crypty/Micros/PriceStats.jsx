@@ -1,19 +1,13 @@
 import React from 'react'
 import { Box, Flex, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, Tag, TagRightIcon, useColorMode } from '@chakra-ui/react'
-import { starSvg } from '../../Icons'
 import Watchlist from './Watchlist';
 import useTokenDetailsStore from '../Stores/tokenDetailsStore';
 
 const PriceStats = () => {
     const {image, name, symbol, price, priceChangePercentageDaily, } = useTokenDetailsStore();
     const colorMode = useColorMode();
-    const type = () => {
-        if( priceChangePercentageDaily.includes('-') ){
-            return 'negative'
-        }else{
-            return 'poisitive'
-        }
-    }
+    
+    const negativeChange = priceChangePercentageDaily < 0;
     
     return (
         <>
@@ -35,7 +29,7 @@ const PriceStats = () => {
                                 fontFamily={'syncopate'}
                             >{price}</StatNumber>
                             <StatHelpText fontSize={{ base:14, sm:18 }}>
-                                <StatArrow color={type == 'negative' ? 'red' : 'green'} type={type == 'negative' ? 'decrease' : 'increase'} />
+                                <StatArrow color={negativeChange ? 'red' : 'green'} type={negativeChange ? 'decrease' : 'increase'} />
                                 {priceChangePercentageDaily}
                             </StatHelpText>
                         </Flex>

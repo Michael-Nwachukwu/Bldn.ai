@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 const getAssetPlatformId = async (contractAddress) => {
-    const response = await fetch('https://api.coingecko.com/api/v3/coins/list');
+    const response = await fetch('https://api.coingecko.com/api/v3/coins/list?x_cg_demo_api_key=CG-xEDfyZh1gVhZ5LFCEuzwUW6M');
     const data = await response.json();
     const coin = data.find(coin => coin.contract_address === contractAddress);
     return coin ? coin.id : null;
@@ -34,15 +34,15 @@ const useTokenDetailsStore = create(set => ({
     description: '',
     tokenChart: [],
     
-    fetchDetails: async (input) => {
+    fetchDetails: async (input, baseUrl) => {
         let url;
         const isContractAddress = /^0x[a-fA-F0-9]{40}$/.test(input);
 
         if (isContractAddress) {
             const assetPlatformId = await getAssetPlatformId(input);
-            url = `https://api.coingecko.com/api/v3/coins/${assetPlatformId}/contract/${input}`;
+            url = `${baseUrl}/coins/${assetPlatformId}/contract/${input}?x_cg_demo_api_key=CG-xEDfyZh1gVhZ5LFCEuzwUW6M`;
         } else {
-            url = `https://api.coingecko.com/api/v3/coins/${input}`;
+            url = `${baseUrl}/coins/${input}?x_cg_demo_api_key=CG-xEDfyZh1gVhZ5LFCEuzwUW6M`;
         }
 
         try {
@@ -52,10 +52,14 @@ const useTokenDetailsStore = create(set => ({
             const data = await response.json();
             console.log(data);
 
-            const tokenChartResponse = await fetch(url + '/market_chart/?vs_currency=usd&days=7');
+            // Split the URL at the "?" character, insert the new string, and join them back together
+            const urlParts = url.split('?');
+            const chartUrl = `${urlParts[0]}/market_chart/?vs_currency=usd&days=7?${urlParts[1]}`;
+
+            const tokenChartResponse = await fetch(chartUrl);
             if (!tokenChartResponse.ok) throw new Error('Error fetching another API');
             const tokenData = await tokenChartResponse.json();
-            console.log(tokenData.prices);
+            // console.log(tokenData.prices);
 
             const price = formatUsdCurrency(data.market_data.current_price.usd);
             const name = data.name;

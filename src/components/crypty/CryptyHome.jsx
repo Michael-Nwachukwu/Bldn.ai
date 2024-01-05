@@ -12,11 +12,15 @@ import TokenDescription from './TokenDescription'
 import LineGlobalStats from './LineGlobalStats'
 import useTokenDetailsStore from './Stores/tokenDetailsStore'
 import useGlobalStore from './Stores/globalMarketStore'
+import useBaseUrl from './Stores/baseUrlStore'
 
 const CryptyHome = () => {
+    const baseUrl = useBaseUrl(state => state.baseUrl);
     const fetchDetails = useTokenDetailsStore(state => state.fetchDetails);
     const fetchGlobal = useGlobalStore(state => state.fetchGlobal);
+
     const { colorMode } = useColorMode()
+
     const borderColor = useColorModeValue('#e3ccbf', '#212d3b')
     const color = useColorModeValue('gray', '#dfe5ed')
     const topCardColor= useColorModeValue('brand.600', '#dfe5ed');
@@ -24,8 +28,8 @@ const CryptyHome = () => {
     const statCardColor = useColorModeValue('#F7F1ED', '#888b8d');
 
     useEffect(() => {
-        fetchDetails('ethereum');
-        fetchGlobal();
+        fetchDetails('ethereum', baseUrl);
+        fetchGlobal(baseUrl);
     }, []);
 
     return (

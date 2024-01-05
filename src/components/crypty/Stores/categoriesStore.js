@@ -7,7 +7,7 @@ const useCategoriesStore = create(set => ({
   fetchTrending: async (baseUrl) => {
     try {
       // Fetch the trnding coins
-      const response = await fetch(`${baseUrl}/search/trending`);
+      const response = await fetch(`${baseUrl}/search/trending?x_cg_demo_api_key=CG-xEDfyZh1gVhZ5LFCEuzwUW6M`);
       if (!response.ok) throw new Error('Error fetching trending coins');
       const data = await response.json();
 

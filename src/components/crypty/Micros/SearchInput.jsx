@@ -3,8 +3,10 @@ import { useColorMode, Input, InputGroup, InputRightElement, Box, Flex, useColor
 import { Search } from '../../Icons';
 import { useEffect } from 'react';
 import useTokenDetailsStore from '../Stores/tokenDetailsStore';
+import useBaseUrl from '../Stores/baseUrlStore';
 
 const SearchInput = () => {
+    const baseUrl = useBaseUrl(state => state.baseUrl);
     const fetchDetails = useTokenDetailsStore(state => state.fetchDetails);
     const colorMode = useColorMode();
     const [input, setInput] = useState();
@@ -18,7 +20,7 @@ const SearchInput = () => {
         event.preventDefault();
         // const input = event.target.elements.searchInput.value;
         // isError = inputValue === ''
-        fetchDetails(input);
+        fetchDetails(input, baseUrl);
         setInput('');
     };
     
@@ -50,6 +52,7 @@ const SearchInput = () => {
                         placeholder='Search'
                         color={useColorModeValue('brand.800', 'white')}
                         onChange={handleUpdateInput}
+                        value={input}
                         name={"password"}
                         _hover={{ border:'' }}
                         _placeholder={{ color: useColorModeValue('brand.800', '#dfe5ed') }}
@@ -65,11 +68,11 @@ const SearchInput = () => {
                 </InputGroup>
             </form>
 
-            <Box w={'70%'} ml={'auto'} pt={3} display={{ sm:'none' }}>
+            <Box w={'70%'} ml={'auto'} pt={3} display={{ sm:'none' }} mb={3}>
                 <form onSubmit={handleSubmit} style={{ width:'100%' }} className="form-control">
-                    <input className="input-search input-alt" onChange={handleUpdateInput} placeholder='Search' required="" type="text" style={{ textAlign: 'right' }} />
+                    <input className="input-search input-alt" value={input} onChange={handleUpdateInput} placeholder='Search' required="" type="text" style={{ textAlign: 'right', paddingRight:'30px' }} />
                     <span className="input-border input-border-alt"></span>
-                    <a href="#" type='submit'>
+                    <a href="#" type='submit' onClick={handleSubmit}>
                         <Search fill={'#464a4d'} />
                     </a>
                 </form>
