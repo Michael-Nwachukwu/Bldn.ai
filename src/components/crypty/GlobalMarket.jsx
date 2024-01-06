@@ -12,11 +12,11 @@ const GlobalMarket = () => {
     <>
         <Grid templateColumns={{ base:'1fr', lg:"1fr 1fr" }} gap={2}>
             <GridItem>
-                <SmallCard value={globalMarketCap} title={'Market Capitalization'} />
+                <SmallCard value={globalMarketCap} title={'Total Market Cap'} />
             </GridItem>
 
             <GridItem display={{ base:'none', lg:'block' }}>
-                <SmallCard value={globalVolume} title={'24h Trading Volume'} />
+                <SmallCard value={globalVolume} title={'Total Trading Volume'} />
             </GridItem>
             
         </Grid>

@@ -55,6 +55,7 @@ const Main = ({ session}) => {
             borderBottom={"1px"}
             _selected={{ border: "1px", borderBottom: "none" }}
             fontSize={{ base:'10px', md:'13px' }}
+            isDisabled
           >
             Toll
           </Tab>

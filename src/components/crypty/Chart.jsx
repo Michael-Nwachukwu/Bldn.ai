@@ -11,7 +11,7 @@ const Chart = () => {
       x: new Date(timestamp),
       y: price,
   }));
-  console.log(dataPoints);
+  // console.log(dataPoints);
   const labelFontColor = useColorModeValue('gray', '#dfe5ed');
 
   useEffect(() => {

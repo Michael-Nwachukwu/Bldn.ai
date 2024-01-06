@@ -22,7 +22,7 @@ const TokenDetailsCard = () => {
                     <List w={'100%'} spacing={2.5} mt={4} fontSize={{ base:'sm', sm:'md' }}>
                         <ListItem>
                             <Flex justify={'space-between'} align={'center'}>
-                                <Text color={statCardColor}>Bitcoin Price</Text>
+                                <Text color={statCardColor}>{symbol} Price</Text>
                                 <Text color={'white'} fontWeight={'semibold'}>{price}</Text>
                             </Flex>
                         </ListItem>
