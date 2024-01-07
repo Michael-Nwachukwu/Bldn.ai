@@ -15,9 +15,10 @@ import 'swiper/swiper-bundle.css';
 const Categories = () => {
     const baseUrl = useBaseUrl(state => state.baseUrl);
     const { fetchTrending, fetchRecentlyUpdated, fetchTrendingPools } = useCategoriesStore();
-    const categories = ['🔥 Trending', '🚀 Updated', '🎱 Trending pools'];
+    
     const bulletColor = useColorModeValue('#672f19', '#ffe5c6');
-
+    
+    const categories = ['🔥 Trending coins', '🚀 Updated', '🎱 Trending pools'];
     
     useEffect(() => {
         fetchTrending(baseUrl);
