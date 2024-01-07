@@ -34,11 +34,10 @@ const useTokenDetailsStore = create(set => ({
     circulatingSupply: '',
     description: '',
     tokenChart: [],
-
-    // activeToken: '',
+    isLoading: false,
     
     fetchDetails: async (input, baseUrl) => {
-
+        set({ isLoading: true })
         let url;
         const isContractAddress = /^0x[a-fA-F0-9]{40}$/.test(input);
 
@@ -55,7 +54,7 @@ const useTokenDetailsStore = create(set => ({
             if (!response.ok) throw new Error('Error fetching token details');
             useActiveTokenStore.setState({ activeToken: input });
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
 
             // Split the URL at the "?" character, insert the new string, and join them back together
             const urlParts = url.split('?');
@@ -111,7 +110,7 @@ const useTokenDetailsStore = create(set => ({
                 circulatingSupply: circulatingSupply,
                 
                 tokenChart: tokenChartData,
-               
+                isLoading: false
             });
             
         } catch (error) {

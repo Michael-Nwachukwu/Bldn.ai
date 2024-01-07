@@ -27,11 +27,11 @@ const BigCard = ({heading}) => {
 
     return (
         <>
-            <Card size={'sm'} h={'auto'} minH={48} pb={{ base:5, sm:0 }} variant={'outline'} bg={'transparent'} borderRadius={10} border={'2px'} borderColor={borderColor} >
+            <Card size={{ base:'sm', md:'xs', lg:'sm' }} h={'auto'} minH={{ base:48, sm:'auto', lg:48 }} p={{ md:3, lg:0 }} pb={{ base:5, md:3, lg:0 }} variant={'outline'} bg={'transparent'} borderRadius={10} border={'2px'} borderColor={borderColor} >
                 <CardBody>
                     <VStack>
                         <Flex alignItems={'center'} w={'100%'}>
-                            <Text fontSize={18} fontWeight={'semibold'} color={useColorModeValue('gray.600', 'white')}>
+                            <Text fontSize={{ base:18, md:'sm', lg:18 }} fontWeight={'semibold'} color={useColorModeValue('gray.600', 'white')}>
                                 {heading}
                             </Text>
                             <Spacer />
@@ -42,12 +42,13 @@ const BigCard = ({heading}) => {
                                 <React.Fragment key={index}>
                                     <ListItem>
                                         <Flex alignItems={'center'}>
-                                            <Flex alignItems={'center'} gap={4}>
+                                            <Flex alignItems={'center'} gap={{ base:4, md:2, lg:4 }}>
                                                 { item.network ? 
                                                     <Tag 
                                                         py={0.5} 
                                                         colorScheme='brand' 
                                                         opacity={useColorModeValue('70%', '100%')}
+                                                        display={{ md:'none', lg:'block' }}
                                                     >
                                                         <TagLabel>
                                                             {item.network}
@@ -59,7 +60,7 @@ const BigCard = ({heading}) => {
                                                 { item.image ?
                                                     <Image
                                                         borderRadius='full'
-                                                        boxSize='24px'
+                                                        boxSize={{ base:'24px', md:'18px',lg:'24px'}}
                                                         src={item.image}
                                                         alt={item.symbol}
                                                     />
@@ -67,12 +68,12 @@ const BigCard = ({heading}) => {
                                                 }
                                                 
 
-                                                <Text fontWeight={'semibold'} fontSize={14}>
+                                                <Text fontWeight={'semibold'} fontSize={{ base:14, md:'xs', lg:14 }}>
                                                     {item.symbol}
                                                 </Text>
                                             </Flex>
                                             <Spacer />
-                                            <Text>{item.price ? item.price : item.volume}</Text>
+                                            <Text fontSize={{ md:'xs', lg:'base' }}>{item.price ? item.price : item.volume}</Text>
                                         </Flex>
                                     </ListItem>
                                     {index < data.length - 1 && <Divider />}

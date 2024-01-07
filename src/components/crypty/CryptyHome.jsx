@@ -1,4 +1,4 @@
-import { Box, Flex, Spacer, Grid, GridItem,  useColorMode, useColorModeValue} from '@chakra-ui/react'
+import { Box, Flex, Spacer, Grid, GridItem,  useColorMode, Skeleton, useColorModeValue} from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 
 import Chart from './Chart'
@@ -46,7 +46,7 @@ const CryptyHome = () => {
         <>
             <Box overflowX={'hidden'}>
 
-                <Box display={{ sm:'none' }}>
+                <Box display={{ lg:'none' }}>
                     <LineGlobalStats />
                 </Box>
 
@@ -54,12 +54,13 @@ const CryptyHome = () => {
                 <Flex align={'center'} justify={'space-between'} direction={{ base:'column', md:'row' }}>
 
                     {/* custom component fro price display */}
+                   
                     <PriceStats />
-
+                   
                     <Spacer />
                     
                     {/* smallDetails for only lg screens and startsCard for md and lg screens */}
-                    <Flex direction={'column'} alignItems={{ lg:'end' }} gap={2} >
+                    <Flex direction={'column'} alignItems={{ lg:'end' }} gap={2} display={{ base:'none', sm:'block' }}>
 
                         {/* Visible only on lg screens. */}
                         <Box display={{ base:'none', lg:'block' }}>

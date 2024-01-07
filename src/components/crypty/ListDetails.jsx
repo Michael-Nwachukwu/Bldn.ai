@@ -7,7 +7,7 @@ const ListDetails = ({color}) => {
 
     return (
         <>
-            <List px={3} spacing={1.5} color={color} fontSize={{ base:'xs', sm:'sm' }} w={{ base:'100%', sm:'xl' }}>
+            <List px={3} spacing={1.5} color={color} fontSize={{ base:'xs', sm:'sm' }} w={{ base:'100%', lg:'xl' }}>
                 <ListItem>
                     <Flex justify={'space-between'} align={'center'}>
                         <Text color={useColorModeValue('black', '#888b8d')}>Market Cap</Text>

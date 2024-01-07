@@ -10,7 +10,7 @@ const SmallCard = ({value, title}) => {
         <>
             <Card size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10}>
                 <CardBody>
-                    <VStack align={'start'} mb={{ base:3, lg:0 }}>
+                    <VStack align={'start'}>
                         <Text fontSize={'lg'} fontWeight={'bold'} color={color}>
                             {value}
                         </Text>
