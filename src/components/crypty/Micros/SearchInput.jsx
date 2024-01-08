@@ -11,7 +11,10 @@ const SearchInput = () => {
 
     const [input, setInput] = useState();
 
-    const handleUpdateInput = (e) => {setInput(e.target.value)};
+    const handleUpdateInput = (e) => {
+        const value = e.target.value;
+        setInput(value);
+    };
 
 
     // let isError;
