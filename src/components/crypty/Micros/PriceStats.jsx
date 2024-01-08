@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, useColorMode, SkeletonText, Skeleton, SkeletonCircle } from '@chakra-ui/react';
+import { Box, Flex, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, useColorMode, Skeleton, SkeletonCircle } from '@chakra-ui/react';
 import Watchlist from './Watchlist';
 import useTokenDetailsStore from '../Stores/tokenDetailsStore';
 

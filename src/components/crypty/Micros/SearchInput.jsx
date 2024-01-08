@@ -13,9 +13,6 @@ const SearchInput = () => {
 
     const handleUpdateInput = (e) => {setInput(e.target.value)};
 
-
-    // let isError;
-
     const handleSubmit = (event) => {
         event.preventDefault();
         if (input == ''){

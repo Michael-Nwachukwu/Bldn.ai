@@ -1,4 +1,4 @@
-import { Box, Flex, Spacer, Grid, GridItem,  useColorMode, Skeleton, useColorModeValue, SkeletonText} from '@chakra-ui/react'
+import { Box, Flex, Spacer, Grid, GridItem,  useColorMode, Skeleton, useColorModeValue} from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 
 import Chart from './Chart'
