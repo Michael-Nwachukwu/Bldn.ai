@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, useColorMode, Skeleton, SkeletonCircle } from '@chakra-ui/react';
+import { Box, Flex, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, useColorMode, SkeletonText, Skeleton, SkeletonCircle } from '@chakra-ui/react';
 import Watchlist from './Watchlist';
 import useTokenDetailsStore from '../Stores/tokenDetailsStore';
 
@@ -28,7 +28,7 @@ const PriceStats = ({loading}) => {
                             </Flex>
                         </StatLabel>
                         <Flex align={'center'} gap={2} mt={2}>
-                            <Skeleton isLoaded={!loading} minW={{ base:32, lg:48 }} minH={{ base:10, lg:16}}>
+                            <Skeleton isLoaded={!loading} minW={{ base: loading ? 32 : 'auto', lg: loading ? 48 : 'auto' }} minH={{ base:10, lg:16}}>
                                 <StatNumber 
                                     fontSize={{ base:27, lg:50 }}
                                     fontFamily={'syncopate'}
