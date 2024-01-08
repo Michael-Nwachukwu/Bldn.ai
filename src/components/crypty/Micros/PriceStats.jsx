@@ -1,10 +1,10 @@
-import React from 'react'
-import { Box, Flex, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, Tag, TagRightIcon, useColorMode } from '@chakra-ui/react'
+import React from 'react';
+import { Box, Flex, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, useColorMode, SkeletonText, Skeleton, SkeletonCircle } from '@chakra-ui/react';
 import Watchlist from './Watchlist';
 import useTokenDetailsStore from '../Stores/tokenDetailsStore';
 
-const PriceStats = () => {
-    const {image, name, symbol, price, priceChangePercentageDaily, } = useTokenDetailsStore();
+const PriceStats = ({loading}) => {
+    const {image, name, symbol, price, priceChangePercentageDaily } = useTokenDetailsStore();
     const colorMode = useColorMode();
     
     const negativeChange = priceChangePercentageDaily < 0;
@@ -19,19 +19,29 @@ const PriceStats = () => {
                     <Stat>
                         <StatLabel>
                             <Flex align={'center'} gap={1.5} fontWeight={'semibold'}>
-                                <img src={image} alt="" />
-                               {name} {symbol}
+                                <SkeletonCircle isLoaded={!loading} size='6'>
+                                    <img src={image} alt="" />
+                                </SkeletonCircle>
+                                <Skeleton isLoaded={!loading} minW={{ base:10, lg:20 }} minH={4} borderRadius={10}>
+                                    {name} {symbol}
+                                </Skeleton>
                             </Flex>
                         </StatLabel>
-                        <Flex align={'center'} gap={2}>
-                            <StatNumber 
-                                fontSize={{ base:27, lg:50 }}
-                                fontFamily={'syncopate'}
-                            >{price}</StatNumber>
-                            <StatHelpText fontSize={{ base:14, sm:18 }}>
-                                <StatArrow color={negativeChange ? 'red' : 'green'} type={negativeChange ? 'decrease' : 'increase'} />
-                                {priceChangePercentageDaily}
-                            </StatHelpText>
+                        <Flex align={'center'} gap={2} mt={2}>
+                            <Skeleton isLoaded={!loading} minW={{ base:32, lg:48 }} minH={{ base:10, lg:16}}>
+                                <StatNumber 
+                                    fontSize={{ base:27, lg:50 }}
+                                    fontFamily={'syncopate'}
+                                >{price}</StatNumber>
+                            </Skeleton>
+
+                            <Skeleton isLoaded={!loading} minW={14} minH={7} borderRadius={10}>
+                                <StatHelpText fontSize={{ base:14, sm:18 }}>
+                                    <StatArrow color={negativeChange ? 'red' : 'green'} type={negativeChange ? 'decrease' : 'increase'} />
+                                    {priceChangePercentageDaily}%
+                                </StatHelpText>
+                            </Skeleton>
+
                         </Flex>
                     </Stat>
 

@@ -1,20 +1,20 @@
 import React from 'react'
-import { useColorMode, useColorModeValue, Card, CardBody, VStack, Text } from '@chakra-ui/react';
+import { useColorModeValue, Card, CardBody, VStack, Text } from '@chakra-ui/react';
 
 const SmallCard = ({value, title}) => {
     const borderColor = useColorModeValue('#e3ccbf', '#212d3b');
-    const color = useColorModeValue('brand.600', '#dfe5ed');
-    const colorMode = useColorMode();
+    const valueColor = useColorModeValue('brand.600', '#dfe5ed');
+    const titleColor = useColorModeValue('brand.600', '#dfe5ed');
 
     return (
         <>
             <Card size={'sm'} variant={'outline'} bg={'transparent'} shadow={'sm'} border={''} borderColor={borderColor} borderRadius={10}>
                 <CardBody>
                     <VStack align={'start'}>
-                        <Text fontSize={'lg'} fontWeight={'bold'} color={color}>
+                        <Text fontSize={'lg'} fontWeight={'bold'} color={valueColor}>
                             {value}
                         </Text>
-                        <Text fontSize={'sm'} color={colorMode == 'light' ? 'brand.600' : '#91a2b8'} >
+                        <Text fontSize={'sm'} color={titleColor} >
                             {title}
                         </Text>
                     </VStack>

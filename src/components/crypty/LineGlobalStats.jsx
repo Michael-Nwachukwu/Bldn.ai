@@ -6,7 +6,7 @@ import { Gas } from '../Icons';
 
 const LineGlobalStats = () => {
     const { cryptos, markets, globalMarketCap, globalVolume, btcDominance, ethDominance, gwei, fetchGwei } = useGlobalStore();
-    const smallStatsValueColor= useColorModeValue('red', '#f8c6a9');
+    const smallStatsValueColor = useColorModeValue('red', '#f8c6a9');
 
     useEffect(() => {
         fetchGwei();
@@ -16,11 +16,13 @@ const LineGlobalStats = () => {
         <>
             <Flex alignItems={'center'} 
                 whiteSpace={{ base:"nowrap", lg:'normal' }}
-                overflowX={{ base:"auto", lg:'' }}  
+                overflowX={"auto"}  
                 p={{ base:1, lg:0 }}
+                pr={3}
+                gap={2}
                 bg={{ base:useColorModeValue('rgba(248, 198, 169, 0.25)', '#1b232d'), lg:'transparent' }}
                 borderRadius={{ base:'15px 0 0 15px', lg:0 }}
-                mb={{ base:1, lg:0 }}
+                mb={{ base:2, lg:0 }}
             >
                 <SmallDetails label={'Cryptos:'} value={cryptos} />
                 
@@ -40,15 +42,16 @@ const LineGlobalStats = () => {
                     <PopoverTrigger>
                         <Box>
                             <Box display={{ lg:'none' }}>
-                                <SmallDetails label={'ETH GAS:'} value={ gwei[2] + 'GWEI' } />
+                                <SmallDetails label={'ETH GAS:'} value={ gwei[2] + 'GWEI ' } />
+                                <span style={{ color:smallStatsValueColor, fontSize:'12px'  }} dangerouslySetInnerHTML={{ __html: '&#x2935;' }} />
                             </Box>
 
-                            <Flex cursor={'pointer'} align={'center'} fontSize={'xs'} ml={2} gap={1} display={{ base:'none', lg:'flex' }}>
+                            <Flex cursor={'pointer'} align={'center'} fontSize={'xs'} gap={1} display={{ base:'none', lg:'flex' }}>
                                 <Flex  align={'center'} gap={1}>
                                     <Gas />
                                     ETH GAS: 
                                 </Flex>
-                                <span style={{ color:smallStatsValueColor }}>{gwei[2]} GWEI </span>
+                                <span style={{ color:smallStatsValueColor }}>{gwei[2]} GWEI &#x2935;</span>
                             </Flex>
                         </Box>
                     </PopoverTrigger>

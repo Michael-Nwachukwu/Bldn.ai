@@ -34,10 +34,10 @@ const useTokenDetailsStore = create(set => ({
     circulatingSupply: '',
     description: '',
     tokenChart: [],
-    isLoading: false,
+    loading: false,
     
     fetchDetails: async (input, baseUrl) => {
-        set({ isLoading: true })
+        set({ loading: true });
         let url;
         const isContractAddress = /^0x[a-fA-F0-9]{40}$/.test(input);
 
@@ -65,6 +65,7 @@ const useTokenDetailsStore = create(set => ({
             const tokenData = await tokenChartResponse.json();
             // console.log(tokenData.prices);
 
+
             const price = formatUsdCurrency(data.market_data.current_price.usd);
             const name = data.name;
             const symbol = data.symbol;
@@ -86,6 +87,8 @@ const useTokenDetailsStore = create(set => ({
             const circulatingSupply = data.market_data.circulating_supply;
             const description = data.description.en;
             const tokenChartData = tokenData.prices;
+
+            // set({ loading: false });
 
             set({
                 price: price,
@@ -110,7 +113,7 @@ const useTokenDetailsStore = create(set => ({
                 circulatingSupply: circulatingSupply,
                 
                 tokenChart: tokenChartData,
-                isLoading: false
+                loading: false
             });
             
         } catch (error) {

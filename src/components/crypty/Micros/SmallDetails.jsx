@@ -6,7 +6,7 @@ const SmallDetails = ({label,value}) => {
     const smallStatsValueColor= useColorModeValue('red', '#f8c6a9');
     return (
         <>
-            <small style={{ color:smallStatsLabelColor, marginLeft:'7px' }}>
+            <small style={{ color:smallStatsLabelColor,  }}>
                 {label} <span style={{ color:smallStatsValueColor }}>{value}</span>
             </small>
         </>

@@ -189,3 +189,10 @@
 .input-alt:focus + .input-border-alt {
   width: 100%;
 }
+
+
+.cat-card {
+  @media (min-width: 768px) and (max-width: 1024px) {
+    padding: 5px;
+  }
+}

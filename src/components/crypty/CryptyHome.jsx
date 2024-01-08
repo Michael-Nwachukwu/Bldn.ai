@@ -1,5 +1,5 @@
-import { Box, Flex, Spacer, Grid, GridItem,  useColorMode, Skeleton, useColorModeValue} from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import { Box, Flex, Spacer, Grid, GridItem,  useColorMode, Skeleton, useColorModeValue, SkeletonText} from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 
 import Chart from './Chart'
 import PriceStats from './Micros/PriceStats'
@@ -22,15 +22,27 @@ const CryptyHome = () => {
     const activeToken = useActiveTokenStore(state => state.activeToken);
     const fetchDetails = useTokenDetailsStore(state => state.fetchDetails);
     const fetchGlobal = useGlobalStore(state => state.fetchGlobal);
+    
+    const [globalLoading, setGlobalLoading] = useState(false);
+    const [tokenLoading, setTokenLoading] = useState(false);
+
 
     const { colorMode } = useColorMode()
 
     const color = useColorModeValue('gray', '#dfe5ed')
 
+    // I am using a loading state here and attaching the toggling to the fetch functions .then method. this is because i only want to display the loading skeleton on initial page load. 
+
     useEffect(() => {
-        console.log(activeToken);
-        fetchDetails(activeToken, baseUrl);
-        fetchGlobal(baseUrl);
+        setTokenLoading(true);
+
+        // console.log(activeToken);
+        fetchDetails(activeToken, baseUrl).then(() => {
+            // seeing as we are setting our loading function here. once fetch is done is turns off loading sometimes it takes a while after before the content is set in the store and reflects in the dom. so im using setimeout to delay the dismissal of loading. 
+            setTimeout(() => {
+                setTokenLoading(false);
+            }, 1000);
+        });
 
         // Set up interval to fetch details every 30 seconds
         const intervalId = setInterval(() => {
@@ -42,29 +54,37 @@ const CryptyHome = () => {
         return () => clearInterval(intervalId);
     }, [activeToken]);
 
+    useEffect(() => {
+        setGlobalLoading(true);
+        fetchGlobal(baseUrl).then(() => setGlobalLoading(false));
+    }, []);
+
     return (
         <>
             <Box overflowX={'hidden'}>
 
                 <Box display={{ lg:'none' }}>
-                    <LineGlobalStats />
+                    <Skeleton isLoaded={!globalLoading} borderRadius={10}>
+                        <LineGlobalStats />
+                    </Skeleton>
                 </Box>
 
                 {/* PriceStars and global stats details */}
                 <Flex align={'center'} justify={'space-between'} direction={{ base:'column', md:'row' }}>
 
                     {/* custom component fro price display */}
-                   
-                    <PriceStats />
+                    <PriceStats loading={tokenLoading} />
                    
                     <Spacer />
                     
                     {/* smallDetails for only lg screens and startsCard for md and lg screens */}
-                    <Flex direction={'column'} alignItems={{ lg:'end' }} gap={2} display={{ base:'none', sm:'block' }}>
+                    <Flex direction={'column'} alignItems={{ lg:'end' }} gap={2} display={{ base:'none', sm:'flex' }}>
 
                         {/* Visible only on lg screens. */}
                         <Box display={{ base:'none', lg:'block' }}>
-                            <LineGlobalStats />
+                            <Skeleton isLoaded={!globalLoading} borderRadius={10}>
+                                <LineGlobalStats />
+                            </Skeleton>
                         </Box>
                         
                         
@@ -73,7 +93,7 @@ const CryptyHome = () => {
                             {/* Add to watchlist md/lg screens */}
                             <Watchlist colorMode={colorMode} />
 
-                            <GlobalMarket />
+                            <GlobalMarket loading={globalLoading} />
 
                         </Flex>
 
@@ -82,11 +102,13 @@ const CryptyHome = () => {
                 </Flex>
             </Box>
 
-            <Box>
+            <Box mt={2}>
                 <Flex direction={{ base:'column', sm:'row' }} justify={{ sm:'space-between' }} align={{base:'end',  lg:'center' }}>
 
                     {/* Active token market stats: stats under the pricestats */}
-                    <ListDetails color={color} />
+                    
+                        <ListDetails color={color} loading={tokenLoading} />
+                   
                     
                     {/* search input component for md and lg screens only */}
                     <SearchInput />
@@ -106,7 +128,7 @@ const CryptyHome = () => {
 
                     <Chart />
 
-                    <TokenDescription />
+                    <TokenDescription loading={tokenLoading} />
 
                 </GridItem>
 
