@@ -50,19 +50,19 @@ const useTokenDetailsStore = create(set => ({
 
         try {
             // const response = await axios.get(url);
-            const response = await fetch(url);
-            // if (!response.ok) throw new Error('Error fetching token details');
+            var response = await fetch(url);
+            if (!response.ok) throw new Error('Error fetching token details');
             useActiveTokenStore.setState({ activeToken: input });
-            const data = await response.json();
+            var data = await response.json();
             // console.log(data);
 
             // Split the URL at the "?" character, insert the new string, and join them back together
-            const urlParts = url.split('?');
-            const chartUrl = `${urlParts[0]}/market_chart/?vs_currency=usd&days=7?${urlParts[1]}`;
+            var urlParts = url.split('?');
+            var chartUrl = `${urlParts[0]}/market_chart/?vs_currency=usd&days=7?${urlParts[1]}`;
 
-            const tokenChartResponse = await fetch(chartUrl);
-            // if (!tokenChartResponse.ok) throw new Error('Error fetching market chart');
-            const tokenData = await tokenChartResponse.json();
+            var tokenChartResponse = await fetch(chartUrl);
+            if (!tokenChartResponse.ok) throw new Error('Error fetching market chart');
+            var tokenData = await tokenChartResponse.json();
             // console.log(tokenData.prices);
 
 
