@@ -88,7 +88,6 @@ const useTokenDetailsStore = create(set => ({
             const description = data.description.en;
             const tokenChartData = tokenData.prices;
 
-            // set({ loading: false });
 
             set({
                 price: price,
