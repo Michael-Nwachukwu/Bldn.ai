@@ -54,7 +54,10 @@ const useTokenDetailsStore = create(set => ({
         try {
             // const response = await axios.get(url);
             const response = await fetch(url);
-            if (!response.ok) console.log(response);
+            if (!response.ok) {
+                const errorResponse = await response.json();
+                console.error('Error response:', errorResponse);
+            }
             useActiveTokenStore.setState({ activeToken: input });
             const data = await response.json();
             // console.log(data);
@@ -64,7 +67,10 @@ const useTokenDetailsStore = create(set => ({
             const chartUrl = `${urlParts[0]}/market_chart/?vs_currency=usd&days=7?${urlParts[1]}`;
 
             const tokenChartResponse = await fetch(chartUrl);
-            if (!tokenChartResponse.ok) throw new Error('Error fetching market chart');
+            if (!tokenChartResponse.ok) {
+                const errorResponse = await response.json();
+                console.error('Error response:', errorResponse);
+            }
             const tokenData = await tokenChartResponse.json();
             // console.log(tokenData.prices);
 
