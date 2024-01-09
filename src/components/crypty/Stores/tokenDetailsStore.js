@@ -55,7 +55,7 @@ const useTokenDetailsStore = create(set => ({
             // const response = await axios.get(url);
             const response = await fetch(url);
             if (!response.ok) {
-                return response.json().then(response => {console.log(response.Error);})
+                return response.json().then(response => {console.log(response.error);})
             }
             useActiveTokenStore.setState({ activeToken: input });
             const data = await response.json();
@@ -68,7 +68,7 @@ const useTokenDetailsStore = create(set => ({
 
             const tokenChartResponse = await fetch(chartUrl);
             if (!tokenChartResponse.ok) {
-                return tokenChartResponse.json().then(tokenChartResponse => {console.log(tokenChartResponse.Error);})
+                return tokenChartResponse.json().then(tokenChartResponse => {console.log(tokenChartResponse.error);})
             }
             const tokenData = await tokenChartResponse.json();
             // console.log(tokenData.prices);
