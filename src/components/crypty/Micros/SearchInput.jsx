@@ -70,7 +70,7 @@ const SearchInput = () => {
         <>
             {/* search input component for md and lg screens only */}
             <form onSubmit={handleSubmit} style={{ width:'100%' }}>
-                <InputGroup ml={'auto'} size='md' maxW={'xs'}>
+                <InputGroup ml={'auto'} size='md' display={{ base:'none', md:'flex' }} maxW={'xs'}>
                     <Input
                         id="searchInput"
                         focusBorderColor={ useColorModeValue('brand.800', '#dfe5ed') }
@@ -96,7 +96,7 @@ const SearchInput = () => {
                 </InputGroup>
             </form>
 
-            {/* <Box w={'70%'} ml={'auto'} pt={3} display={{ sm:'none' }} mb={3}>
+            <Box w={'70%'} ml={'auto'} pt={3} display={{ sm:'none' }} mb={3}>
                 <form onSubmit={handleSubmitMobile} style={{ width:'100%' }} className="form-control">
                     <input className="input-search input-alt" value={inputMobile} onChange={handleUpdateInputMobile} placeholder='Search' required="" type="text" style={{ textAlign: 'right', paddingRight:'30px' }} />
                     <span className="input-border input-border-alt"></span>
@@ -106,11 +106,7 @@ const SearchInput = () => {
                 </form>
 
 
-
-
-
-
-                <form onSubmit={handleSubmitMobile} style={{ width:'100%' }}>
+                {/* <form onSubmit={handleSubmitMobile} style={{ width:'100%' }}>
                     <InputGroup ml={'auto'} size='md' maxW={'xs'}>
                         <Input
                             id="searchInput"
@@ -135,10 +131,10 @@ const SearchInput = () => {
                             </Flex>
                         </InputRightElement>
                     </InputGroup>
-                </form>
+                </form> */}
 
 
-            </Box> */}
+            </Box>
             
         </>
     )
