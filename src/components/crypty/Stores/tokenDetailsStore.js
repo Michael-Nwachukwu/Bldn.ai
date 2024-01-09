@@ -61,7 +61,7 @@ const useTokenDetailsStore = create(set => ({
             const chartUrl = `${urlParts[0]}/market_chart/?vs_currency=usd&days=7?${urlParts[1]}`;
 
             const tokenChartResponse = await fetch(chartUrl);
-            if (!tokenChartResponse.ok) throw new Error('Error fetching market chart');
+            // if (!tokenChartResponse.ok) throw new Error('Error fetching market chart');
             const tokenData = await tokenChartResponse.json();
             // console.log(tokenData.prices);
 
