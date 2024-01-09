@@ -1,4 +1,4 @@
-import { Box, Flex, Spacer, Grid, GridItem,  useColorMode, Skeleton, useColorModeValue, InputGroup, Input, InputRightElement} from '@chakra-ui/react'
+import { Box, Flex, Spacer, Grid, GridItem,  useColorMode, Skeleton, useColorModeValue, Input} from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 
 import Chart from './Chart'
@@ -6,13 +6,11 @@ import PriceStats from './Micros/PriceStats'
 import GlobalMarket from './GlobalMarket'
 import Watchlist from './Micros/Watchlist'
 import ListDetails from './ListDetails'
-// import SearchInput from './Micros/SearchInput'
+import SearchInput from './Micros/SearchInput'
 import Categories from './Categories'
 import TokenDetailsCard from './TokenDetailsCard'
 import TokenDescription from './TokenDescription'
 import LineGlobalStats from './LineGlobalStats'
-
-import { Search } from '../Icons'
 
 import useTokenDetailsStore from './Stores/tokenDetailsStore'
 import useGlobalStore from './Stores/globalMarketStore'
@@ -24,9 +22,6 @@ const CryptyHome = () => {
     const activeToken = useActiveTokenStore(state => state.activeToken);
     const fetchDetails = useTokenDetailsStore(state => state.fetchDetails);
     const fetchGlobal = useGlobalStore(state => state.fetchGlobal);
-
-    const [input, setInput] = useState('');
-
     
     const [globalLoading, setGlobalLoading] = useState(false);
     const [tokenLoading, setTokenLoading] = useState(false);
@@ -35,6 +30,32 @@ const CryptyHome = () => {
     const { colorMode } = useColorMode()
 
     const color = useColorModeValue('gray', '#dfe5ed')
+
+
+
+    const [input, setInput] = useState('');
+
+
+    const handleUpdateInput = (e) => {
+        const value = e.target.value;
+        setInput(value);
+    };
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (input === ''){
+            alert('Please enter an address or serch by coin id');
+        }else{
+
+            fetchDetails(input, baseUrl);
+
+            console.log('Active Token:', input);
+        };
+        setInput('');
+    };
+
+
 
     // I am using a loading state here and attaching the toggling to the fetch functions .then method. this is because i only want to display the loading skeleton on initial page load. 
 
@@ -58,31 +79,11 @@ const CryptyHome = () => {
         // Clear interval on component unmount
         return () => clearInterval(intervalId);
     }, [activeToken]);
-    
+
     useEffect(() => {
         setGlobalLoading(true);
         fetchGlobal(baseUrl).then(() => setGlobalLoading(false));
     }, []);
-
-
-
-    const handleUpdateInput = (e) => {
-        const value = e.target.value;
-        setInput(value);
-    };
-
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (input === ''){
-            alert('Please enter an address or serch by coin id');
-        }else{
-            fetchDetails(input, baseUrl);
-            console.log('Active Token:', input);
-        };
-        setInput('');
-    };
-
 
     return (
         <>
@@ -137,47 +138,10 @@ const CryptyHome = () => {
                     
                     {/* search input component for md and lg screens only */}
                     {/* <SearchInput /> */}
-
-
-                    <form onSubmit={handleSubmit} style={{ width:'100%' }}>
-                        <InputGroup ml={'auto'} size='md' display={{ base:'none', md:'flex' }} maxW={'xs'}>
-                            <Input
-                                id="searchInput"
-                                focusBorderColor={ useColorModeValue('brand.800', '#dfe5ed') }
-                                border={useColorModeValue('1px', '')}
-                                bg={useColorModeValue('transparent', "#1b232d")}
-                                py={5}
-                                placeholder='Search'
-                                color={useColorModeValue('brand.800', 'white')}
-                                onChange={handleUpdateInput}
-                                value={input}
-                                name={"password"}
-                                _hover={{ border:'' }}
-                                _placeholder={{ color: useColorModeValue('brand.800', '#dfe5ed') }}
-                                required
-                            />
-                            <InputRightElement width='4.5rem' pl={6}>
-                                <Flex justifyContent={'center'} w={6} bg={useColorModeValue('brand.700', "#384a61")} opacity={'70%'} color={"white"} borderRadius={5} fontWeight={'bold'}
-                                    _hover={{ bg:'' }} 
-                                >
-                                    /
-                                </Flex>
-                            </InputRightElement>
-                        </InputGroup>
+                    <form onSubmit={handleSubmit}>
+                        <Input onChange={handleUpdateInput}
+                        value={input} />
                     </form>
-
-                    <Box w={'70%'} ml={'auto'} pt={3} display={{ sm:'none' }} mb={3}>
-                        <form onSubmit={handleSubmit} style={{ width:'100%' }} className="form-control">
-                            <input className="input-search input-alt" value={input} onChange={handleUpdateInput} placeholder='Search' required="" type="text" style={{ textAlign: 'right', paddingRight:'30px' }} />
-                            <span className="input-border input-border-alt"></span>
-                            <a href="#" type='submit' onClick={handleSubmit}>
-                                <Search fill={'#464a4d'} />
-                            </a>
-                        </form>
-                    </Box>
-
-
-
                 </Flex>
             </Box>
             

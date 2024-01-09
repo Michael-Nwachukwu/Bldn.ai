@@ -7,7 +7,7 @@ import useBaseUrl from '../Stores/baseUrlStore';
 
 const SearchInput = () => {
     const baseUrl = useBaseUrl(state => state.baseUrl);
-    const {fetchDetails} = useTokenDetailsStore(state => state.fetchDetails);
+    const fetchDetails = useTokenDetailsStore(state => state.fetchDetails);
 
     const [input, setInput] = useState('');
 
