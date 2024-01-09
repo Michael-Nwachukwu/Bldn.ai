@@ -54,7 +54,7 @@ const useTokenDetailsStore = create(set => ({
         try {
             // const response = await axios.get(url);
             const response = await fetch(url);
-            if (!response.ok) alert(response);
+            if (!response.ok) console.log(response);
             useActiveTokenStore.setState({ activeToken: input });
             const data = await response.json();
             // console.log(data);
