@@ -21,15 +21,16 @@ const CryptyHome = () => {
     const baseUrl = useBaseUrl(state => state.baseUrl);
     const activeToken = useActiveTokenStore(state => state.activeToken);
     const fetchDetails = useTokenDetailsStore(state => state.fetchDetails);
+    const tokenLoading = useTokenDetailsStore(state => state.loading);
     const fetchGlobal = useGlobalStore(state => state.fetchGlobal);
     
     const [globalLoading, setGlobalLoading] = useState(false);
-    const [tokenLoading, setTokenLoading] = useState(false);
+    // const [tokenLoading, setTokenLoading] = useState(false);
 
 
     const { colorMode } = useColorMode()
 
-    const color = useColorModeValue('gray', '#dfe5ed')
+    const color = useColorModeValue('gray', '#dfe5ed');
 
 
 
@@ -60,15 +61,10 @@ const CryptyHome = () => {
     // I am using a loading state here and attaching the toggling to the fetch functions .then method. this is because i only want to display the loading skeleton on initial page load. 
 
     useEffect(() => {
-        setTokenLoading(true);
+        // setTokenLoading(true);
 
         // console.log(activeToken);
-        fetchDetails(activeToken, baseUrl).then(() => {
-            // seeing as we are setting our loading function here. once fetch is done is turns off loading sometimes it takes a while after before the content is set in the store and reflects in the dom. so im using setimeout to delay the dismissal of loading. 
-            setTimeout(() => {
-                setTokenLoading(false);
-            }, 1000);
-        });
+        fetchDetails(activeToken, baseUrl);
 
         // Set up interval to fetch details every 30 seconds
         const intervalId = setInterval(() => {
