@@ -6,7 +6,7 @@ import PriceStats from './Micros/PriceStats'
 import GlobalMarket from './GlobalMarket'
 import Watchlist from './Micros/Watchlist'
 import ListDetails from './ListDetails'
-import SearchInput from './Micros/SearchInput'
+// import SearchInput from './Micros/SearchInput'
 import Categories from './Categories'
 import TokenDetailsCard from './TokenDetailsCard'
 import TokenDescription from './TokenDescription'
@@ -138,7 +138,7 @@ const CryptyHome = () => {
                     
                     {/* search input component for md and lg screens only */}
                     {/* <SearchInput /> */}
-                    <form onSubmit={handleSubmit}>
+                    <form id='myform' onSubmit={handleSubmit}>
                         <Input onChange={handleUpdateInput}
                         value={input} />
                     </form>

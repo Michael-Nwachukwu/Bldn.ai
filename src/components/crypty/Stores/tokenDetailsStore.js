@@ -38,6 +38,7 @@ const useTokenDetailsStore = create(set => ({
     
     fetchDetails: async (input, baseUrl) => {
         set({ loading: true });
+        alert(input);
         console.log(input);
         
         let url;
