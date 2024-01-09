@@ -20,7 +20,7 @@ import { useState } from "react";
 const Main = ({ session}) => {
   const headings = [
     "Paste in your text below and we'll extract the keywords for you.",
-    "Pate in an address and we'll extract the details for you. test",
+    "Pate in an address and we'll extract the details for you.",
     "Ask a question about taxt and we'll fetch the answers for you."
   ];
   const [heading, setHeading] = useState(headings[0]);

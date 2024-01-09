@@ -1,18 +1,18 @@
 import { create } from "zustand";
 import useActiveTokenStore from "./activeTokenStore";
 
-var getAssetPlatformId = async (contractAddress) => {
-    var response = await fetch('https://api.coingecko.com/api/v3/coins/list?x_cg_demo_api_key=CG-xEDfyZh1gVhZ5LFCEuzwUW6M');
-    var data = await response.json();
-    var coin = data.find(coin => coin.contract_address === contractAddress);
+const getAssetPlatformId = async (contractAddress) => {
+    const response = await fetch('https://api.coingecko.com/api/v3/coins/list?x_cg_demo_api_key=CG-xEDfyZh1gVhZ5LFCEuzwUW6M');
+    const data = await response.json();
+    const coin = data.find(coin => coin.contract_address === contractAddress);
     return coin ? coin.id : null;
 }
 
-var formatUsdCurrency = (value) => {
+const formatUsdCurrency = (value) => {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
 }
 
-var useTokenDetailsStore = create(set => ({
+const useTokenDetailsStore = create(set => ({
     price: '',
     name: '',
     symbol: '',
@@ -38,55 +38,57 @@ var useTokenDetailsStore = create(set => ({
     
     fetchDetails: async (input, baseUrl) => {
         set({ loading: true });
+        console.log(input);
+        
         let url;
-        var isContractAddress = /^0x[a-fA-F0-9]{40}$/.test(input);
+        const isContractAddress = /^0x[a-fA-F0-9]{40}$/.test(input);
 
         if (isContractAddress) {
-            var assetPlatformId = await getAssetPlatformId(input);
+            const assetPlatformId = await getAssetPlatformId(input);
             url = `${baseUrl}/coins/${assetPlatformId}/contract/${input}?x_cg_demo_api_key=CG-xEDfyZh1gVhZ5LFCEuzwUW6M`;
         } else {
             url = `${baseUrl}/coins/${input}?x_cg_demo_api_key=CG-xEDfyZh1gVhZ5LFCEuzwUW6M`;
         }
 
         try {
-            // var response = await axios.get(url);
-            var response = await fetch(url);
+            // const response = await axios.get(url);
+            const response = await fetch(url);
             if (!response.ok) throw new Error('Error fetching token details');
             useActiveTokenStore.setState({ activeToken: input });
-            var data = await response.json();
+            const data = await response.json();
             // console.log(data);
 
             // Split the URL at the "?" character, insert the new string, and join them back together
-            var urlParts = url.split('?');
-            var chartUrl = `${urlParts[0]}/market_chart/?vs_currency=usd&days=7?${urlParts[1]}`;
+            const urlParts = url.split('?');
+            const chartUrl = `${urlParts[0]}/market_chart/?vs_currency=usd&days=7?${urlParts[1]}`;
 
-            var tokenChartResponse = await fetch(chartUrl);
+            const tokenChartResponse = await fetch(chartUrl);
             if (!tokenChartResponse.ok) throw new Error('Error fetching market chart');
-            var tokenData = await tokenChartResponse.json();
+            const tokenData = await tokenChartResponse.json();
             // console.log(tokenData.prices);
 
 
-            var price = formatUsdCurrency(data.market_data.current_price.usd);
-            var name = data.name;
-            var symbol = data.symbol;
-            var priceChangePercentageDaily = data.market_data.price_change_percentage_24h;
-            var image = data.image.thumb;
-            var marketCap =  formatUsdCurrency(data.market_data.market_cap.usd);
-            var tradingVolume = formatUsdCurrency(data.market_data.total_volume.usd);
-            var fdv = formatUsdCurrency(data.market_data.fully_diluted_valuation.usd);
-            var dailyLow = formatUsdCurrency(data.market_data.low_24h.usd);
-            var dailyHigh = formatUsdCurrency(data.market_data.high_24h.usd);
-            var marketCapRank = data.market_data.market_cap_rank;
-            var ath = formatUsdCurrency(data.market_data.ath.usd);
-            var athChangePercentage = data.market_data.ath_change_percentage.usd;
-            var athDate = data.market_data.ath_date.usd;
-            var atl = formatUsdCurrency(data.market_data.atl.usd);
-            var atlChangePercentage = data.market_data.atl_change_percentage.usd;
-            var atlDate = data.market_data.atl_date.usd;
-            var totalSupply = data.market_data.total_supply;
-            var circulatingSupply = data.market_data.circulating_supply;
-            var description = data.description.en;
-            var tokenChartData = tokenData.prices;
+            const price = formatUsdCurrency(data.market_data.current_price.usd);
+            const name = data.name;
+            const symbol = data.symbol;
+            const priceChangePercentageDaily = data.market_data.price_change_percentage_24h;
+            const image = data.image.thumb;
+            const marketCap =  formatUsdCurrency(data.market_data.market_cap.usd);
+            const tradingVolume = formatUsdCurrency(data.market_data.total_volume.usd);
+            const fdv = formatUsdCurrency(data.market_data.fully_diluted_valuation.usd);
+            const dailyLow = formatUsdCurrency(data.market_data.low_24h.usd);
+            const dailyHigh = formatUsdCurrency(data.market_data.high_24h.usd);
+            const marketCapRank = data.market_data.market_cap_rank;
+            const ath = formatUsdCurrency(data.market_data.ath.usd);
+            const athChangePercentage = data.market_data.ath_change_percentage.usd;
+            const athDate = data.market_data.ath_date.usd;
+            const atl = formatUsdCurrency(data.market_data.atl.usd);
+            const atlChangePercentage = data.market_data.atl_change_percentage.usd;
+            const atlDate = data.market_data.atl_date.usd;
+            const totalSupply = data.market_data.total_supply;
+            const circulatingSupply = data.market_data.circulating_supply;
+            const description = data.description.en;
+            const tokenChartData = tokenData.prices;
 
 
             set({

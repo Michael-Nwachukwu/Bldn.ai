@@ -19,7 +19,7 @@ const theme = extendTheme({
         heading: `'syncopate', sans-serif`,
         body: `'Montserrat', sans-serif`,
     },
-    initialColorMode: 'system',
+    initialColorMode: 'dark',
     useSystemColorMode: true,
   })
 
