@@ -38,7 +38,7 @@ const useTokenDetailsStore = create(set => ({
     
     fetchDetails: async (input, baseUrl) => {
         set({ loading: true });
-        alert(input);
+        // alert(input);
         console.log(input);
         
         let url;
@@ -55,12 +55,12 @@ const useTokenDetailsStore = create(set => ({
             // const response = await axios.get(url);
             const response = await fetch(url);
             if (!response.ok) {
-                const errorResponse = await response.json();
-                console.error('Error response:', errorResponse);
+                return response.json().then(response => {console.log(response.Error);})
             }
             useActiveTokenStore.setState({ activeToken: input });
             const data = await response.json();
             // console.log(data);
+            
 
             // Split the URL at the "?" character, insert the new string, and join them back together
             const urlParts = url.split('?');
@@ -68,8 +68,7 @@ const useTokenDetailsStore = create(set => ({
 
             const tokenChartResponse = await fetch(chartUrl);
             if (!tokenChartResponse.ok) {
-                const errorResponse = await response.json();
-                console.error('Error response:', errorResponse);
+                return tokenChartResponse.json().then(tokenChartResponse => {console.log(tokenChartResponse.Error);})
             }
             const tokenData = await tokenChartResponse.json();
             // console.log(tokenData.prices);
