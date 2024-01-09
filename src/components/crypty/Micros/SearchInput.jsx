@@ -23,7 +23,10 @@ const SearchInput = () => {
         if (input === ''){
             alert('Please enter an address or serch by coin id');
         }else{
+
             fetchDetails(input, baseUrl);
+
+
             console.log('Active Token:', input);
         };
         setInput('');

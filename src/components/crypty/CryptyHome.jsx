@@ -6,7 +6,7 @@ import PriceStats from './Micros/PriceStats'
 import GlobalMarket from './GlobalMarket'
 import Watchlist from './Micros/Watchlist'
 import ListDetails from './ListDetails'
-// import SearchInput from './Micros/SearchInput'
+import SearchInput from './Micros/SearchInput'
 import Categories from './Categories'
 import TokenDetailsCard from './TokenDetailsCard'
 import TokenDescription from './TokenDescription'
@@ -21,11 +21,10 @@ const CryptyHome = () => {
     const baseUrl = useBaseUrl(state => state.baseUrl);
     const activeToken = useActiveTokenStore(state => state.activeToken);
     const fetchDetails = useTokenDetailsStore(state => state.fetchDetails);
-    const tokenLoading = useTokenDetailsStore(state => state.loading);
     const fetchGlobal = useGlobalStore(state => state.fetchGlobal);
     
     const [globalLoading, setGlobalLoading] = useState(false);
-    // const [tokenLoading, setTokenLoading] = useState(false);
+    const [tokenLoading, setTokenLoading] = useState(false);
 
 
     const { colorMode } = useColorMode()
@@ -33,38 +32,18 @@ const CryptyHome = () => {
     const color = useColorModeValue('gray', '#dfe5ed');
 
 
-
-    const [input, setInput] = useState('');
-
-
-    const handleUpdateInput = (e) => {
-        const value = e.target.value;
-        setInput(value);
-    };
-
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (input === ''){
-            alert('Please enter an address or serch by coin id');
-        }else{
-
-            fetchDetails(input, baseUrl);
-
-            console.log('Active Token:', input);
-        };
-        setInput('');
-    };
-
-
-
     // I am using a loading state here and attaching the toggling to the fetch functions .then method. this is because i only want to display the loading skeleton on initial page load. 
 
     useEffect(() => {
-        // setTokenLoading(true);
+        setTokenLoading(true);
 
         // console.log(activeToken);
-        fetchDetails(activeToken, baseUrl);
+        fetchDetails(activeToken, baseUrl).then(() => {
+            // seeing as we are setting our loading function here. once fetch is done is turns off loading sometimes it takes a while after before the content is set in the store and reflects in the dom. so im using setimeout to delay the dismissal of loading. 
+            setTimeout(() => {
+                setTokenLoading(false);
+            }, 1000);
+        });
 
         // Set up interval to fetch details every 30 seconds
         const intervalId = setInterval(() => {
@@ -133,11 +112,11 @@ const CryptyHome = () => {
                    
                     
                     {/* search input component for md and lg screens only */}
-                    {/* <SearchInput /> */}
-                    <form id='myform' onSubmit={handleSubmit}>
+                    <SearchInput />
+                    {/* <form id='myform' onSubmit={handleSubmit}>
                         <Input onChange={handleUpdateInput}
                         value={input} />
-                    </form>
+                    </form> */}
                 </Flex>
             </Box>
             
