@@ -65,7 +65,7 @@
     border-radius: 15px;
     /* box-shadow: inset 2px 2px 10px #a86b48; */
     height: 60px;
-  }
+}
 
   .input::placeholder{
     color: #91a2b8;
@@ -115,7 +115,13 @@
     .go{
       margin-bottom: 15px;
     }
-
+    .loader {
+      --dim: 1.4rem !important;
+      margin-bottom: 20px !important;
+    }
+    .loader .circle {
+      --dim: 0.6rem !important;
+    }
   }
 
   /* Tablets */
@@ -194,5 +200,74 @@
 .cat-card {
   @media (min-width: 768px) and (max-width: 1024px) {
     padding: 5px;
+  }
+}
+
+
+
+
+
+
+.loader {
+  --dim: 1.7rem;
+  width: var(--dim);
+  height: var(--dim);
+  position: absolute;
+  animation: spin988 2s linear infinite;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 22px;
+  margin-right: 15px;
+}
+
+.loader .circle {
+  /* --color: #fff; */
+  --dim: 0.75rem;
+  width: var(--dim);
+  height: var(--dim);
+  background-color: var(--color);
+  border-radius: 50%;
+  position: absolute;
+}
+
+.loader .circle:nth-child(1) {
+  top: 0;
+  left: 0;
+}
+
+.loader .circle:nth-child(2) {
+  top: 0;
+  right: 0;
+}
+
+.loader .circle:nth-child(3) {
+  bottom: 0;
+  left: 0;
+}
+
+.loader .circle:nth-child(4) {
+  bottom: 0;
+  right: 0;
+}
+
+@keyframes spin988 {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+
+  20%, 25% {
+    transform: scale(1.3) rotate(90deg);
+  }
+
+  45%, 50% {
+    transform: scale(1) rotate(180deg);
+  }
+
+  70%, 75% {
+    transform: scale(1.3) rotate(270deg);
+  }
+
+  95%, 100% {
+    transform: scale(1) rotate(360deg);
   }
 }

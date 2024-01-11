@@ -56,8 +56,10 @@ export const onSendMessage = async (message, messageId) => {
         if (json.choices && json.choices.length > 0) {
             let message = json.choices[0].text.trim();
             await sendMessageToSupabase('49fce734-a6ec-431f-9afe-651edee8f9f7', message, messageId);
+            return true; //message sent successfully
         } else {
             console.error('Invalid response from OpenAI API:', json);
+            return false; //message sennd failed
         }
         // setLoading(false);
     } catch (error) {

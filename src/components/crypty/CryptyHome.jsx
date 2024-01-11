@@ -1,5 +1,5 @@
-import { Box, Flex, Spacer, Grid, GridItem,  useColorMode, Skeleton, useColorModeValue, Input} from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import { Box, Flex, Spacer, Grid, GridItem,  useColorMode, Skeleton, useColorModeValue} from '@chakra-ui/react'
+import React, { useEffect, useState, useRef } from 'react'
 
 import Chart from './Chart'
 import PriceStats from './Micros/PriceStats'
@@ -31,6 +31,7 @@ const CryptyHome = () => {
 
     const color = useColorModeValue('gray', '#dfe5ed');
 
+    const intervalIdRef = useRef(null);
 
     // I am using a loading state here and attaching the toggling to the fetch functions .then method. this is because i only want to display the loading skeleton on initial page load. 
 
@@ -45,20 +46,44 @@ const CryptyHome = () => {
             }, 1000);
         });
 
-        // Set up interval to fetch details every 30 seconds
-        const intervalId = setInterval(() => {
-            // alert(activeToken);
-            fetchDetails(activeToken, baseUrl);
-        }, 30000); // 30000 milliseconds = 30 seconds
-
-        // Clear interval on component unmount
-        return () => clearInterval(intervalId);
     }, [activeToken]);
+
+
+    useEffect(() => {
+
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'visible' && navigator.onLine) {
+                intervalIdRef.current = setInterval(() => {
+                    // alert(activeToken);
+                    fetchDetails(activeToken, baseUrl);
+                    // alert('fetched');
+                }, 30000); // 30000 milliseconds = 30 seconds
+            } else {
+                clearInterval(intervalIdRef.current);
+            }
+        };
+    
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        window.addEventListener('online', handleVisibilityChange);
+        window.addEventListener('offline', handleVisibilityChange);
+    
+        handleVisibilityChange(); // Initial check
+    
+        return () => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            window.removeEventListener('online', handleVisibilityChange);
+            window.removeEventListener('offline', handleVisibilityChange);
+            clearInterval(intervalIdRef.current);
+        };
+    }, [activeToken]);
+
 
     useEffect(() => {
         setGlobalLoading(true);
         fetchGlobal(baseUrl).then(() => setGlobalLoading(false));
     }, []);
+
+
 
     return (
         <>

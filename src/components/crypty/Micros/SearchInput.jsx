@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
-import { useColorMode, Input, InputGroup, InputRightElement, Box, Flex, useColorModeValue, FormControl, FormHelperText, FormErrorMessage } from '@chakra-ui/react'
+import { Input, InputGroup, InputRightElement, Box, Flex, useColorModeValue,} from '@chakra-ui/react'
 import { Search } from '../../Icons';
 import { useEffect } from 'react';
-import useTokenDetailsStore from '../Stores/tokenDetailsStore';
-import useBaseUrl from '../Stores/baseUrlStore';
+// import useTokenDetailsStore from '../Stores/tokenDetailsStore';
+// import useBaseUrl from '../Stores/baseUrlStore';
+import useActiveTokenStore from '../Stores/activeTokenStore';
 
 const SearchInput = () => {
-    const baseUrl = useBaseUrl(state => state.baseUrl);
-    const fetchDetails = useTokenDetailsStore(state => state.fetchDetails);
+    // const baseUrl = useBaseUrl(state => state.baseUrl);
+    // const fetchDetails = useTokenDetailsStore(state => state.fetchDetails);
 
     const [input, setInput] = useState('');
 
@@ -24,10 +25,9 @@ const SearchInput = () => {
             alert('Please enter an address or serch by coin id');
         }else{
 
-            fetchDetails(input, baseUrl);
+            useActiveTokenStore.setState({ activeToken: input });
 
-
-            console.log('Active Token:', input);
+            // console.log('Active Token:', input);
         };
         setInput('');
     };
