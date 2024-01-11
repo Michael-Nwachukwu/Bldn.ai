@@ -37,7 +37,7 @@ export const onSendMessage = async (message, messageId) => {
             Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
         },
         body: JSON.stringify({
-            model: 'text-davinci-003',
+            model: 'gpt-3.5-turbo-instruct',
             prompt:
                 'Extract keywords from this text. Make the first letter of every word uppercase and separate with commas:\n\n' +
                 message +
