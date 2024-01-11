@@ -56,7 +56,10 @@ const useTokenDetailsStore = create(set => ({
             if (!response.ok) {
                 return response.json().then(response => {console.log(response.error); throw new Error("error fetching token details");})
             }
-            useActiveTokenStore.setState({ activeToken: input });
+            
+            // calling the function from activeTokenStore. This function sets the activeToken state to the input value and also saves the value to local storage for future retrievals
+            useActiveTokenStore.getState().setActiveToken(input); // Call setActiveToken function
+
             const data = await response.json();
             // console.log(data);
             
