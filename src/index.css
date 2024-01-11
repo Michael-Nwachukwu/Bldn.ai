@@ -135,9 +135,9 @@
 
 
 
-/* body, html{
-  overflow-y: hidden;
-} */
+body, html{
+  overflow-y: hidden !important;
+}
 
 #chartContainer{
   min-width: 100% !important;

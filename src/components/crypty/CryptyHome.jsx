@@ -165,6 +165,8 @@ const CryptyHome = () => {
             </Grid>
 
             {/* <Floating /> */}
+            
+            <Box h={'190px'}></Box>
 
         </>
     )

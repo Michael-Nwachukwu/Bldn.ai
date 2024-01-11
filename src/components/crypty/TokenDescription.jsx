@@ -6,7 +6,7 @@ const TokenDescription = ({loading}) => {
   const { description, symbol } = useTokenDetailsStore();
   return (
     <>
-        <Box p={3}>
+        <Box p={3} pb={12}>
             <Heading py={3}>
                 About {symbol}.
             </Heading>

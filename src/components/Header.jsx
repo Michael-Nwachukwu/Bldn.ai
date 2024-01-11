@@ -167,7 +167,7 @@ const Header = ({ session, setSession, fill, heading }) => {
   }
 
   return (
-    <Box>
+    <Box >
       <Box borderBottom={"1px"} borderColor="gray.300" pt={3} pb={{ md:2 }}>
         <Flex minWidth="max-content" >
 

@@ -127,7 +127,8 @@ const useTokenDetailsStore = create(set => ({
             
         } catch (error) {
             // set({ error: 'Coin not found' });
-            alert(error);
+            // alert(error);
+            return
         }
     },
 
