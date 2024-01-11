@@ -11,9 +11,7 @@ const TokenDescription = ({loading}) => {
                 About {symbol}.
             </Heading>
             <SkeletonText isLoaded={!loading} noOfLines={10} skeletonHeight='3'>    
-              <Text h={{ base:'auto', sm:60 }} overflow={'scroll'} color={useColorModeValue('','#9fa0a2')}>
-                  {description}
-              </Text>
+              <Text h={{ base:'auto', sm:60 }} overflow={'scroll'} color={useColorModeValue('','#9fa0a2')} dangerouslySetInnerHTML={{ __html: description }} />
             </SkeletonText>
         </Box>
     </>
