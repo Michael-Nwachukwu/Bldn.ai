@@ -85,9 +85,9 @@ const CryptyHome = () => {
 
 
 
-    return (
+    return ( 
         <>
-            <Box overflowX={'hidden'}>
+            <Box>
 
                 <Box display={{ lg:'none' }}>
                     <Skeleton isLoaded={!globalLoading} borderRadius={10}>
@@ -165,9 +165,6 @@ const CryptyHome = () => {
             </Grid>
 
             {/* <Floating /> */}
-            
-            <Box h={'190px'}></Box>
-
         </>
     )
 }

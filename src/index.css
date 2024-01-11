@@ -133,11 +133,9 @@
   }
 }
 
-
-
-body, html{
-  overflow-y: hidden !important;
-}
+/* body, html{
+  overflow-y: hidden;
+} */
 
 #chartContainer{
   min-width: 100% !important;

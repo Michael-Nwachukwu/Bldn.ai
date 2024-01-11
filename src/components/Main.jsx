@@ -36,7 +36,7 @@ const Main = ({ session}) => {
         mt={{ base:3, md:10, lg:5 }} 
         onChange={(index) => setHeading(headings[index])}
       >
-        <TabList position={'fixed'} w={{ base:'90%', lg:'78%' }} mb="0.5em" fontFamily="syncopate">
+        <TabList mb="0.5em" fontFamily="syncopate">
           <Tab
             borderBottom={"1px"}
             _selected={{ border: "1px", borderBottom: "none" }}
@@ -62,16 +62,16 @@ const Main = ({ session}) => {
         </TabList>
 
         <TabPanels>
-          <TabPanel mt={8} >
+          <TabPanel>
             <Flex direction="column">
               <Chatwidget flex="1" />
               <Chatinput onSendMessage={onSendMessage} />
             </Flex>
           </TabPanel>
-          <TabPanel p={-10} pb={12} mt={12} h={'100vh'} overflowY={'scroll'}>
+          <TabPanel p={-10}>
             <CryptyHome />
           </TabPanel>
-          <TabPanel mt={8}>
+          <TabPanel>
             <Input
               border={"1px"}
               bg={"transparent"}
