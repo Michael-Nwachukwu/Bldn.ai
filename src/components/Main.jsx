@@ -48,6 +48,7 @@ const Main = ({ session}) => {
             borderBottom={"1px"}
             _selected={{ border: "1px", borderBottom: "none" }}
             fontSize={{ base:'10px', md:'13px' }}
+            isDisabled
           >
             Crypty
           </Tab>
@@ -69,7 +70,7 @@ const Main = ({ session}) => {
             </Flex>
           </TabPanel>
           <TabPanel p={-10}>
-            <CryptyHome />
+            {/* <CryptyHome /> */}
           </TabPanel>
           <TabPanel>
             <Input
