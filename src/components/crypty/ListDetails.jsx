@@ -7,7 +7,7 @@ const ListDetails = ({color, loading}) => {
 
     return (
         <>
-            <List px={3} spacing={1.5} color={color} fontSize={{ base:'xs', sm:'sm' }} w={{ base:'100%', lg:'xl' }}>
+            <List px={3} spacing={1.5} color={color} fontSize={{ base:'xs', sm:'sm' }} w={{ base:'100%', lg:'md' }}>
                 <ListItem>
                     <SkeletonText isLoaded={!loading} noOfLines={1} skeletonHeight='5'>
                         <Flex justify={'space-between'} align={'center'}>

@@ -1,15 +1,18 @@
-// rafce for gen
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Container, Box, useColorMode, useColorModeValue, VStack } from "@chakra-ui/react";
 import Main from "./components/Main";
 import Auth from "./components/Auth";
 import { supabase } from "./services/supabase";
+import useGetUserIdStore from "./components/crypty/Stores/getUserIdStore";
 
 
 const App = () => {
   // State variable to manage the user session
   const [session, setSession] = useState(null);
+  const getUserId = useGetUserIdStore(state => state.getUserId);
+  const { userId } = useGetUserIdStore(state => state.userId);
+
   const { colorMode, toggleColorMode } = useColorMode()
 
   const bg = useColorModeValue('#F7F1ED', '#0e1217')
@@ -27,9 +30,13 @@ const App = () => {
       // Update the user session in the component state on state changes
       setSession(session);
     });
-
     
   }, []); // Run the effect only once on component mount
+
+
+  useEffect(() => {
+    getUserId();
+  })
 
 
   return (

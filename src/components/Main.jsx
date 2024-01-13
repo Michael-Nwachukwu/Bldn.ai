@@ -13,7 +13,6 @@ import Chatinput from "./Chatinput";
 import { onSendMessage } from "../services/supabaseService";
 import Header from "./Header";
 import Chatwidget from "./Chatwidget";
-import Home from "./crypty/CryptyHome";
 import CryptyHome from "./crypty/CryptyHome";
 import { useState } from "react";
 
@@ -48,7 +47,7 @@ const Main = ({ session}) => {
             borderBottom={"1px"}
             _selected={{ border: "1px", borderBottom: "none" }}
             fontSize={{ base:'10px', md:'13px' }}
-            isDisabled
+            // isDisabled
           >
             Crypty
           </Tab>
@@ -70,7 +69,7 @@ const Main = ({ session}) => {
             </Flex>
           </TabPanel>
           <TabPanel p={-10}>
-            {/* <CryptyHome /> */}
+            <CryptyHome />
           </TabPanel>
           <TabPanel>
             <Input

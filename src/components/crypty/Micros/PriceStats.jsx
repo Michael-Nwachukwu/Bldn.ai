@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Flex, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, useColorMode, SkeletonText, Skeleton, SkeletonCircle } from '@chakra-ui/react';
-import Watchlist from './Watchlist';
 import useTokenDetailsStore from '../Stores/tokenDetailsStore';
+import WatchlistBtn from './WatchlistBtn';
 
 const PriceStats = ({loading}) => {
     const {image, name, symbol, price, priceChangePercentageDaily } = useTokenDetailsStore();
@@ -47,7 +47,7 @@ const PriceStats = ({loading}) => {
 
                     {/* Add to watclist icon btn */}
                     <Box display={{ sm:'none' }}>
-                        <Watchlist colorMode={colorMode} />
+                        <WatchlistBtn colorMode={colorMode} />
                     </Box>
 
                 </Flex>

@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
-import { Input, InputGroup, InputRightElement, Box, Flex, useColorModeValue,} from '@chakra-ui/react'
+import { Input, InputGroup, InputRightElement, Box, Flex, useColorModeValue} from '@chakra-ui/react'
 import { Search } from '../../Icons';
 import { useEffect } from 'react';
-// import useTokenDetailsStore from '../Stores/tokenDetailsStore';
-// import useBaseUrl from '../Stores/baseUrlStore';
 import useActiveTokenStore from '../Stores/activeTokenStore';
+import Watchlist from './Watchlist';
 
 const SearchInput = () => {
-    // const baseUrl = useBaseUrl(state => state.baseUrl);
-    // const fetchDetails = useTokenDetailsStore(state => state.fetchDetails);
-
+    
     const [input, setInput] = useState('');
 
 
@@ -27,7 +24,6 @@ const SearchInput = () => {
 
             useActiveTokenStore.setState({ activeToken: input });
 
-            // console.log('Active Token:', input);
         };
         setInput('');
     };
@@ -49,32 +45,38 @@ const SearchInput = () => {
     return (
         <>
             {/* search input component for md and lg screens only */}
-            <form onSubmit={handleSubmit} style={{ width:'100%' }}>
-                <InputGroup ml={'auto'} size='md' display={{ base:'none', md:'flex' }} maxW={'xs'}>
-                    <Input
-                        id="searchInput"
-                        focusBorderColor={ useColorModeValue('brand.800', '#dfe5ed') }
-                        border={useColorModeValue('1px', '')}
-                        bg={useColorModeValue('transparent', "#1b232d")}
-                        py={5}
-                        placeholder='Search'
-                        color={useColorModeValue('brand.800', 'white')}
-                        onChange={handleUpdateInput}
-                        value={input}
-                        name={"password"}
-                        _hover={{ border:'' }}
-                        _placeholder={{ color: useColorModeValue('brand.800', '#dfe5ed') }}
-                        required
-                    />
-                    <InputRightElement width='4.5rem' pl={6}>
-                        <Flex justifyContent={'center'} w={6} bg={useColorModeValue('brand.700', "#384a61")} opacity={'70%'} color={"white"} borderRadius={5} fontWeight={'bold'}
-                            _hover={{ bg:'' }} 
-                        >
-                            /
-                        </Flex>
-                    </InputRightElement>
-                </InputGroup>
-            </form>
+
+            <Flex maxW={'65%'} ml={'auto'} gap={3}>
+                <Watchlist />
+                <form onSubmit={handleSubmit} style={{ width:'100%' }}>
+                    <InputGroup size='md' display={{ base:'none', md:'flex' }}>
+                        <Input
+                            id="searchInput"
+                            focusBorderColor={ useColorModeValue('brand.800', '#dfe5ed') }
+                            border={useColorModeValue('1px', '')}
+                            bg={useColorModeValue('transparent', "#1b232d")}
+                            py={5}
+                            placeholder='Search'
+                            color={useColorModeValue('brand.800', 'white')}
+                            onChange={handleUpdateInput}
+                            value={input}
+                            name={"password"}
+                            _hover={{ border:'' }}
+                            _placeholder={{ color: useColorModeValue('brand.800', '#dfe5ed') }}
+                            required
+                        />
+                        <InputRightElement width='4.5rem' pl={6}>
+                            <Flex justifyContent={'center'} w={6} bg={useColorModeValue('brand.700', "#384a61")} opacity={'70%'} color={"white"} borderRadius={5} fontWeight={'bold'}
+                                _hover={{ bg:'' }} 
+                            >
+                                /
+                            </Flex>
+                        </InputRightElement>
+                    </InputGroup>
+                </form>
+            </Flex>
+
+            
 
             <Box w={'70%'} ml={'auto'} pt={3} display={{ sm:'none' }} mb={3}>
                 <form onSubmit={handleSubmit} style={{ width:'100%' }} className="form-control">

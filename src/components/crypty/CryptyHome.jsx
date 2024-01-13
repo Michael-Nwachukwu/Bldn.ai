@@ -4,7 +4,8 @@ import React, { useEffect, useState, useRef } from 'react'
 import Chart from './Chart'
 import PriceStats from './Micros/PriceStats'
 import GlobalMarket from './GlobalMarket'
-import Watchlist from './Micros/Watchlist'
+
+import WatchlistBtn from './Micros/WatchlistBtn'
 import ListDetails from './ListDetails'
 import SearchInput from './Micros/SearchInput'
 import Categories from './Categories'
@@ -117,8 +118,9 @@ const CryptyHome = () => {
                         <Flex alignItems={"center"} display={{ base:'none', md:'flex' }} gap={3}>
 
                             {/* Add to watchlist md/lg screens */}
-                            <Watchlist colorMode={colorMode} />
+                            <WatchlistBtn colorMode={colorMode} />
 
+                            
                             <GlobalMarket loading={globalLoading} />
 
                         </Flex>
@@ -132,16 +134,17 @@ const CryptyHome = () => {
                 <Flex direction={{ base:'column', sm:'row' }} justify={{ sm:'space-between' }} align={{base:'end',  lg:'center' }}>
 
                     {/* Active token market stats: stats under the pricestats */}
-                    
+                    <Box w={{ lg:'50%' }}>
                         <ListDetails color={color} loading={tokenLoading} />
+                    </Box>
                    
                     
                     {/* search input component for md and lg screens only */}
-                    <SearchInput />
-                    {/* <form id='myform' onSubmit={handleSubmit}>
-                        <Input onChange={handleUpdateInput}
-                        value={input} />
-                    </form> */}
+                    <Box w={{ lg:'100%' }}>
+                        <SearchInput />
+                    </Box>
+
+                
                 </Flex>
             </Box>
             

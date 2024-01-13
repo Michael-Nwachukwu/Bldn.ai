@@ -24,7 +24,7 @@ const useCategoriesStore = create(set => ({
 
     } catch (error) {
       console.error(error);
-      alert(error);
+      // alert(error);
     }
   },
 
@@ -48,7 +48,7 @@ const useCategoriesStore = create(set => ({
 
     } catch (error) {
       console.error(error);
-      alert(error);
+      // alert(error);
     }
   },
 
@@ -72,7 +72,7 @@ const useCategoriesStore = create(set => ({
   
     } catch (error) {
       console.error(error);
-      alert(error);
+      // alert(error);
     }
   },
   
