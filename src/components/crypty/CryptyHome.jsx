@@ -17,6 +17,8 @@ import useTokenDetailsStore from './Stores/tokenDetailsStore'
 import useGlobalStore from './Stores/globalMarketStore'
 import useBaseUrl from './Stores/baseUrlStore'
 import useActiveTokenStore from './Stores/activeTokenStore'
+import useWatchListStore from './Stores/watchListStore'
+import useGetUserIdStore from './Stores/getUserIdStore'
 
 const CryptyHome = () => {
     const baseUrl = useBaseUrl(state => state.baseUrl);
@@ -26,6 +28,9 @@ const CryptyHome = () => {
     
     const [globalLoading, setGlobalLoading] = useState(false);
     const [tokenLoading, setTokenLoading] = useState(false);
+
+    const fetchWatchList = useWatchListStore(state => state.fetchWatchList);
+    const userId = useGetUserIdStore(state => state.userId);
 
 
     const { colorMode } = useColorMode()
@@ -84,6 +89,10 @@ const CryptyHome = () => {
         fetchGlobal(baseUrl).then(() => setGlobalLoading(false));
     }, []);
 
+
+    useEffect(() => {
+        fetchWatchList(userId);
+    }, []);
 
 
     return ( 

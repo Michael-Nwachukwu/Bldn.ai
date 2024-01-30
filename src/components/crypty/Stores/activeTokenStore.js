@@ -5,6 +5,8 @@ import { create } from "zustand";
 
 const useActiveTokenStore = create(set => ({
     activeToken: localStorage.getItem('activeToken') || 'bitcoin',
+    activeTokenSymbol: '',
+    activeTokenName: '',
     setActiveToken: (input) => {
         set({ activeToken: input });
         localStorage.setItem('activeToken', input);

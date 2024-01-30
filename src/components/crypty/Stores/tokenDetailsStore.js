@@ -2,10 +2,16 @@ import { create } from "zustand";
 import useActiveTokenStore from "./activeTokenStore";
 
 const getAssetPlatformId = async (contractAddress) => {
-    const response = await fetch('https://api.coingecko.com/api/v3/coins/list?x_cg_demo_api_key=CG-xEDfyZh1gVhZ5LFCEuzwUW6M');
-    const data = await response.json();
-    const coin = data.find(coin => coin.contract_address === contractAddress);
-    return coin ? coin.id : null;
+    const controller = new AbortController();
+    const signal = controller.signal;
+    try {
+        const response = await fetch('https://api.coingecko.com/api/v3/coins/list?x_cg_demo_api_key=CG-xEDfyZh1gVhZ5LFCEuzwUW6M', { signal });
+        const data = await response.json();
+        const coin = data.find(coin => coin.contract_address === contractAddress);
+        return coin ? coin.id : null;
+    } catch (error) {
+        controller.abort();
+    }
 }
 
 const formatUsdCurrency = (value) => {
@@ -37,6 +43,8 @@ const useTokenDetailsStore = create(set => ({
     loading: false,
     
     fetchDetails: async (input, baseUrl) => {
+        const controller = new AbortController();
+        const signal = controller.signal;
         set({ loading: true });
         
         let url;
@@ -51,8 +59,7 @@ const useTokenDetailsStore = create(set => ({
         }
 
         try {
-            // const response = await axios.get(url);
-            const response = await fetch(url);
+            const response = await fetch(url, { signal });
             if (!response.ok) {
                 return response.json().then(response => {console.log(response.error); throw new Error("error fetching token details");})
             }
@@ -68,7 +75,7 @@ const useTokenDetailsStore = create(set => ({
             const urlParts = url.split('?');
             const chartUrl = `${urlParts[0]}/market_chart/?vs_currency=usd&days=7?${urlParts[1]}`;
 
-            const tokenChartResponse = await fetch(chartUrl);
+            const tokenChartResponse = await fetch(chartUrl, { signal });
             if (!tokenChartResponse.ok) {
                 return tokenChartResponse.json().then(tokenChartResponse => {console.log(tokenChartResponse.error);})
             }
@@ -98,7 +105,6 @@ const useTokenDetailsStore = create(set => ({
             const description = data.description.en;
             const tokenChartData = tokenData.prices;
 
-
             set({
                 price: price,
                 name: name,
@@ -124,6 +130,10 @@ const useTokenDetailsStore = create(set => ({
                 tokenChart: tokenChartData,
                 loading: false
             });
+
+            // set the activeTokenDetails
+            useActiveTokenStore.setState({ activeTokenSymbol: symbol, activeTokenName: name });
+
             
         } catch (error) {
             // set({ error: 'Coin not found' });
