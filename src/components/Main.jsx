@@ -26,7 +26,7 @@ const Main = ({ session}) => {
   // maxH="100vh"
   return (
     <VStack  spacing={0}>
-      <Header session={session} heading={heading} />
+      {/* <Header session={session} heading={heading} /> */}
       <Tabs 
         isFitted 
         variant="enclosed" 
