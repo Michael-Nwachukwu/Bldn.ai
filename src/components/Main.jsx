@@ -26,7 +26,7 @@ const Main = ({ session}) => {
   // maxH="100vh"
   return (
     <VStack  spacing={0}>
-      {/* <Header session={session} heading={heading} /> */}
+      <Header session={session} heading={heading} />
       <Tabs 
         isFitted 
         variant="enclosed" 
@@ -47,7 +47,7 @@ const Main = ({ session}) => {
             borderBottom={"1px"}
             _selected={{ border: "1px", borderBottom: "none" }}
             fontSize={{ base:'10px', md:'13px' }}
-            // isDisabled
+            isDisabled
           >
             Crypty
           </Tab>
