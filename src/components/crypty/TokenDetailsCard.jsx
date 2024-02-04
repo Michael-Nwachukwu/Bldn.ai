@@ -3,6 +3,7 @@ import { Card, CardBody, Text, List, ListItem, Flex, Divider, Box, Stat, StatNum
 import { useColorModeValue } from '@chakra-ui/react'
 import { OpenAi } from '../Icons';
 import useTokenDetailsStore from './Stores/tokenDetailsStore';
+import dateFormat from 'dateformat';
 
 const TokenDetailsCard = () => {
     const { symbol, price, marketCap, tradingVolume, fdv, dailyLow, dailyHigh, marketCapRank, ath, athChangePercentage, athDate, atl, atlChangePercentage, atlDate, description, totalSupply, circulatingSupply } = useTokenDetailsStore();
@@ -91,7 +92,9 @@ const TokenDetailsCard = () => {
                                                 </StatHelpText>
                                             </Flex>
                                             {/* <small style={{ color: smallColor }}>Feb 24, 2018 (almost 6 years)</small> */}
-                                            <small style={{ color: smallColor }}>{athDate}</small>
+                                            <small style={{ color: smallColor }}>
+                                                {dateFormat(athDate, "h:MM TT, mmmm dS, yyyy")}
+                                            </small>
                                         </Flex>
                                     </Stat>
                                 </Box>
@@ -112,7 +115,9 @@ const TokenDetailsCard = () => {
                                                     <StatArrow color={'green.300'} mb={2} type='increase' />
                                                 </StatHelpText>
                                             </Flex>
-                                            <small style={{ color: smallColor }}>{atlDate}</small>
+                                            <small style={{ color: smallColor }}>
+                                                {dateFormat(atlDate, "h:MM TT, mmmm dS, yyyy")}
+                                            </small>
                                         </Flex>
                                     </Stat>
                                 </Box>
@@ -122,7 +127,7 @@ const TokenDetailsCard = () => {
 
                     <Card bg={"#0e1217"} opacity={'60%'} borderRadius={20} minH={48} mt={3}>
                         <CardBody>
-                            <Flex direction={'column'} justify={'space-between'} gap={{ base:4, sm:3 }}>
+                            {/* <Flex direction={'column'} justify={'space-between'} gap={{ base:4, sm:3 }}>
                                 <Text fontSize={'sm'} color={'white'}>
                                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui error est sit officiis eum ea? Expedita molestiae ipsam rem nisi placeat impedit porro cupiditate culpa rerum ipsa. Accusantium, nulla id! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, commodi!
                                 </Text>
@@ -135,6 +140,11 @@ const TokenDetailsCard = () => {
                                         </span>
                                     </Flex>
                                 </Flex>
+                            </Flex> */}
+                            <Flex justify={'center'} align={'center'} h={'100%'}>
+                                <Text color={'white'} px={6} textAlign={'center'} mt={12}>
+                                    AI GENERATED RESPONSES ARE COMING SOON
+                                </Text>
                             </Flex>
                         </CardBody>
                     </Card>

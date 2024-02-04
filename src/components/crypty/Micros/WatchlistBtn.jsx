@@ -23,7 +23,8 @@ const WatchlistBtn = ({colorMode}) => {
     <>
       <Link onClick={handleClick} disabled={isTokenInWatchlist}>
         <Tag size={'md'} variant={colorMode == 'light' ? 'outline' : 'subtle'} colorScheme={isTokenInWatchlist ? 'green' : 'brand'} py={1}>
-            <TagLabel display={{ base:'none', lg:'block' }} pr={2}>{isTokenInWatchlist ? 'Added' : 'Add to Watchlist'}</TagLabel>
+            <TagLabel display={{ base:'none', lg:'block' }} pr={2}>
+              {isTokenInWatchlist ? 'Added' : 'Add to Watchlist'}</TagLabel>
             <TagRightIcon as={starSvg} />
         </Tag>
       </Link>

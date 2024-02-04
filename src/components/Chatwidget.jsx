@@ -20,38 +20,38 @@ const Chatwidget = () => {
     let rule = css({
 
         '@media(max-width: 360px)': {
-            height:'27.5rem',
+            height:'30.5rem',
         },
 
         '@media(min-width: 361px)': {
-            height:'24rem',
+            height:'27rem',
         },
 
         '@media(min-width: 390px)': {
-            height:'25rem',
+            height:'28rem',
         },
 
         '@media(min-width: 414px)': {
-            height:'28.5rem',
+            height:'31.5rem',
         },
 
         '@media(min-width: 428px)': {
-            height:'29rem',
+            height:'32rem',
         },
 
         '@media only screen and (min-width: 768px) and (max-width: 1023px)': {
-            height:'35rem',
+            height:'38rem',
         },
 
         '@media only screen and (min-width: 800px) and (max-width: 1279px)': {
-            height:'46rem',
+            height:'49rem',
         },
 
         '@media only screen and (min-width: 884px) and (max-width: 1104px)': {
-            height:'41rem',
+            height:'44rem',
         },
 
-        height:'29rem',
+        height:'32rem',
         
     })
 

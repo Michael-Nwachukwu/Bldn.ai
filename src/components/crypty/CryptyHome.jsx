@@ -143,13 +143,13 @@ const CryptyHome = () => {
                 <Flex direction={{ base:'column', sm:'row' }} justify={{ sm:'space-between' }} align={{base:'end',  lg:'center' }}>
 
                     {/* Active token market stats: stats under the pricestats */}
-                    <Box w={{ lg:'50%' }}>
+                    <Box w={{ base:'100%', lg:'50%' }} mr={'auto'}>
                         <ListDetails color={color} loading={tokenLoading} />
                     </Box>
                    
                     
                     {/* search input component for md and lg screens only */}
-                    <Box w={{ lg:'100%' }}>
+                    <Box w={{ base:'100%', lg:'100%' }} ml={'auto'}>
                         <SearchInput />
                     </Box>
 

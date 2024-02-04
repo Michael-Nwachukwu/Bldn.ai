@@ -46,10 +46,10 @@ const SearchInput = () => {
         <>
             {/* search input component for md and lg screens only */}
 
-            <Flex maxW={'65%'} ml={'auto'} gap={3}>
+            <Flex maxW={'65%'} ml={'auto'} gap={3} display={{ base:'none', md:'flex' }}>
                 <Watchlist />
                 <form onSubmit={handleSubmit} style={{ width:'100%' }}>
-                    <InputGroup size='md' display={{ base:'none', md:'flex' }}>
+                    <InputGroup size='md'>
                         <Input
                             id="searchInput"
                             focusBorderColor={ useColorModeValue('brand.800', '#dfe5ed') }
@@ -74,19 +74,27 @@ const SearchInput = () => {
                         </InputRightElement>
                     </InputGroup>
                 </form>
+            </Flex> 
+
+            <Flex direction={'column'} display={{ sm:'none' }} mb={3}>
+
+                <Box w={'70%'} ml={'auto'} pt={3} >
+                    <form onSubmit={handleSubmit} style={{ width:'100%' }} className="form-control">
+                        <input className="input-search input-alt" value={input} onChange={handleUpdateInput} placeholder='Search' required type="text" style={{ textAlign: 'right', paddingRight:'30px', color: useColorModeValue('black', 'white') }} />
+                        <span className="input-border input-border-alt"></span>
+                        <a href="#" type='submit' onClick={handleSubmit}>
+                            <Search fill={'#464a4d'} />
+                        </a>
+                    </form>
+                </Box>
+
+                <Box>
+                    <Watchlist />
+                </Box>
+
             </Flex>
 
             
-
-            <Box w={'70%'} ml={'auto'} pt={3} display={{ sm:'none' }} mb={3}>
-                <form onSubmit={handleSubmit} style={{ width:'100%' }} className="form-control">
-                    <input className="input-search input-alt" value={input} onChange={handleUpdateInput} placeholder='Search' required="" type="text" style={{ textAlign: 'right', paddingRight:'30px' }} />
-                    <span className="input-border input-border-alt"></span>
-                    <a href="#" type='submit' onClick={handleSubmit}>
-                        <Search fill={'#464a4d'} />
-                    </a>
-                </form>
-            </Box>
             
         </>
     )

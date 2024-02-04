@@ -19,22 +19,34 @@ const updateWatchlist = async (userId, watchlist) => {
 
 const useWatchListStore = create( set => ({
 
-  watchList: [],
-
+  watchlist: [],
   fetchWatchList: async (userId) => {
-    const { data, error } = await supabase
-    .from('profiles')
-    .select('watchlist')
-    .eq('id', userId);
+    try {
+      // Check if userId is a non-empty string before making the query
+      if (!userId || typeof userId !== 'string') {
+        console.error('Invalid userId:', userId);
+        return [];
+      }
 
-    if (error) {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('watchlist')
+        .eq('id', userId);
+
+      if (error) {
+        console.error('Error fetching watchlist:', error.message);
+        return [];
+      }
+
+      // Extract and return the watchlist array, ensuring it's not undefined
+      const watchlist = data?.[0]?.watchlist || [];
+
+      set({ watchlist });
+      return watchlist;
+    } catch (error) {
       console.error('Error fetching watchlist:', error.message);
       return [];
     }
-    // Extract and return the watchlist array
-    const watchlist =  data?.[0]?.watchlist || [];
-
-    set({ watchlist: watchlist });
   },
 
   addToWatchList: async (userId, coinId) => {

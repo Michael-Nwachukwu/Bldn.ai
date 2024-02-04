@@ -167,9 +167,9 @@ const Header = ({ session, setSession, fill, heading }) => {
   }
 
   return (
-    <Box >
-      <Box borderBottom={"1px"} borderColor="gray.300" pt={3} pb={{ md:2 }}>
-        <Flex minWidth="max-content" >
+    <Box minWidth="100%">
+      <Box minWidth="100%" borderBottom={"1px"} borderColor="gray.300" pt={3} pb={{ md:2 }}>
+        <Flex minWidth="100%" >
 
           <Image src={logoUrl} alt="logo" width={{ base:'70px', md:90 }} marginBottom="1rem" />
 
@@ -387,10 +387,10 @@ const Header = ({ session, setSession, fill, heading }) => {
         </Flex>
       </Box>
 
-      <Heading fontWeight="bold" textAlign="center" pt={{ base:3, md:6, lg:5}} 
+      {/* <Heading fontWeight="bold" textAlign="center" pt={{ base:3, md:6, lg:5}} 
       fontSize={{ base:'16px', md:'22px', lg:'30px' }}>
         {heading}
-      </Heading>
+      </Heading> */}
     </Box>
   );
 };
