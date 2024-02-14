@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import useActiveTokenStore from "./activeTokenStore";
+import { useToast } from "@chakra-ui/react";
 
 const getAssetPlatformId = async (contractAddress) => {
     const controller = new AbortController();
@@ -61,7 +62,10 @@ const useTokenDetailsStore = create(set => ({
         try {
             const response = await fetch(url, { signal });
             if (!response.ok) {
-                return response.json().then(response => {console.log(response.error); throw new Error("error fetching token details");})
+                response.json().then(response => {
+                    const errorMessage = response.error || 'An error occurred';
+                    throw new Error(errorMessage);
+                })
             }
             
             // calling the function from activeTokenStore. This function sets the activeToken state to the input value and also saves the value to local storage for future retrievals
@@ -134,7 +138,6 @@ const useTokenDetailsStore = create(set => ({
             // set the activeTokenDetails
             useActiveTokenStore.setState({ activeTokenSymbol: symbol, activeTokenName: name });
 
-            
         } catch (error) {
             // set({ error: 'Coin not found' });
             // alert(error);
