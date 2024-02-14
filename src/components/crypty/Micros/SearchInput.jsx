@@ -46,9 +46,9 @@ const SearchInput = () => {
         <>
             {/* search input component for md and lg screens only */}
 
-            <Flex maxW={'65%'} ml={'auto'} gap={3} display={{ base:'none', md:'flex' }}>
+            <Flex direction={{ base:'column', lg:'row' }} maxW={'65%'} ml={'auto'} gap={3} display={{ base:'none', md:'flex' }}>
                 <Watchlist />
-                <form onSubmit={handleSubmit} style={{ width:'100%' }}>
+                <form onSubmit={handleSubmit} style={{ width:'100%' }} className='search'>
                     <InputGroup size='md'>
                         <Input
                             id="searchInput"
@@ -79,7 +79,7 @@ const SearchInput = () => {
             <Flex direction={'column'} display={{ sm:'none' }} mb={3}>
 
                 <Box w={'70%'} ml={'auto'} pt={3} >
-                    <form onSubmit={handleSubmit} style={{ width:'100%' }} className="form-control">
+                    <form onSubmit={handleSubmit} style={{ width:'100%' }} className="form-control search-mobile">
                         <input className="input-search input-alt" value={input} onChange={handleUpdateInput} placeholder='Search' required type="text" style={{ textAlign: 'right', paddingRight:'30px', color: useColorModeValue('black', 'white') }} />
                         <span className="input-border input-border-alt"></span>
                         <a href="#" type='submit' onClick={handleSubmit}>
@@ -88,7 +88,7 @@ const SearchInput = () => {
                     </form>
                 </Box>
 
-                <Box>
+                <Box className='watchlist-mobile'>
                     <Watchlist />
                 </Box>
 

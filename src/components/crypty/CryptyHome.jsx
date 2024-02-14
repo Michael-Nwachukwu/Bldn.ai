@@ -60,9 +60,7 @@ const CryptyHome = () => {
         const handleVisibilityChange = () => {
             if (document.visibilityState === 'visible' && navigator.onLine) {
                 intervalIdRef.current = setInterval(() => {
-                    // alert(activeToken);
                     fetchDetails(activeToken, baseUrl);
-                    // alert('fetched');
                 }, 30000); // 30000 milliseconds = 30 seconds
             } else {
                 clearInterval(intervalIdRef.current);
@@ -99,11 +97,16 @@ const CryptyHome = () => {
         <>
             <Box>
 
-                <Box display={{ lg:'none' }}>
-                    <Skeleton isLoaded={!globalLoading} borderRadius={10}>
-                        <LineGlobalStats />
-                    </Skeleton>
-                </Box>
+                <div className='global-line-metrics'>
+                    <Box display={{ lg:'none' }} >
+                        <Skeleton isLoaded={!globalLoading} borderRadius={10}>
+                            
+                            <LineGlobalStats />
+                            
+                        </Skeleton>
+                    </Box>
+                </div>
+                
 
                 {/* PriceStars and global stats details */}
                 <Flex align={'center'} justify={'space-between'} direction={{ base:'column', md:'row' }}>
@@ -117,17 +120,23 @@ const CryptyHome = () => {
                     <Flex direction={'column'} alignItems={{ lg:'end' }} gap={2} display={{ base:'none', sm:'flex' }}>
 
                         {/* Visible only on lg screens. */}
+                        
                         <Box display={{ base:'none', lg:'block' }}>
                             <Skeleton isLoaded={!globalLoading} borderRadius={10}>
+                                
                                 <LineGlobalStats />
+                               
                             </Skeleton>
                         </Box>
+                        
                         
                         
                         <Flex alignItems={"center"} display={{ base:'none', md:'flex' }} gap={3}>
 
                             {/* Add to watchlist md/lg screens */}
-                            <WatchlistBtn colorMode={colorMode} />
+                            <div className='btn'>
+                                <WatchlistBtn colorMode={colorMode} />
+                            </div>
 
                             
                             <GlobalMarket loading={globalLoading} />

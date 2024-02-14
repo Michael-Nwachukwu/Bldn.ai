@@ -45,7 +45,7 @@ const Chart = () => {
   }, [dataPoints]);
   
   return (
-    <Box p={{ md:3 }} minW={'100%'}>
+    <Box p={{ md:3 }} minW={'100%'} className='chart'>
       <div id="chartContainer" style={{ height: "400px", minWidth:"100%" }}></div>
     </Box>
   );

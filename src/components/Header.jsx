@@ -168,138 +168,18 @@ const Header = ({ session, setSession, fill, heading }) => {
 
   return (
     <Box minWidth="100%">
-      <Box minWidth="100%" borderBottom={"1px"} borderColor="gray.300" pt={3} pb={{ md:2 }}>
-        <Flex minWidth="100%" >
+      <Box minWidth="100%" borderBottom={"1px"} borderColor="gray.300" pt={2} pb={{ md:2 }}>
+        <Flex minWidth="100%">
 
-          <Image src={logoUrl} alt="logo" width={{ base:'70px', md:90 }} marginBottom="1rem" />
+          <Image src={logoUrl} alt="logo" pt={1} width={{ base:'70px', md:90 }} marginBottom="1rem" />
 
           <Spacer />
 
-          <Box display={{ base: 'block', md: 'none' }}>
-            <Flex alignItems={'start'} gap={3}>
+          {/* lg screen navbar */}
+          <Box>
+            <Flex alignItems="center" gap={{ base:2, md:5, lg:5 }} fontFamily="syncopate">
 
-              <Flex alignItems="center" gap={1}>
-                <Tag
-                  size="lg"
-                  colorScheme="red"
-                  fontSize={"11px"}
-                  borderRadius="full"
-                >
-                  <Avatar
-                    src={avatar}
-                    size="xs"
-                    name="User"
-                    ml={-1}
-                    mr={2}
-                  />
-                  <TagLabel fontWeight={"bold"}>{username ? username : 'user'}</TagLabel>
-                </Tag>
-
-                <Popover
-                  isOpen={isOpen}
-                  initialFocusRef={firstFieldRef}
-                  onOpen={onOpen}
-                  onClose={onClose}
-                  placement="bottom"
-                  closeOnBlur={false}
-                >
-                  <PopoverTrigger>
-                    <IconButton size="sm" bg={''} _hover={{ bg:'' }} icon={<EditIcon fill={svgFill} />} />
-                  </PopoverTrigger> 
-                  <PopoverContent p={5}>
-                    <FocusLock returnFocus persistentFocus={false}>
-                      <PopoverArrow />
-                      <PopoverCloseButton />
-                      <Form firstFieldRef={firstFieldRef} onCancel={onClose} session={session} setUsername={setUsername} updateProfile={updateProfile} username={username} id={'mobile-form'} />
-                    </FocusLock>
-                  </PopoverContent>
-                </Popover>
-              </Flex>
-              
-              
-              <Button bg={''} pb={2} _hover={{ bg:'' }} onClick={toggleColorMode}>
-                {colorMode == 'light' ? <Moonlight fill={svgFill} /> : <Sunshine fill={svgFill} /> }
-              </Button>
-
-              <Menu>
-
-                <MenuButton
-                  as={IconButton}
-                  aria-label='Options'
-                  // variant='outline'
-                  bg={''}
-                  border={'none'}
-                  pb={2}
-                  _hover={{ bg: '' }}
-                  _active={{ bg: '' }}
-                  onClick={handleCheckboxChange}
-                >
-                  {/* Your custom SVG icon goes here */}
-                  <label htmlFor="menuCheckbox" className="hamburger">
-                    <input id="menuCheckbox"
-                      type="checkbox"
-                      checked={isChecked}
-                    />
-                    {/* <svg viewBox="0 0 32 32">
-                      <path className="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
-                      <path className="line" d="M7 16 27 16"></path>
-                    </svg> */}
-                    <Hamburger fill={fill} colorMode={colorMode} />
-                  </label>
-                </MenuButton>
-
-                <MenuList bg={'#f9f6f4'} shadow={'md'} color={'gray.700'}>
-                  <MenuItem bg={'transparent'} _hover={{ bg: '#a86b48', color:'white' }} command='⌘T'>
-                    <Link
-                      fontFamily={'syncopate'}
-                      letterSpacing="0.2px"
-                      fontSize="sm"
-                      href="https://github.com/Michael-Nwachukwu"
-                      isExternal
-                    >
-                      GitHub
-                    </Link>
-
-                  </MenuItem>
-                  <MenuItem bg={'transparent'} _hover={{ bg: '#a86b48', color:'white' }} command='⌘N'>
-                    <Link
-                        fontFamily={'syncopate'}
-                        letterSpacing="0.2px"
-                        fontSize="sm"
-                        href="https://chakra-ui.com"
-                        isExternal
-                      >
-                        Contact
-                      </Link>
-                  </MenuItem>
-                  <MenuItem bg={'transparent'}>
-
-                    <Button
-                      fontSize={"xs"}
-                      bg="#a86b48"
-                      _hover={{ bg: "brand.500", color: "white" }}
-                      size="md"
-                      fontWeight="600"
-                      letterSpacing="0.4px"
-                      border="1px"
-                      borderColor="#E3CCBF"
-                      boxShadow="md"
-                      color={'white'}
-                      onClick={() => signOut()}
-                      rounded="lg"
-                      ml={'auto'}
-                    >
-                      Sign Out
-                    </Button>
-                  </MenuItem>
-                </MenuList>
-
-              </Menu>
-            </Flex>
-          </Box>
-        
-          <Box display={{ base: 'none', md: 'block' }}>
-            <Flex alignItems="center" gap={{ md:5, lg:14 }} fontFamily="syncopate">
+              {/* github */}
               <Link
                 fontWeight={600}
                 letterSpacing="0.2px"
@@ -307,10 +187,12 @@ const Header = ({ session, setSession, fill, heading }) => {
                 color={color}
                 href="https://github.com/Michael-Nwachukwu"
                 isExternal
+                display={{ base: 'none', md: 'block' }}
               >
                 GitHub
               </Link>
-
+              
+              {/* contact */}
               <Link
                 fontWeight={600}
                 letterSpacing="0.2px"
@@ -318,11 +200,13 @@ const Header = ({ session, setSession, fill, heading }) => {
                 color={color}
                 href="https://chakra-ui.com"
                 isExternal
+                display={{ base: 'none', md: 'block' }}
               >
                 Contact
               </Link>
 
-              <Flex alignItems="center" gap={1}>
+              {/* username component */}
+              <Flex alignItems="center" gap={1} className="username">
                 <Tag
                   size="lg"
                   colorScheme="red"
@@ -360,7 +244,7 @@ const Header = ({ session, setSession, fill, heading }) => {
                 </Popover>
               </Flex>
 
-
+              {/* sign out button */}
               <Button
                 fontSize={"xs"}
                 bg=""
@@ -373,24 +257,97 @@ const Header = ({ session, setSession, fill, heading }) => {
                 boxShadow="md"
                 onClick={() => signOut()}
                 rounded="lg"
+                display={{ base: 'none', md: 'block' }}
               >
                 Sign Out
               </Button>
 
-              <Button onClick={toggleColorMode}>
+              {/* toggle light and dark mode */}
+              <Button p={1} h={9} onClick={toggleColorMode} _hover={{ bg:'#f1c9b255', }} className="light-dark-mode" bg={''}>
                 {colorMode == 'light' ? <Moonlight fill={svgFill} /> : <Sunshine fill={svgFill} /> }
               </Button>
 
+              <Menu display={{ sm: 'none' }}>
+
+                <MenuButton
+                  as={IconButton}
+                  aria-label='Options'
+                  // variant='outline'
+                  bg={''}
+                  border={'none'}
+                  // pb={2}
+                  _hover={{ bg: '' }}
+                  _active={{ bg: '' }}
+                  onClick={handleCheckboxChange}
+                >
+                  {/* Your custom SVG icon goes here */}
+                  <label htmlFor="menuCheckbox" className="hamburger">
+                    <input id="menuCheckbox"
+                      type="checkbox"
+                      checked={isChecked}
+                    />
+                    <Hamburger fill={fill} colorMode={colorMode} />
+                  </label>
+                </MenuButton>
+
+                <MenuList bg={'#f9f6f4'} shadow={'md'} color={'gray.700'}>
+                  <MenuItem bg={'transparent'} _hover={{ bg: '#a86b48', color:'white' }} command='⌘T'>
+                    <Link
+                      fontFamily={'syncopate'}
+                      letterSpacing="0.2px"
+                      fontSize="sm"
+                      href="https://github.com/Michael-Nwachukwu"
+                      isExternal
+                    >
+                      GitHub
+                    </Link>
+
+                  </MenuItem>
+                  <MenuItem bg={'transparent'} _hover={{ bg: '#a86b48', color:'white' }} command='⌘N'>
+                    <Link
+                        fontFamily={'syncopate'}
+                        letterSpacing="0.2px"
+                        fontSize="sm"
+                        href="https://chakra-ui.com"
+                        isExternal
+                      >
+                        Contact
+                      </Link>
+                  </MenuItem>
+                  <MenuItem bg={'transparent'}>
+
+                    {/* sign out button */}
+                    <Button
+                      fontSize={"xs"}
+                      bg="#a86b48"
+                      _hover={{ bg: "brand.500", color: "white" }}
+                      size="md"
+                      fontWeight="600"
+                      letterSpacing="0.4px"
+                      border="1px"
+                      borderColor="#E3CCBF"
+                      boxShadow="md"
+                      color={'white'}
+                      onClick={() => signOut()}
+                      rounded="lg"
+                      ml={'auto'}
+                    >
+                      Sign Out
+                    </Button>
+
+                  </MenuItem>
+                </MenuList>
+
+              </Menu>
+
             </Flex>
           </Box>
+
+          {/* mobile navigation */}
+         
             
         </Flex>
       </Box>
-
-      {/* <Heading fontWeight="bold" textAlign="center" pt={{ base:3, md:6, lg:5}} 
-      fontSize={{ base:'16px', md:'22px', lg:'30px' }}>
-        {heading}
-      </Heading> */}
     </Box>
   );
 };

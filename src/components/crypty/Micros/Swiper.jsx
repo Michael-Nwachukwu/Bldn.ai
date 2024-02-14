@@ -4,7 +4,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css/pagination';
 import 'swiper/swiper-bundle.css';
-import { space } from '@chakra-ui/react';
 
 const MySwiper = ({ children, bulletColor, space }) => {
   return (

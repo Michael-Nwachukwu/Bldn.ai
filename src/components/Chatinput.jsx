@@ -55,7 +55,7 @@ const Chatinput = ({ onSendMessage }) => {
     return (
         <>
             <div style={{ background: colorMode == 'light' ? '#F7F1ED' : '#0e1217' }} className="fixed-container">
-                <div className="textarea-container">
+                <div className="textarea-container chatbox">
                     <textarea
                         onChange={handleMessageChange}
                         placeholder="Paste text to extract.."

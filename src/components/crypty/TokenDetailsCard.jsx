@@ -16,7 +16,7 @@ const TokenDetailsCard = () => {
 
     return (
         <>
-            <Card bg={background} borderRadius={15}>
+            <Card bg={background} borderRadius={15} className='token-details'>
                 <CardBody>
                     <Text fontSize={25} fontWeight={'bold'} color={useColorModeValue('white', '#e1e2e2')}>{symbol} Price Statistics</Text>
 

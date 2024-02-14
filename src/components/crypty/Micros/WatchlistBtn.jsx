@@ -8,11 +8,15 @@ import useGetUserIdStore from '../Stores/getUserIdStore'
 
 const WatchlistBtn = ({colorMode}) => {
   const addToWatchList = useWatchListStore(state => state.addToWatchList);
-  const activeToken = useActiveTokenStore(state => state.activeToken);
-  const userId = useGetUserIdStore(state => state.userId);
   const watchlist = useWatchListStore((state) => state.watchlist) || [];
+
+  const activeToken = useActiveTokenStore(state => state.activeToken);
+
+  const userId = useGetUserIdStore(state => state.userId);
+
   const isTokenInWatchlist = watchlist.includes(activeToken);
 
+  // function that handles adding tokens to watchlist, we first check to be sure token isnt already in the watchlist
   const handleClick = () => {
     if (!isTokenInWatchlist) {
       addToWatchList(userId, activeToken);
@@ -22,10 +26,16 @@ const WatchlistBtn = ({colorMode}) => {
   return (
     <>
       <Link onClick={handleClick} disabled={isTokenInWatchlist}>
-        <Tag size={'md'} variant={colorMode == 'light' ? 'outline' : 'subtle'} colorScheme={isTokenInWatchlist ? 'green' : 'brand'} py={1}>
-            <TagLabel display={{ base:'none', lg:'block' }} pr={2}>
-              {isTokenInWatchlist ? 'Added' : 'Add to Watchlist'}</TagLabel>
-            <TagRightIcon as={starSvg} />
+        <Tag 
+          size={'md'} 
+          variant={colorMode == 'light' ? 'outline' : 'subtle'} 
+          colorScheme={isTokenInWatchlist ? 'green' : 'brand'} 
+          py={1}
+        >
+          <TagLabel display={{ base:'none', lg:'block' }} pr={2}>
+            {isTokenInWatchlist ? 'Added' : 'Add to watchlist'}
+          </TagLabel>
+          <TagRightIcon as={starSvg} />
         </Tag>
       </Link>
     </>

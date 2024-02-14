@@ -13,7 +13,7 @@ const PriceStats = ({loading}) => {
         <>
             {/* PriceStat, statArrow and percentage, and Add to watchlist starSvg button that shows only on small screens*/}
             <Box p={2} minW={{ sm:'sm' }} w={{ base:'100%', sm:'auto' }}>
-                <Flex justify={'space-between'} align={'center'}>
+                <Flex justify={'space-between'} align={'center'} className='price'>
 
                     {/* priceStat */}
                     <Stat>
@@ -46,7 +46,7 @@ const PriceStats = ({loading}) => {
                     </Stat>
 
                     {/* Add to watclist icon btn */}
-                    <Box display={{ sm:'none' }}>
+                    <Box display={{ sm:'none' }} className='btn-mobile'>
                         <WatchlistBtn colorMode={colorMode} />
                     </Box>
 

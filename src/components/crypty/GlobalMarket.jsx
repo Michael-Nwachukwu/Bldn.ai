@@ -9,32 +9,33 @@ const GlobalMarket = ({loading}) => {
   const bulletColor = useColorModeValue('#672f19', '#ffe5c6');
     
   return (
-    <>
-        <Grid display={{ md:'none', lg:'grid' }} templateColumns={{ base:'1fr', lg:"1fr 1fr" }} gap={2}>
-            <GridItem>
-                <Skeleton isLoaded={!loading} borderRadius={10}>
-                    <SmallCard value={globalMarketCap} title={'Total Market Cap'} />
-                </Skeleton>
-            </GridItem>
-
-            <GridItem>
-                <Skeleton isLoaded={!loading} borderRadius={10}>
-                  <SmallCard value={globalVolume} title={'Total Trading Volume'} />
-                </Skeleton>
-            </GridItem>
-        </Grid>
-
-        <Box display={{ lg:'none' }}>
+    <div className='global-metrics'>
+      <Grid display={{ base:'none', lg:'grid' }} templateColumns={{ base:'1fr', lg:"1fr 1fr" }} gap={2} >
+        <GridItem>
           <Skeleton isLoaded={!loading} borderRadius={10}>
-            <MySwiper bulletColor={bulletColor} space={0}>
               <SmallCard value={globalMarketCap} title={'Total Market Cap'} />
-              <SmallCard value={globalVolume} title={'Total Trading Volume'} />
-              <SmallCard value={globalMarketCap} title={'Total Market Cap'} />
-              <SmallCard value={globalVolume} title={'Total Trading Volume'} />
-            </MySwiper>
           </Skeleton>
-        </Box>
-    </>
+        </GridItem>
+
+        <GridItem>
+          <Skeleton isLoaded={!loading} borderRadius={10}>
+            <SmallCard value={globalVolume} title={'Total Trading Volume'} />
+          </Skeleton>
+        </GridItem>
+      </Grid>
+
+      <Box w={56} display={{ lg:'none' }}>
+        <Skeleton isLoaded={!loading} borderRadius={10}>
+          <MySwiper bulletColor={bulletColor} space={0}>
+            <SmallCard value={globalMarketCap} title={'Total Market Cap'} />
+            <SmallCard value={globalVolume} title={'Total Trading Volume'} />
+            <SmallCard value={globalMarketCap} title={'Total Market Cap'} />
+            <SmallCard value={globalVolume} title={'Total Trading Volume'} />
+          </MySwiper>
+        </Skeleton>
+        
+      </Box>
+    </div>
   )
 }
 

@@ -14,12 +14,13 @@ const updateWatchlist = async (userId, watchlist) => {
   } else {
     console.log('Watchlist updated successfully:', data);
   }
-};
 
+};
 
 const useWatchListStore = create( set => ({
 
   watchlist: [],
+
   fetchWatchList: async (userId) => {
     try {
       // Check if userId is a non-empty string before making the query
@@ -50,6 +51,7 @@ const useWatchListStore = create( set => ({
   },
 
   addToWatchList: async (userId, coinId) => {
+    
     // Fetch the existing watchlist
     const { data, error } = await supabase
       .from('profiles')
@@ -67,11 +69,12 @@ const useWatchListStore = create( set => ({
     // Add the new coin to the watchlist
     const newWatchlist = [...existingWatchlist, coinId];
 
-    // console.log(newWatchlist);
-
     // Update the watchlist in the profiles table
     updateWatchlist(userId, newWatchlist);
-    
+
+    // set new updated watchlist
+    set({ watchlist: newWatchlist });
+
   }
     
 }))
