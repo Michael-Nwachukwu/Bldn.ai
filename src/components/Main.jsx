@@ -97,7 +97,7 @@ const Main = ({ session}) => {
       ]);
       setTimeout(() => {
         // trigger tour
-        localStorage.setItem('toured', 'extractor&crypty');
+        setIsOpen(true);
       }, 3000);
     }
   }
