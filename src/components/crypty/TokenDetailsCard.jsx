@@ -143,7 +143,7 @@ const TokenDetailsCard = () => {
                             </Flex> */}
                             <Flex justify={'center'} align={'center'} h={'100%'}>
                                 <Text color={'white'} px={6} textAlign={'center'} mt={12}>
-                                    AI GENERATED RESPONSES ARE COMING SOON
+                                    CRYPTO CURRENCY CONVERSIONS ARE COMING SOON
                                 </Text>
                             </Flex>
                         </CardBody>

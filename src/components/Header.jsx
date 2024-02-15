@@ -185,8 +185,9 @@ const Header = ({ session, setSession, fill, heading }) => {
                 letterSpacing="0.2px"
                 fontSize="sm"
                 color={color}
-                href="https://github.com/Michael-Nwachukwu"
-                isExternal
+                href="https://github.com/Michael-Nwachukwu/Bldn.ai"
+                target="_blank"
+                rel="noopener noreferrer"
                 display={{ base: 'none', md: 'block' }}
               >
                 GitHub
@@ -198,8 +199,7 @@ const Header = ({ session, setSession, fill, heading }) => {
                 letterSpacing="0.2px"
                 fontSize="sm"
                 color={color}
-                href="https://chakra-ui.com"
-                isExternal
+                href="mailto:dahformulah@gmail.com"
                 display={{ base: 'none', md: 'block' }}
               >
                 Contact
@@ -272,10 +272,8 @@ const Header = ({ session, setSession, fill, heading }) => {
                 <MenuButton
                   as={IconButton}
                   aria-label='Options'
-                  // variant='outline'
                   bg={''}
                   border={'none'}
-                  // pb={2}
                   _hover={{ bg: '' }}
                   _active={{ bg: '' }}
                   onClick={handleCheckboxChange}
@@ -284,7 +282,7 @@ const Header = ({ session, setSession, fill, heading }) => {
                   <label htmlFor="menuCheckbox" className="hamburger">
                     <input id="menuCheckbox"
                       type="checkbox"
-                      checked={isChecked}
+                      defaultChecked={isChecked}
                     />
                     <Hamburger fill={fill} colorMode={colorMode} />
                   </label>
@@ -296,8 +294,9 @@ const Header = ({ session, setSession, fill, heading }) => {
                       fontFamily={'syncopate'}
                       letterSpacing="0.2px"
                       fontSize="sm"
-                      href="https://github.com/Michael-Nwachukwu"
-                      isExternal
+                      href="https://github.com/Michael-Nwachukwu/Bldn.ai"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       GitHub
                     </Link>
@@ -305,12 +304,11 @@ const Header = ({ session, setSession, fill, heading }) => {
                   </MenuItem>
                   <MenuItem bg={'transparent'} _hover={{ bg: '#a86b48', color:'white' }} command='⌘N'>
                     <Link
-                        fontFamily={'syncopate'}
-                        letterSpacing="0.2px"
-                        fontSize="sm"
-                        href="https://chakra-ui.com"
-                        isExternal
-                      >
+                      fontFamily={'syncopate'}
+                      letterSpacing="0.2px"
+                      fontSize="sm"
+                      href="mailto:dahformulah@gmail.com"
+                    >
                         Contact
                       </Link>
                   </MenuItem>
