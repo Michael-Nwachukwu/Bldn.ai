@@ -267,10 +267,11 @@ const Header = ({ session, setSession, fill, heading }) => {
                 {colorMode == 'light' ? <Moonlight fill={svgFill} /> : <Sunshine fill={svgFill} /> }
               </Button>
 
-              <Menu display={{ sm: 'none' }}>
+              <Menu >
 
                 <MenuButton
                   as={IconButton}
+                  display={{ lg: 'none' }}
                   aria-label='Options'
                   bg={''}
                   border={'none'}
