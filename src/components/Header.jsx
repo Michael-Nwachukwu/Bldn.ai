@@ -280,16 +280,21 @@ const Header = ({ session, setSession, fill, heading }) => {
                   onClick={handleCheckboxChange}
                 >
                   {/* Your custom SVG icon goes here */}
-                  <label htmlFor="menuCheckbox" className="hamburger">
+                  {/* <label htmlFor="menuCheckbox" className="hamburger">
                     <input id="menuCheckbox"
                       type="checkbox"
                       defaultChecked={isChecked}
                     />
                     <Hamburger fill={fill} colorMode={colorMode} />
-                  </label>
+                  </label> */}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke={svgFill} className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+                  </svg>
+
                 </MenuButton>
 
                 <MenuList bg={'#f9f6f4'} shadow={'md'} color={'gray.700'}>
+
                   <MenuItem bg={'transparent'} _hover={{ bg: '#a86b48', color:'white' }} command='⌘T'>
                     <Link
                       fontFamily={'syncopate'}
@@ -301,8 +306,8 @@ const Header = ({ session, setSession, fill, heading }) => {
                     >
                       GitHub
                     </Link>
-
                   </MenuItem>
+
                   <MenuItem bg={'transparent'} _hover={{ bg: '#a86b48', color:'white' }} command='⌘N'>
                     <Link
                       fontFamily={'syncopate'}
@@ -310,9 +315,10 @@ const Header = ({ session, setSession, fill, heading }) => {
                       fontSize="sm"
                       href="mailto:dahformulah@gmail.com"
                     >
-                        Contact
-                      </Link>
+                      Contact
+                    </Link>
                   </MenuItem>
+
                   <MenuItem bg={'transparent'}>
 
                     {/* sign out button */}
