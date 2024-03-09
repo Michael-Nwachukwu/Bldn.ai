@@ -296,7 +296,7 @@ const Header = ({ session, setSession, fill, heading }) => {
                 <MenuList bg={'#f9f6f4'} shadow={'md'} color={'gray.700'}>
 
                   <MenuItem bg={'transparent'} _hover={{ bg: '#a86b48', color:'white' }} command='⌘T'>
-                    <Link
+                    <a
                       fontFamily={'syncopate'}
                       letterSpacing="0.2px"
                       fontSize="sm"
@@ -305,18 +305,18 @@ const Header = ({ session, setSession, fill, heading }) => {
                       rel="noopener noreferrer"
                     >
                       GitHub
-                    </Link>
+                    </a>
                   </MenuItem>
 
                   <MenuItem bg={'transparent'} _hover={{ bg: '#a86b48', color:'white' }} command='⌘N'>
-                    <Link
+                    <a
                       fontFamily={'syncopate'}
                       letterSpacing="0.2px"
                       fontSize="sm"
                       href="mailto:dahformulah@gmail.com"
                     >
                       Contact
-                    </Link>
+                    </a>
                   </MenuItem>
 
                   <MenuItem bg={'transparent'}>
