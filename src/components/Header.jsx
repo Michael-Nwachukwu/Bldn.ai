@@ -264,7 +264,7 @@ const Header = ({ session, setSession, fill, heading }) => {
               </Button>
 
               {/* toggle light and dark mode */}
-              <Button p={1} h={9} onClick={toggleColorMode} _hover={{ bg:'#f1c9b255', }} className="light-dark-mode" bg={''}>
+              <Button p={1} h={9} onClick={toggleColorMode} _hover={{ bg: '#4FA53133' }} className="light-dark-mode" bg={''}>
                 {colorMode == 'light' ? <Moonlight fill={svgFill} /> : <Sunshine fill={svgFill} /> }
               </Button>
 
@@ -325,7 +325,7 @@ const Header = ({ session, setSession, fill, heading }) => {
                     {/* sign out button */}
                     <Button
                       fontSize={"xs"}
-                      bg="#a86b48"
+                      bg="red.500"
                       _hover={{ bg: "red", color: "white" }}
                       size="md"
                       fontWeight="600"

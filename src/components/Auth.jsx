@@ -186,7 +186,7 @@ const Auth = () => {
                                     handleLogin("REGISTER").catch(console.error)
                                 }
                                 width={'100%'}
-                                bg={"#905f43"}
+                                bg={signInButtonBg}
                                 color={"white"}
                                 _hover={{ bg: '' }}
                             >
@@ -362,7 +362,7 @@ const Auth = () => {
                     </VStack>
                 }
                 <Center mt={10}>
-                    <Button onClick={toggleColorMode}>
+                    <Button onClick={toggleColorMode} bg={'#4FA53133'} _hover={{ bg: '#4FA53133' }}>
                         {colorMode == 'light' ? <Moonlight fill={svgFill} /> : <Sunshine fill={svgFill} />}
                     </Button>
                 </Center>
