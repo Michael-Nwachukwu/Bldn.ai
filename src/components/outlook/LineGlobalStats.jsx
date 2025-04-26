@@ -20,7 +20,7 @@ const LineGlobalStats = () => {
                 p={{ base:1, lg:0 }}
                 pr={3}
                 gap={2}
-                bg={{ base:useColorModeValue('rgba(248, 198, 169, 0.25)', '#1b232d'), lg:'transparent' }}
+                bg={{ base:useColorModeValue('#4FA53133', '#1b232d'), lg:'transparent' }}
                 borderRadius={{ base:'15px 0 0 15px', lg:0 }}
                 mb={{ base:2, lg:0 }}
             >
@@ -51,7 +51,7 @@ const LineGlobalStats = () => {
                                     <Gas />
                                     ETH GAS: 
                                 </Flex>
-                                <span style={{ color:smallStatsValueColor }}>{gwei[2]} GWEI &#x2935;</span>
+                                <span style={{ color:"#4FA531", fontWeight:'bold' }}>{gwei[2]} GWEI &#x2935;</span>
                             </Flex>
                         </Box>
                     </PopoverTrigger>

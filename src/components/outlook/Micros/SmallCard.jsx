@@ -2,9 +2,9 @@ import React from 'react'
 import { useColorModeValue, Card, CardBody, VStack, Text } from '@chakra-ui/react';
 
 const SmallCard = ({value, title}) => {
-    const borderColor = useColorModeValue('#e3ccbf', '#212d3b');
-    const valueColor = useColorModeValue('brand.600', '#dfe5ed');
-    const titleColor = useColorModeValue('brand.600', '#dfe5ed');
+    const borderColor = useColorModeValue('gray.400', '#212d3b');
+    const valueColor = useColorModeValue('gray.600', '#dfe5ed');
+    const titleColor = useColorModeValue('gray.600', '#dfe5ed');
 
     return (
         <>

@@ -22,7 +22,7 @@ const Watchlist = () => {
         <>
             <Menu isLazy>
                 <MenuButton fontWeight={'semibold'} fontSize={'sm'} color={'black'}>
-                    <Flex align={'center'} color={useColorModeValue('brand.700', 'gray.400')} gap={1} className='watchlist'>
+                    <Flex align={'center'} color={useColorModeValue('green.600', 'gray.400')} gap={1} className='watchlist'>
                         <Text fontSize={'xs'}>
                             WATCHLIST
                         </Text>

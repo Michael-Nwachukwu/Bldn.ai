@@ -56,7 +56,7 @@ const useGlobalStore = create(set => ({
         } catch (error) {
             console.error('Error fetching gas prices: ', error);
         }
-    }
+    },
   
 }));
 
