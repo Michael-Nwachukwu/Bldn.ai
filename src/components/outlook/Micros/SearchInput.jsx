@@ -52,8 +52,9 @@ const SearchInput = () => {
                     <InputGroup size='md'>
                         <Input
                             id="searchInput"
-                            focusBorderColor={ useColorModeValue('brand.800', '#dfe5ed') }
+                            focusBorderColor={ useColorModeValue('#4FA531', '#dfe5ed') }
                             border={useColorModeValue('1px', '')}
+                            borderColor={useColorModeValue('#4FA531', '#dfe5ed')}
                             bg={useColorModeValue('transparent', "#1b232d")}
                             py={5}
                             placeholder='Search'
@@ -62,11 +63,11 @@ const SearchInput = () => {
                             value={input}
                             name={"password"}
                             _hover={{ border:'' }}
-                            _placeholder={{ color: useColorModeValue('brand.800', '#dfe5ed') }}
+                            _placeholder={{ color: useColorModeValue('#4FA531', '#dfe5ed') }}
                             required
                         />
                         <InputRightElement width='4.5rem' pl={6}>
-                            <Flex justifyContent={'center'} w={6} bg={useColorModeValue('brand.700', "#384a61")} opacity={'70%'} color={"white"} borderRadius={5} fontWeight={'bold'}
+                            <Flex justifyContent={'center'} w={6} bg={useColorModeValue('#4FA531', "#384a61")} opacity={'70%'} color={"white"} borderRadius={5} fontWeight={'bold'}
                                 _hover={{ bg:'' }} 
                             >
                                 /

@@ -88,9 +88,9 @@ const Header = ({ session, setSession, fill, heading }) => {
   const [isChecked, setIsChecked] = useState(false);
 
 
-  const logoUrl = useColorModeValue(logo, whiteLogo)
+  const logoUrl = useColorModeValue("../outlook-green.png", "../outlook-light.png");
   const color = useColorModeValue('#030202', '#F7F1ED')
-  const svgFill = useColorModeValue('#030202', '#e3ccbf')
+  const svgFill = useColorModeValue('#030202', 'oklch(92.9% 0.013 255.508)')
 
 
   const handleCheckboxChange = () => {
@@ -171,7 +171,7 @@ const Header = ({ session, setSession, fill, heading }) => {
       <Box minWidth="100%" borderBottom={"1px"} borderColor="gray.300" pt={2} pb={{ md:2 }}>
         <Flex minWidth="100%">
 
-          <Image src={logoUrl} alt="logo" pt={1} width={{ base:'70px', md:90 }} marginBottom="1rem" />
+          <Image src={logoUrl} alt="logo" pt={1} width={{ base:'110px', md:140 }} height={{ base:'35px', md:'45px' }} />
 
           <Spacer />
 
@@ -209,7 +209,7 @@ const Header = ({ session, setSession, fill, heading }) => {
               <Flex alignItems="center" gap={1} className="username">
                 <Tag
                   size="lg"
-                  colorScheme="red"
+                  colorScheme="green"
                   fontSize={"11px"}
                   borderRadius="full"
                 >
@@ -248,12 +248,13 @@ const Header = ({ session, setSession, fill, heading }) => {
               <Button
                 fontSize={"xs"}
                 bg=""
-                _hover={{ bg: "brand.500", color: "white" }}
+                _hover={{ bg: "red", color: "white" }}
                 size="md"
                 fontWeight="600"
                 letterSpacing="0.4px"
+                color={"red"}
                 border="1px"
-                borderColor="#E3CCBF"
+                borderColor="red"
                 boxShadow="md"
                 onClick={() => signOut()}
                 rounded="lg"
@@ -325,7 +326,7 @@ const Header = ({ session, setSession, fill, heading }) => {
                     <Button
                       fontSize={"xs"}
                       bg="#a86b48"
-                      _hover={{ bg: "brand.500", color: "white" }}
+                      _hover={{ bg: "red", color: "white" }}
                       size="md"
                       fontWeight="600"
                       letterSpacing="0.4px"

@@ -29,7 +29,7 @@ const WatchlistBtn = ({colorMode}) => {
         <Tag 
           size={'md'} 
           variant={colorMode == 'light' ? 'outline' : 'subtle'} 
-          colorScheme={isTokenInWatchlist ? 'green' : 'brand'} 
+          colorScheme={isTokenInWatchlist ? 'green' : 'red'} 
           py={1}
         >
           <TagLabel display={{ base:'none', lg:'block' }} pr={2}>

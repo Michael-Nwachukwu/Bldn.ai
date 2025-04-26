@@ -11,7 +11,7 @@ const TokenDetailsCard = () => {
 
 
     const statCardColor = useColorModeValue('#F7F1ED', '#888b8d');
-    const background = useColorModeValue('brand.700', '#191e22');
+    const background = useColorModeValue('green.800', '#191e22');
     const smallColor = useColorModeValue('white', '#888b8d');
 
     return (

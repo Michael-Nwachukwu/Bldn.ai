@@ -5,7 +5,6 @@ import {
   Tab,
   TabPanels,
   TabPanel,
-  Input,
   VStack,
   Flex,
   useMediaQuery
@@ -14,7 +13,7 @@ import Chatinput from "./Chatinput";
 import { onSendMessage } from "../services/supabaseService";
 import Header from "./Header";
 import Chatwidget from "./Chatwidget";
-import CryptyHome from "./crypty/CryptyHome";
+import CryptyHome from "./outlook/CryptyHome";
 import { useTour } from "@reactour/tour";
 
 const Main = ({ session}) => {
@@ -111,15 +110,16 @@ const Main = ({ session}) => {
         mx={{ lg:20 }} 
         w={'100%'} 
         mt={{ base:3, md:10, lg:5 }} 
+        defaultIndex={0}
       >
         <TabList mb="0.5em" fontFamily="syncopate">
-          <Tab
+          {/* <Tab
             borderBottom={"1px"}
             _selected={{ border: "1px", borderBottom: "none" }}
             fontSize={{ base:'10px', md:'13px' }}
           >
             Extractor
-          </Tab>
+          </Tab> */}
           <Tab
             borderBottom={"1px"}
             _selected={{ border: "1px", borderBottom: "none" }}
@@ -133,18 +133,19 @@ const Main = ({ session}) => {
 
         <TabPanels>
 
-          <TabPanel overflowY={'hidden'}>
+          {/* <TabPanel overflowY={'hidden'}>
             <Flex direction="column" overflowY={'hidden'}>
               <Chatwidget flex="1" />
               <Chatinput onSendMessage={onSendMessage} />
             </Flex>
-          </TabPanel>
+          </TabPanel> */}
 
           <TabPanel p={-10}>
             <CryptyHome />
           </TabPanel>
           
         </TabPanels>
+
       </Tabs>
     </VStack>
   );

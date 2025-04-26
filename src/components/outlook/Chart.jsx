@@ -35,7 +35,7 @@ const Chart = () => {
         {
           type: 'area',
           fillOpacity: 0.1,
-          color: '#912f13',
+          color: '#4FA531',
           dataPoints: dataPoints,
         },
       ],
