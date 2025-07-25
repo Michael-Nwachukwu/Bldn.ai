@@ -76,7 +76,7 @@ const BigCard = ({heading, loading}) => {
                                                 </Flex>
                                                 <Spacer />
                                                 <Text fontSize={{ md:'xs', lg:14 }}>
-                                                  {item.price ? item.price.toFixed(2) : item.volume.toFixed(2)}
+                                                    {item.price != null ? item.price.toFixed(2) : item.volume != null ? item.volume.toFixed(2) : 'N/A'}
                                                 </Text>
                                             </Flex>
                                         </ListItem>
